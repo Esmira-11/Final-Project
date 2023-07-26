@@ -17,20 +17,20 @@ const Header = () => {
       <div className="nav">
         <div className="nav-links">
           <div className="nav-link">
+            <a href="#">Home</a>
+          </div>
+          <div className="nav-link">
             <a href="#">About us</a>
           </div>
           <div className="nav-link">
             <a href="#">Shop</a>
           </div>
           <div className="nav-link">
-            <a href="#">Services</a>
-          </div>
-          <div className="nav-link">
             <a href="#">Announcement</a>
           </div>
-          {/* <div className="nav-link">
-            <a href="#">About</a>
-          </div> */}
+          <div className="nav-link">
+            <a href="#">Contact</a>
+          </div>
         </div>
       </div>
 
