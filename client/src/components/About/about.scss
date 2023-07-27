@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,700;1,500;1,700&family=Sofia&display=swap');
+
+
+.about{
+    display: flex;
+    width: 90%;
+    margin: 0 auto;
+    padding: 50px 0;
+    font-family: 'Raleway', sans-serif;
+    &-left{
+        width: 50%;
+        text-align: center;
+    }
+    &-right{
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        &-name{
+            h3{
+                font-size: 25px;
+                color: #2d92ba;
+                font-family: 'Sofia', cursive;
+                font-weight: 500;
+            }
+        }
+        &-title{
+            h2{
+                font-size: 36px;
+                // width: 300px;
+                font-weight: 700;
+                padding: 20px 0;
+                line-height: 40px;
+            }
+            span{
+                color: #2d92ba;
+            }
+        }
+        &-content{
+            padding-bottom: 20px;
+            p{
+                font-size: 18px;
+                color: #5b5b5b;
+            }
+        }
+        &-boxes{
+            &-top,&-bottom{
+                padding: 10px 15px;
+                border-left: 2px solid #2d92ba;
+                
+            }
+            &-top{
+                margin-bottom: 15px;
+            }
+            .about-right-boxes-title{
+                padding: 10px 0;
+                font-size: 20px;
+                font-weight: 700;
+
+            }
+            .about-right-boxes-content{
+                padding: 10px 0;
+                font-size: 18px;
+            }
+        }
+    }
+}
