@@ -7,6 +7,7 @@ import GivingBack from './components/GivingBack/GivingBack'
 import './App.css'
 import About from './components/About/About'
 import Team from './components/Team/Team'
+import Services from './components/Services/Services'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
       <GivingBack/>
       <About/>
       <Team/>
+      <Services/>
     </>
   )
 }
