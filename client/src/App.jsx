@@ -8,6 +8,7 @@ import './App.css'
 import About from './components/About/About'
 import Team from './components/Team/Team'
 import Services from './components/Services/Services'
+import Footer from './components/Footer/Footer'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
       <About/>
       <Team/>
       <Services/>
+      <Footer/>
     </>
   )
 }
