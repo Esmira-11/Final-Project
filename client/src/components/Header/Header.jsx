@@ -1,6 +1,8 @@
 import React from 'react'
 import './header.scss'
 import bowl from '../../assets/images/pet-bowl-3.png'
+import {Link} from 'react-router-dom'
+
 
 const Header = () => {
   return (
@@ -17,10 +19,10 @@ const Header = () => {
       <div className="nav">
         <div className="nav-links">
           <div className="nav-link">
-            <a href="#">Home</a>
+          <Link to="/">Home</Link>
           </div>
           <div className="nav-link">
-            <a href="#">About us</a>
+            <Link to="about">About us</Link>
           </div>
           <div className="nav-link">
             <a href="#">Shop</a>

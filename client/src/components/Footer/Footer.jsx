@@ -40,12 +40,12 @@ function Footer() {
             </div>
           </div>
 
-          <div className="hours">
+          {/* <div className="hours">
             <h2>Opening Hours</h2>
             <p>Mon - Fri: 9.00AM - 6.00PM</p>
             <p>Saturday: 9.00AM - 6.00PM</p>
             <p>Sunday: Closed</p>
-          </div>
+          </div> */}
 
           <div className="contact">
             <h2>Contact Us</h2>
