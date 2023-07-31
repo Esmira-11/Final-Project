@@ -9,7 +9,7 @@ const Header = () => {
     <div className="header">
       <div className="logo">
         <div className="logo-icon">
-          <i class="fa-solid fa-paw"></i>
+          <i className="fa-solid fa-paw"></i>
         </div>
         <div className="logo-name">
           <h2>Possy Sunny</h2>
@@ -38,11 +38,11 @@ const Header = () => {
 
       <div className="icons">
           <div className="search-icon icon">
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <i className="fa-solid fa-magnifying-glass"></i>
           </div>
           
           <div className="profile-icon icon">
-            <i class="fa-regular fa-user"></i>
+            <i className="fa-regular fa-user"></i>
           </div>
           
           <div className="cart-icon icon">

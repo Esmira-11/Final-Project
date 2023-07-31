@@ -9,7 +9,7 @@ function Footer() {
           <div className="footer-brand">
             <div className="logo">
               <div className="logo-icon">
-                <i class="fa-solid fa-paw"></i>
+                <i className="fa-solid fa-paw"></i>
               </div>
               <div className="logo-name">
                 <h2>Possy Sunny</h2>
@@ -50,19 +50,19 @@ function Footer() {
           <div className="contact">
             <h2>Contact Us</h2>
             <div className="contact-box">
-              <i class="fa-solid fa-location-dot"></i>
+              <i className="fa-solid fa-location-dot"></i>
               <p>National park,d1 588436,United States</p>
             </div>
             <div className="contact-box">
-              <i class="fa-solid fa-phone"></i>
+              <i className="fa-solid fa-phone"></i>
               <p>+91 123 456 789</p>
             </div>
             <div className="contact-box">
-              <i class="fa-solid fa-fax"></i>
+              <i className="fa-solid fa-fax"></i>
               <p>0123-456-789</p>
             </div>
             <div className="contact-box">
-              <i class="fa-solid fa-envelope"></i>
+              <i className="fa-solid fa-envelope"></i>
               <p>demo@Yourstore.com</p>
             </div>
           </div>
@@ -73,22 +73,22 @@ function Footer() {
               <div className="social-media-links">
                 <div className="social-media-link">
                   <a href="#">
-                    <i class="fa-brands fa-facebook-f"></i>
+                    <i className="fa-brands fa-facebook-f"></i>
                   </a>
                 </div>
                 <div className="social-media-link">
                   <a href="#">
-                    <i class="fa-brands fa-instagram"></i>
+                    <i className="fa-brands fa-instagram"></i>
                   </a>
                 </div>
                 <div className="social-media-link">
                   <a href="#">
-                    <i class="fa-brands fa-whatsapp"></i>
+                    <i className="fa-brands fa-whatsapp"></i>
                   </a>
                 </div>
                 <div className="social-media-link">
                   <a href="#">
-                    <i class="fa-brands fa-pinterest"></i>
+                    <i className="fa-brands fa-pinterest"></i>
                   </a>
                 </div>
               </div>
@@ -98,22 +98,22 @@ function Footer() {
               <div className="social-media-links">
                 <div className="social-media-link">
                   <a href="#">
-                    <i class="fa-brands fa-cc-visa"></i>
+                    <i className="fa-brands fa-cc-visa"></i>
                   </a>
                 </div>
                 <div className="social-media-link">
                   <a href="#">
-                    <i class="fa-brands fa-cc-mastercard"></i>
+                    <i className="fa-brands fa-cc-mastercard"></i>
                   </a>
                 </div>
                 <div className="social-media-link">
                   <a href="#">
-                    <i class="fa-brands fa-cc-paypal"></i>
+                    <i className="fa-brands fa-cc-paypal"></i>
                   </a>
                 </div>
                 <div className="social-media-link">
                   <a href="#">
-                    <i class="fa-brands fa-cc-discover"></i>
+                    <i className="fa-brands fa-cc-discover"></i>
                   </a>
                 </div>
               </div>
