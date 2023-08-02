@@ -14,6 +14,9 @@ import AboutPage from './pages/AboutPage'
 import HomePage from './pages/HomePage'
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage'
 import LoginPage from './pages/LoginPage/LoginPage'
+import RegisterPage from './pages/RegisterPage/RegisterPage'
+import ForgotPassword from './pages/ForgotPasswordPage/forgotPassword'
+import ChangePassword from './pages/ChangePasswordPage/ChangePassword'
 
 
 function App() {
@@ -28,7 +31,11 @@ function App() {
             <Route path='/about' element={<AboutPage/>}/>
             <Route path='*' element={<NotFoundPage/>}/>
             <Route path='/login' element={<LoginPage/>}/>
-            
+            <Route path='/register' element={<RegisterPage/>}/>
+            <Route path='/forgotpassword' element={<ForgotPassword/>}/>
+            <Route path='/changepassword' element={<ChangePassword/>}/>
+
+
           </Routes>
         {/* <Footer /> */}
       </BrowserRouter>

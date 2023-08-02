@@ -8,7 +8,6 @@ import {eye} from 'react-icons-kit/feather/eye'
 
 
 function LoginPage() {
-  // const [PasswordInputType, ToogleIcon] = usePasswordToogle();
 
   const [type,setType] = useState('password');
   const [icon,setIcon] = useState(eyeOff)
@@ -51,10 +50,10 @@ function LoginPage() {
 
             <div className="links">
               <div className="link">
-                <a href="#">Don't have an account?</a>
+                <a href="/register">Don't have an account?</a>
               </div>
               <div className="link">
-                <a href="#">Forgot password?</a>
+                <a href="/forgotpassword">Forgot password?</a>
               </div>
             </div>
           </div>
