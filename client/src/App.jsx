@@ -17,6 +17,7 @@ import LoginPage from './pages/LoginPage/LoginPage'
 import RegisterPage from './pages/RegisterPage/RegisterPage'
 import ForgotPassword from './pages/ForgotPasswordPage/forgotPassword'
 import ChangePassword from './pages/ChangePasswordPage/ChangePassword'
+import Announcement from './pages/AnnouncementPage/Announcement'
 
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
     <>
 
       <BrowserRouter>
-        {/* <Header /> */}
+        <Header />
           <Routes>
             <Route path='/' element={<HomePage/>}/>
             <Route path='/about' element={<AboutPage/>}/>
@@ -34,10 +35,11 @@ function App() {
             <Route path='/register' element={<RegisterPage/>}/>
             <Route path='/forgotpassword' element={<ForgotPassword/>}/>
             <Route path='/changepassword' element={<ChangePassword/>}/>
+            <Route path='/announsements' element={<Announcement/>}/>
 
 
           </Routes>
-        {/* <Footer /> */}
+        <Footer />
       </BrowserRouter>
 
       {/* <Header/> */}
