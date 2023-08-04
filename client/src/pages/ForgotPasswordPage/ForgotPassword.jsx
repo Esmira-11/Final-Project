@@ -16,10 +16,13 @@ function forgotPassword() {
         <div className="forgot-password-page-title">
           <h1 className="forgot-password-title">Forgot your password?</h1>
         </div>
+        <div className="forgot-password-page-content">
+          <p>Please enter the email address you register your account with. We will send you reset password confirmation to this email.</p>
+        </div>
         <div className="forgot-password-page-bottom">
           <div className="form">
             <div className="form-group">
-              <label htmlFor="email">Enter your email</label>
+              {/* <label htmlFor="email">Email</label> */}
               <input type="email" placeholder="name@example.com" />
             </div>
 

@@ -45,6 +45,11 @@ function RegisterPage() {
         <div className="register-page-bottom">
           <div className="form">
             <div className="form-group">
+              <label htmlFor="username">Enter your username</label>
+              <input type="text" placeholder="John" />
+            </div>
+
+            <div className="form-group">
               <label htmlFor="email">Enter your email</label>
               <input type="email" placeholder="name@example.com" />
             </div>

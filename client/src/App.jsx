@@ -26,7 +26,7 @@ function App() {
     <>
 
       <BrowserRouter>
-        <Header />
+        {/* <Header /> */}
           <Routes>
             <Route path='/' element={<HomePage/>}/>
             <Route path='/about' element={<AboutPage/>}/>
@@ -39,7 +39,7 @@ function App() {
 
 
           </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </BrowserRouter>
 
       {/* <Header/> */}
