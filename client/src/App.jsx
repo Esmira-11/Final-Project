@@ -18,6 +18,7 @@ import RegisterPage from './pages/RegisterPage/RegisterPage'
 import ForgotPassword from './pages/ForgotPasswordPage/forgotPassword'
 import ChangePassword from './pages/ChangePasswordPage/ChangePassword'
 import Announcement from './pages/AnnouncementPage/Announcement'
+import Detail from './pages/DetailPage/Detail'
 
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
     <>
 
       <BrowserRouter>
-        {/* <Header /> */}
+        <Header />
           <Routes>
             <Route path='/' element={<HomePage/>}/>
             <Route path='/about' element={<AboutPage/>}/>
@@ -36,10 +37,11 @@ function App() {
             <Route path='/forgotpassword' element={<ForgotPassword/>}/>
             <Route path='/changepassword' element={<ChangePassword/>}/>
             <Route path='/announsements' element={<Announcement/>}/>
+            <Route path='/detail' element={<Detail/>}/>
 
 
           </Routes>
-        {/* <Footer /> */}
+        <Footer />
       </BrowserRouter>
 
       {/* <Header/> */}
