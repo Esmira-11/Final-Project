@@ -1,4 +1,5 @@
 .shop-item{
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
     margin-bottom: 25px;
     background: #F2EEFB;
     border-radius: 15px;
@@ -17,6 +18,13 @@
             left: -50px;
             z-index: 3;
             transition: all .5s ease-in-out;
+            opacity: 0;
+            height: 100%;
+            .links{
+                position: absolute;
+                top: 50px;
+                right: 15px;
+            }
             a{
                 display: block;
                 width: 40px;
@@ -25,28 +33,20 @@
                 border-radius: 10px;
                 text-align: center;
                 background: #fff;
-                color: #7C58D3;
+                color: #2f4f4f;
                 margin-bottom: 15px;
                 font-size: 18px;
             }
+            a:hover{
+                background-color: transparent;
+                border: 2px solid #fff;
+                color:#fff;
+                
+                
+            }
         }
     }
-    &-img:hover .shop-item-meta{
-        content: "";
-        top: 5px;
-        left: 5px;
-        right: 5px;
-        bottom: 5px;
-        position: absolute;
-        border-radius: 10px;
-        background: rgba(124, 88, 211, .7);
-        z-index: 2;
-        transform: scale(0.9);
-        transition: all 0.3s linear 0s;
-        
-    }
-
-
+ 
     .shop-item-info{
         padding-top: 10px;
         padding-bottom: 20px;
@@ -55,14 +55,18 @@
             color: #FAB319;
             margin-bottom: 5px;
         }
+        a{
+            text-decoration: none;
+        }
         .shop-item-title{
-            font-size: 19px;
-            color: #393D72;
-            transition: all .5s ease-in-out;
+            padding: 10px 0;
+            font-size: 20px;
+            color: #2f4f4f;
+            // transition: all .5s ease-in-out;
         }
         .shop-item-price{
-            font-size: 18px;
-            color: #7C58D3;
+            font-size: 20px;
+            color: #2f4f4f;
             font-weight: 700;
             margin-top: 5px;
         }
@@ -70,3 +74,18 @@
 }
 
 
+.shop-item:hover .shop-item-meta{
+    content: "";
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    position: absolute;
+    border-radius: 10px;
+    opacity: 1;
+    background: rgba(47, 79, 79, 0.8);
+    z-index: 2;
+    transform: scale(0.9);
+    transition: all 0.3s linear 0s;
+    
+}

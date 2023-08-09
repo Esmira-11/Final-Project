@@ -8,8 +8,10 @@ function Card() {
         <div className="shop-item-img">
             <img src={img} alt="shop-item" />
             <div className="shop-item-meta">
-                <a href="#"><i className="far fa-heart"></i></a>
-                <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                <div className="links">
+                    <a href="#"><i className="far fa-heart"></i></a>
+                    <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                </div>
             </div>
         </div>
         <div className="shop-item-info">
