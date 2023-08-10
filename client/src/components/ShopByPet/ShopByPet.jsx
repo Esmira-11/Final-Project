@@ -12,7 +12,7 @@ function ShopByPet() {
     <div className="shop-by-pet">
         <div className="shop-by-pet-container">
             <div className="title">
-                <h1>Shop</h1>
+                <h1>Shop By Category</h1>
             </div>
             <div className="shop-categories">
                 <div className="shop-category-item">

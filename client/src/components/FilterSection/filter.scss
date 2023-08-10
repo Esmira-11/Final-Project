@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,700;1,500;1,700&display=swap');
+
+
+.filter-section{
+    font-family: 'Raleway', sans-serif;
+    color: #2f4f4f;
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 20px;
+    &-container{
+        display: flex;
+        gap: 20px;
+        &-left{
+            padding-right: 10px;
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            .category-bar{
+                padding: 15px;
+                border-radius: 15px;
+                border: 1px solid #2f4f4f;
+                &-title{
+                    padding-bottom: 10px;
+                    border-bottom: 1px solid #2f4f4f;
+                    h2{
+                        font-size: 18px;
+                        font-weight: 600;
+                    }
+                }
+                &-content{
+                    padding-top: 10px;
+                    .category{
+                        padding: 5px 0;
+                        position: relative;
+                        a{
+                            text-decoration: none;
+                            color: #2f4f4f;
+                            font-size: 18px;
+
+                        }
+                    }
+                    .category::before{
+                        content: '';
+                        position: absolute;
+                        bottom: -2px;
+                        left: 0;
+                        width: 0;
+                        height: 2px;
+                        background-color: #2f4f4f; 
+                        transition: width 0.6s ease;
+                      }
+                    .category:hover::before{
+                        width: 100%;
+                      }
+                }
+            }
+
+            .size-bar{
+                padding: 15px;
+                border-radius: 15px;
+                border: 1px solid #2f4f4f;
+                &-title{
+                    padding-bottom: 10px;
+                    border-bottom: 1px solid #2f4f4f;
+                    h2{
+                        font-size: 18px;
+                        font-weight: 600;
+                    }
+                }
+                &-content{
+                    padding-top: 10px;
+                    .size{
+                        position: relative;
+                        padding: 5px 0;
+                        a{
+                            text-decoration: none;
+                            color: #2f4f4f;
+                            font-size: 18px;
+                        }
+                    }
+                    .size::before{
+                        content: '';
+                        position: absolute;
+                        bottom: -2px;
+                        left: 0;
+                        width: 0;
+                        height: 2px;
+                        background-color: #2f4f4f;
+                        transition: width 0.6s ease;
+                    }
+                    .size:hover::before{
+                        width: 100%;
+                    }
+                }
+            }
+
+            .price-bar{
+                padding: 15px;
+                border-radius: 15px;
+                border: 1px solid #2f4f4f;
+                &-title{
+                    padding-bottom: 10px;
+                    border-bottom: 1px solid #2f4f4f;
+                    h2{
+                        font-size: 18px;
+                        font-weight: 600;
+                    }
+                }
+                &-content{
+                    padding-top: 10px;
+                    .price{
+                        position: relative;
+                        padding: 5px 0;
+                        a{
+                            text-decoration: none;
+                            color: #2f4f4f;
+                            font-size: 18px;
+                        }
+                    }
+                    .price::before{
+                        content: '';
+                        position: absolute;
+                        bottom: -2px;
+                        left: 0;
+                        width: 0;
+                        height: 2px;
+                        background-color: #2f4f4f;
+                        transition: width 0.6s ease;
+                      }
+                    .price:hover::before{
+                        width: 100%;
+                      }
+                }
+            }
+        }
+        &-right{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 0 0 0 25px;
+            &-top{
+                padding: 0 40px 10px 5px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .left{
+                    h2{
+                        font-size: 20px;
+                        font-weight: 600;
+                    }
+                }
+                .right{
+                    select{
+                        padding: 10px;
+                        border: none;
+                        outline: none;
+                        font-size: 16px;
+                        background: transparent;
+                        color: #2f4f4f;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -28,7 +28,7 @@ const Header = () => {
             <a href="shop">Shop</a>
           </div>
           <div className="nav-link">
-            <a href="#">Announcement</a>
+            <a href="announsements">Announcement</a>
           </div>
           <div className="nav-link">
             <a href="#">Contact</a>
