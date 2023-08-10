@@ -51,7 +51,8 @@ function Footer() {
             <h2>Contact Us</h2>
             <div className="contact-box">
               <i className="fa-solid fa-location-dot"></i>
-              <p>National park,d1 588436,United States</p>
+              {/* <p>National park,d1 588436,United States</p> */}
+              <p>808 Vale Street Bay Magna</p>
             </div>
             <div className="contact-box">
               <i className="fa-solid fa-phone"></i>
@@ -63,7 +64,7 @@ function Footer() {
             </div>
             <div className="contact-box">
               <i className="fa-solid fa-envelope"></i>
-              <p>demo@Yourstore.com</p>
+              <p>info@examples.com</p>
             </div>
           </div>
 

@@ -20,6 +20,7 @@ import ChangePassword from './pages/ChangePasswordPage/ChangePassword'
 import Announcement from './pages/AnnouncementPage/Announcement'
 import Detail from './pages/DetailPage/Detail'
 import Shop from './pages/ShopPage/Shop'
+import Contact from './pages/ContactPage/Contact'
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
             <Route path='/announsements' element={<Announcement/>}/>
             <Route path='/detail' element={<Detail/>}/>
             <Route path='/shop' element={<Shop/>}/>
+            <Route path='/contact' element={<Contact/>}/>
 
           </Routes>
         <Footer />
