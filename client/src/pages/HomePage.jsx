@@ -4,7 +4,7 @@ import Feedback from '../components/Feedback/Feedback'
 import GivingBack from '../components/GivingBack/GivingBack'
 import Services from '../components/Services/Services'
 import IntroSection from '../components/IntroSection/IntroSection'
-import Card from '../components/Card/Card'
+// import Card from '../components/Card/Card'
 
 function HomePage() {
   return (
@@ -13,7 +13,7 @@ function HomePage() {
         <Feedback/>
         <Feature/>
         <GivingBack/>
-        <Card/>
+        {/* <Card/> */}
     </>
     
   )

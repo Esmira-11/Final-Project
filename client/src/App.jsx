@@ -19,6 +19,7 @@ import ForgotPassword from './pages/ForgotPasswordPage/forgotPassword'
 import ChangePassword from './pages/ChangePasswordPage/ChangePassword'
 import Announcement from './pages/AnnouncementPage/Announcement'
 import Detail from './pages/DetailPage/Detail'
+import Shop from './pages/ShopPage/Shop'
 
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
             <Route path='/changepassword' element={<ChangePassword/>}/>
             <Route path='/announsements' element={<Announcement/>}/>
             <Route path='/detail' element={<Detail/>}/>
-
+            <Route path='/shop' element={<Shop/>}/>
 
           </Routes>
         <Footer />
