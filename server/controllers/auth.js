@@ -2,7 +2,9 @@ const crypto = require('crypto');
 const User = require('../models/User');
 const ErrorResponse = require('../utils/errorResponse');
 const sendEmail = require('../utils/sendEmail');
-
+const { generateOTP } = require('../utils/verifyEmail');
+const Token = require('../models/Token');
+const {isValidObjectId} = require("mongoose")
 
 exports.register = async (req, res, next) =>{
     const {username, email, password} = req.body;
@@ -12,6 +14,23 @@ exports.register = async (req, res, next) =>{
             username, 
             email, 
             password,
+        });
+
+        const OTP = generateOTP();
+        const token = new Token({
+            userID: user._id,
+            token: OTP
+        })
+        await token.save();
+        await user.save();
+
+        const message = `
+          <h1>Your verification code is: ${OTP}</h1>
+          `
+        await sendEmail({
+            to: user.email,
+            subject: "Verify Email Request",
+            text: message
         });
 
         sendToken(user, 201, res);
@@ -33,6 +52,10 @@ exports.login = async (req, res, next) =>{
 
         if(!user){
             //401 unauthorized
+            return next(new ErrorResponse("Invalid Credentials",401));
+        }
+
+        if(!user.verified){
             return next(new ErrorResponse("Invalid Credentials",401));
         }
 
@@ -124,6 +147,57 @@ exports.resetpassword = async (req, res, next) =>{
 
 
 };
+
+exports.verifyEmail = async(req,res,next) => {
+    const {userID,otp} = req.body;
+    if(!userID || !otp.trim()) {
+        return next(new ErrorResponse("Invalid request, missing parameters!",400));
+    }
+
+    if(!isValidObjectId(userID)){
+        return next(new ErrorResponse("Invalid userID!",400));
+    }
+
+    const user = await User.findById(userID)
+    if(!user){
+        return next(new ErrorResponse("Sorry, user not found!",400));
+    }
+
+    if(user.verified){
+        //what
+        return next(new ErrorResponse("This account is already verified",200));
+    }
+
+    const token = await Token.findOne({userID: user._id})
+    if(!token){
+        return next(new ErrorResponse("Sorry, user not found!",400));
+    }
+
+    //otp.trim olmalidimi??
+    const isMatched = await token.compareToken(otp)
+    if(!isMatched){
+        return next(new ErrorResponse("Please provide a valid token",400));
+    }
+
+    user.verified = true;
+
+    await Token.findByIdAndDelete(token._id);
+    await user.save();
+
+    const message = `
+          <h1>Your Email Verified Successfully.</h1>
+          `
+    await sendEmail({
+            to: user.email,
+            subject: "Verify your email account",
+            text: message
+    });
+
+    res.status(200).json({
+        success:true,
+        data:`Your email is verified successfully.`
+    })
+}
 
 const sendToken = (user, statusCode, res) => {
     const token = user.getSignedToken();
