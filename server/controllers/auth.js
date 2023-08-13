@@ -4,7 +4,7 @@ const ErrorResponse = require('../utils/errorResponse');
 const sendEmail = require('../utils/sendEmail');
 const { generateOTP } = require('../utils/verifyEmail');
 const Token = require('../models/Token');
-const {isValidObjectId} = require("mongoose")
+const {isValidObjectId} = require("mongoose");
 
 exports.register = async (req, res, next) =>{
     const {username, email, password} = req.body;
@@ -149,8 +149,11 @@ exports.resetpassword = async (req, res, next) =>{
 };
 
 exports.verifyEmail = async(req,res,next) => {
-    const {userID} = req.params;
-    const {otp} = req.body;
+    //const {userID} = req.params;
+    const {userID,otp} = req.body;
+    console.log(userID)
+    console.log(otp)
+
     if(!userID || !otp.trim()) {
         return next(new ErrorResponse("Invalid request, missing parameters!",400));
     }
@@ -164,10 +167,10 @@ exports.verifyEmail = async(req,res,next) => {
         return next(new ErrorResponse("Sorry, user not found!",400));
     }
 
-    if(user.verified){
-        //what
-        return next(new ErrorResponse("This account is already verified",200));
-    }
+    // if(user.verified){
+    //     //what
+    //     return next(new ErrorResponse("This account is already verified",200));
+    // }
 
     const token = await Token.findOne({userID: user._id})
     if(!token){

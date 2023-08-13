@@ -76,7 +76,7 @@ function RegisterPage() {
       // setUserID(data.user._id);
       localStorage.setItem("authToken", data.token);
       
-      navigate(`/verify/?token=${data.token}/?id=${data.user._id}`);
+      navigate(`/verify?token=${data.token}&userID=${data.user._id}`);
     } catch (error) {
       // setError(error.response.data.error);
       // setTimeout(() => {

@@ -1,21 +1,27 @@
 import React, { useState } from 'react'
 import './verify.scss'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import axios from 'axios'
 
 function Verify() {
   let navigate = useNavigate();
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const userID = query.get('userID');
+  // console.log(userID);
 
   const [otp, setOtp] = useState('');
-  const {token, userID } = useParams();
   const [error, setError] = useState("");
-
-  const handleVerify = async () => {
+  
+  const handleVerify = async (e) => {
+    e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:5000/api/verify`, {
-        otp,
+      
+      const response = await axios.post(`http://localhost:5000/api/auth/verify`, {
         userID,
+        otp,
       });
+      
       if (response.data.success) {
         console.log("true")
         navigate('/login'); 
