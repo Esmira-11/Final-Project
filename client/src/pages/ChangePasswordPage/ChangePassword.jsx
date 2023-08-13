@@ -3,9 +3,12 @@ import { Icon } from 'react-icons-kit'
 import {eyeOff} from 'react-icons-kit/feather/eyeOff'
 import {eye} from 'react-icons-kit/feather/eye'
 import './changePassword.scss'
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 function ChangePassword() {
-
+  const { token } = useParams();
+  
   const [type,setType] = useState('password');
   const [icon,setIcon] = useState(eyeOff)
 

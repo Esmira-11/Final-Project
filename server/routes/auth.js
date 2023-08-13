@@ -5,13 +5,12 @@ const { register, forgotpassword, resetpassword, login, verifyEmail} = require('
 
 router.route("/register").post(register);
 
+router.route("/verify").post(verifyEmail);
+
 router.route("/login").post(login);
 
 router.route("/forgotpassword").post(forgotpassword);
 
 router.route("/resetpassword/:resetToken").put(resetpassword);
-
-router.route("/verify").post(verifyEmail);
-
 
 module.exports = router;

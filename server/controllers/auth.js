@@ -87,7 +87,7 @@ exports.forgotpassword = async (req, res, next) =>{
 
         await user.save();
 
-        const resetUrl = `http://localhost:3000/passwordreset/${resetToken}`;
+        const resetUrl = `http://localhost:3000/resetpassword/${resetToken}`;
 
         const message = `
           <h1>You have requested a password reset</h1>
@@ -149,7 +149,8 @@ exports.resetpassword = async (req, res, next) =>{
 };
 
 exports.verifyEmail = async(req,res,next) => {
-    const {userID,otp} = req.body;
+    const {userID} = req.params;
+    const {otp} = req.body;
     if(!userID || !otp.trim()) {
         return next(new ErrorResponse("Invalid request, missing parameters!",400));
     }
@@ -201,5 +202,5 @@ exports.verifyEmail = async(req,res,next) => {
 
 const sendToken = (user, statusCode, res) => {
     const token = user.getSignedToken();
-    res.status(statusCode).json({success:true, token})
+    res.status(statusCode).json({success:true, token, user:user})
 }
