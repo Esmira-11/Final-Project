@@ -125,7 +125,7 @@ function Card() {
             <div className="shop-item-price">$800</div>
         </div>
         </div>
-        <div className="shop-item">
+        {/* <div className="shop-item">
         <div className="shop-item-img">
             <img src={img} alt="shop-item" />
             <div className="shop-item-meta">
@@ -220,7 +220,7 @@ function Card() {
             </a>
             <div className="shop-item-price">$800</div>
         </div>
-        </div>
+        </div> */}
     </div>
     
   )

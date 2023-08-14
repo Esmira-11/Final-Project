@@ -13,9 +13,9 @@ function LoginPage() {
 
   // useEffect(() => {
   //   if (localStorage.getItem("authToken")) {
-  //     history.push("/");
+  //     navigate("/");
   //   }
-  // }, [history]);
+  // }, []);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -52,7 +52,6 @@ function LoginPage() {
       );
 
       localStorage.setItem("authToken", data.token);
-
       navigate("/");
     } catch (error) {
       setError(error.response.data.error);

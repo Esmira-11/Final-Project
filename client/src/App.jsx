@@ -22,6 +22,7 @@ import Detail from './pages/DetailPage/Detail'
 import Shop from './pages/ShopPage/Shop'
 import Contact from './pages/ContactPage/Contact'
 import Verify from './pages/VerifyPage/Verify'
+import UserProfile from './pages/UserProfilePage/UserProfile'
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
             <Route path='/announsements' element={<Announcement/>}/>
             <Route path='/detail' element={<Detail/>}/>
             <Route path='/shop' element={<Shop/>}/>
+            <Route path='/profile' element={<UserProfile/>}/>
             <Route path='/contact' element={<Contact/>}/>
             <Route path='/verify' element={<Verify/>}/>
           </Routes>

@@ -19,10 +19,10 @@ const Header = () => {
       <div className="nav">
         <div className="nav-links">
           <div className="nav-link">
-          <Link to="/">Home</Link>
+          <a href="/">Home</a>
           </div>
           <div className="nav-link">
-            <Link to="about">About us</Link>
+            <a href="about">About us</a>
           </div>
           <div className="nav-link">
             <a href="shop">Shop</a>
@@ -38,11 +38,11 @@ const Header = () => {
 
       <div className="icons">
           <div className="search-icon icon">
-            <i className="fa-solid fa-magnifying-glass"></i>
+            <a href=""><i className="fa-solid fa-magnifying-glass"></i></a> 
           </div>
           
           <div className="profile-icon icon">
-            <i className="fa-regular fa-user"></i>
+            <a href="profile"><i className="fa-regular fa-user"></i></a>
           </div>
           
           <div className="cart-icon icon">
