@@ -203,6 +203,15 @@ exports.verifyEmail = async(req,res,next) => {
     })
 }
 
+exports.test = async(req,res) => {
+    try {
+        res.send("Protected Routes");
+    } catch (error) {
+        console.log(error);
+        res.send({ error });
+    }
+}
+
 const sendToken = (user, statusCode, res) => {
     const token = user.getSignedToken();
     res.status(statusCode).json({success:true, token, user:user})

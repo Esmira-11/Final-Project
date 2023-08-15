@@ -23,7 +23,6 @@ function Verify() {
       });
       
       if (response.data.success) {
-        console.log("true")
         navigate('/login'); 
       } else {
         setError(error.response.data.error);

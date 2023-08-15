@@ -1,10 +1,23 @@
-import React from 'react'
-import './header.scss'
-import bowl from '../../assets/images/pet-bowl-3.png'
-import {Link} from 'react-router-dom'
-
+import React from "react";
+import "./header.scss";
+import bowl from "../../assets/images/pet-bowl-3.png";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../context/auth";
 
 const Header = () => {
+  const [auth, setAuth] = useAuth();
+
+  const handleLogout = () => {
+    setAuth({
+      ...auth,
+      user:null,
+      token: ''
+    })
+    localStorage.removeItem('auth')
+    localStorage.removeItem('authToken')
+
+  }
+
   return (
     <div className="header">
       <div className="logo">
@@ -19,7 +32,7 @@ const Header = () => {
       <div className="nav">
         <div className="nav-links">
           <div className="nav-link">
-          <a href="/">Home</a>
+            <a href="/">Home</a>
           </div>
           <div className="nav-link">
             <a href="about">About us</a>
@@ -36,21 +49,48 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="icons">
-          <div className="search-icon icon">
-            <a href=""><i className="fa-solid fa-magnifying-glass"></i></a> 
+      {!auth.user ? (
+        <>
+          <div className="icons">
+            <div className="profile-icon icon">
+              <a href="/login">Login</a>
+            </div>
+            <div className="profile-icon icon">
+              <a href="/register">Register</a>
+            </div>
           </div>
-          
-          <div className="profile-icon icon">
-            <a href="profile"><i className="fa-regular fa-user"></i></a>
-          </div>
-          
-          <div className="cart-icon icon">
-            <img src={bowl} alt="dog-bowl" />
-          </div>
-        </div>
-    </div>
-  )
-}
+        </>
+      ) : (
+        <>
+          <div className="icons">
+            {/* <h2>{JSON.stringify(auth,null,4)}</h2> */}
+            {console.log(JSON.stringify(auth, null, 4))}
+            <div className="search-icon icon">
+              <a href="">
+                <i className="fa-solid fa-magnifying-glass"></i>
+              </a>
+            </div>
 
-export default Header
+            <div className="profile-icon icon">
+              <a href="profile">
+                <i className="fa-regular fa-user"></i>
+              </a>
+            </div>
+
+            <div className="profile-icon icon">
+              <a onClick={handleLogout} href="#">
+                <i class="fa-solid fa-right-from-bracket"></i>
+              </a>
+            </div>
+
+            <div className="cart-icon icon">
+              <img src={bowl} alt="dog-bowl" />
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
+export default Header;

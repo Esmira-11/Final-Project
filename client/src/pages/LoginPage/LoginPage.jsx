@@ -6,10 +6,11 @@ import {eye} from 'react-icons-kit/feather/eye'
 import Layout from "../../components/Layout";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { useAuth } from "../../context/auth";
 
 function LoginPage() {
   let navigate = useNavigate();
+  const [auth,setAuth] = useAuth();
 
   // useEffect(() => {
   //   if (localStorage.getItem("authToken")) {
@@ -52,6 +53,13 @@ function LoginPage() {
       );
 
       localStorage.setItem("authToken", data.token);
+      localStorage.setItem("auth", JSON.stringify(data));
+
+      setAuth({
+        ...auth,
+        user: data.user,
+        token: data.token,
+      })
       navigate("/");
     } catch (error) {
       setError(error.response.data.error);

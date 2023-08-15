@@ -23,6 +23,7 @@ import Shop from './pages/ShopPage/Shop'
 import Contact from './pages/ContactPage/Contact'
 import Verify from './pages/VerifyPage/Verify'
 import UserProfile from './pages/UserProfilePage/UserProfile'
+import PrivateRoute from './routes/Private'
 
 function App() {
 
@@ -39,7 +40,9 @@ function App() {
             <Route path='/announsements' element={<Announcement/>}/>
             <Route path='/detail' element={<Detail/>}/>
             <Route path='/shop' element={<Shop/>}/>
-            <Route path='/profile' element={<UserProfile/>}/>
+            <Route path='/profile' element={<PrivateRoute/>}>
+                <Route path='' element={<UserProfile/>}/>
+            </Route>
             <Route path='/contact' element={<Contact/>}/>
             <Route path='/verify' element={<Verify/>}/>
           </Routes>
