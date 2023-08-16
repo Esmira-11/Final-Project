@@ -40,13 +40,13 @@ function Filter() {
                     </div>
                     <div className="size-bar-content">
                         <div className="size">
-                            <a href="#">Big</a>
+                            <a href="#">Small</a>
                         </div>
                         <div className="size">
                             <a href="#">Medium</a>
                         </div>
                         <div className="size">
-                            <a href="#">Small</a>
+                            <a href="#">Large</a>
                         </div>
                     </div>
                 </div>
