@@ -4,8 +4,11 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import Card from "../../components/Card/Card";
 import './userprofile.scss'
 import avatar from "../../assets/images/avatar-3.png"
+import { useAuth } from "../../context/auth";
 
 function UserProfile() {
+  const [auth, setAuth] = useAuth();
+
   return (
     <Layout>
       <div className="user-profile">
@@ -24,10 +27,10 @@ function UserProfile() {
                         </div>
                         <div className="user-detail-info">
                             <div className="user-name">
-                                <h3>Esmira</h3>
+                                <h3>{auth.user.username}</h3>
                             </div>
                             <div className="user-email">
-                                <h4>esmiraismayilova@gmail.com</h4>
+                                <h4>{auth.user.email}</h4>
                             </div>
                         </div>
                     </div>

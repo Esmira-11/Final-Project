@@ -72,9 +72,11 @@ const Header = () => {
             </div>
 
             <div className="profile-icon icon">
-              <a href="profile">
+              <Link to={`/profile/${
+                auth?.user?.role === 1 ? 'admin' : 'user' 
+                }`}>
                 <i className="fa-regular fa-user"></i>
-              </a>
+              </Link>
             </div>
 
             <div className="profile-icon icon">
