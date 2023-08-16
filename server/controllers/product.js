@@ -4,7 +4,7 @@ const fs = require('fs')
 
 exports.createProduct = async (req, res) => {
     try {
-        const {name, slug, description, price, category, quantity, shipping} = req.fields;
+        const {name, slug, description, price, category, petcategory, quantity, shipping} = req.fields;
         const {photo} = req.files
         switch(true){
             case !name:
@@ -15,6 +15,8 @@ exports.createProduct = async (req, res) => {
                 return res.status(500).send({error:'Price is Required'})
             case !category:
                 return res.status(500).send({error:'Category is Required'})
+            case !petcategory:
+                return res.status(500).send({error:'PetCategory is Required'})
             case !quantity:
                 return res.status(500).send({error:'Quantity is Required'})
             case photo && photo.size>1000000:
@@ -50,6 +52,7 @@ exports.getAllProducts = async (req, res) => {
         const products = await Product
         .find({})
         .populate('category')
+        .populate('petcategory','name')
         .select("-photo")
         .limit(12)
         .sort({createdAt: -1 });
@@ -75,7 +78,8 @@ exports.getProductById = async (req, res) => {
         const product = await Product
         .findById(id)
         .select("-photo")
-        .populate("category");
+        .populate("category")
+        .populate('petcategory','name');
         res.status(200).send({
           success: true,
           message: "Get Single Product Successfully",
@@ -130,7 +134,7 @@ exports.deleteProductById = async(req,res) => {
 
 exports.updateProduct = async(req,res) => {
     try {
-        const {name, slug, description, price, category, quantity, shipping} = req.fields;
+        const {name, slug, description, price, category, petcategory, quantity, shipping} = req.fields;
         const {photo} = req.files
         switch(true){
             case !name:
@@ -141,6 +145,8 @@ exports.updateProduct = async(req,res) => {
                 return res.status(500).send({error:'Price is Required'})
             case !category:
                 return res.status(500).send({error:'Category is Required'})
+            case !petcategory:
+                return res.status(500).send({error:'PetCategory is Required'})
             case !quantity:
                 return res.status(500).send({error:'Quantity is Required'})
             case photo && photo.size>1000000:

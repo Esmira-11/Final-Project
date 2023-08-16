@@ -22,6 +22,11 @@ const ProductSchema = new mongoose.Schema({
         ref:'Category',
         required:true
     },
+    petcategory:{
+        type:mongoose.ObjectId,
+        ref:'PetCategory',
+        required:true
+    },
     quantity:{
         type:Number,
         required:true
