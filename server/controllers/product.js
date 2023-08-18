@@ -4,7 +4,7 @@ const fs = require('fs')
 
 exports.createProduct = async (req, res) => {
     try {
-        const {name, slug, description, price, category, petcategory, size, quantity, shipping} = req.fields;
+        const {name, slug, description, price, category, petcategory, size,} = req.fields;
         const {photo} = req.files
         switch(true){
             case !name:
@@ -19,12 +19,9 @@ exports.createProduct = async (req, res) => {
                 return res.status(500).send({error:'PetCategory is Required'})
             case !size:
                 return res.status(500).send({error:'Size is Required'})
-            case !quantity:
-                return res.status(500).send({error:'Quantity is Required'})
             case photo && photo.size>1000000:
                 return res.status(500).send({error:'Photo is Required and should be less than 1mb'})
-            // case !shipping:
-            //     return res.status(500).send({error:'Shipping is Required'})
+            
         }
         const products = new Product({...req.fields, slug:slugify(name)})
         if(photo){
@@ -136,7 +133,7 @@ exports.deleteProductById = async(req,res) => {
 
 exports.updateProduct = async(req,res) => {
     try {
-        const {name, slug, description, price, category, petcategory, size, quantity, shipping} = req.fields;
+        const {name, slug, description, price, category, petcategory, size,} = req.fields;
         const {photo} = req.files
         switch(true){
             case !name:
@@ -151,12 +148,9 @@ exports.updateProduct = async(req,res) => {
                 return res.status(500).send({error:'PetCategory is Required'})
             case !size:
                 return res.status(500).send({error:'Size is Required'})
-            case !quantity:
-                return res.status(500).send({error:'Quantity is Required'})
             case photo && photo.size>1000000:
                 return res.status(500).send({error:'Photo is Required and should be less than 1mb'})
-            // case !shipping:
-            //     return res.status(500).send({error:'Shipping is Required'})
+            
         }
         const products = await Product.findByIdAndUpdate(req.params.id,
             {...req.fields, slug: slugify(name)},

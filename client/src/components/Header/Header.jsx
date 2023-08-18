@@ -81,7 +81,7 @@ const Header = () => {
 
             <div className="profile-icon icon">
               <a onClick={handleLogout} href="#">
-                <i class="fa-solid fa-right-from-bracket"></i>
+                <i className="fa-solid fa-right-from-bracket"></i>
               </a>
             </div>
 

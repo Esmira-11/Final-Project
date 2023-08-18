@@ -32,17 +32,10 @@ const ProductSchema = new mongoose.Schema({
         enum: ["Small", "Medium", "Large"],
         required:true
     },
-    quantity:{
-        type:Number,
-        required:true
-    },
     photo:{
         data:Buffer,
         contentType:String
     },
-    shipping:{
-        type:Boolean,
-    }
     },
     {timestamps:true}
 );

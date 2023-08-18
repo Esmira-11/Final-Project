@@ -34,8 +34,8 @@ function CreateCategory() {
       const { data } = await axios.get(
         "http://localhost:5000/api/category/all-categories"
       );
-      if (data.success) {
-        setCategories(data.category);
+      if (data?.success) {
+        setCategories(data?.category);
       }
     } catch (error) {
       console.log(error);
@@ -116,8 +116,6 @@ function CreateCategory() {
     borderRadius:'15px',
     backgroundColor:' #fffaf5',
     color:'#2f4f4f',
-    // bgcolor: 'background.paper',
-    border: '2px solid #000',
     boxShadow: 24,
     p: 4,
     border:'none'
@@ -145,43 +143,6 @@ function CreateCategory() {
             </form>
           </div>
         </div>
-
-        {/* <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {categories?.map((item) => (
-              <>
-                <tr
-                  style={{
-                    fontFamily: "'Raleway', sans-serif",
-                    color: "#2f4f4f",
-                  }}
-                >
-                  <td style={{ fontSize: "20px" }} key={item._id}>
-                    {item.name}
-                  </td>
-                  <td style={{ paddingTop: "5px" }}>
-                    <button
-                      style={{
-                        background: "#d5e5e9",
-                        color: "#2f4f4f",
-                        border: "none",
-                      }}
-                      className="btn btn-primary"
-                    >
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-              </>
-            ))}
-          </tbody>
-        </table> */}
 
         <TableContainer className="table" component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
