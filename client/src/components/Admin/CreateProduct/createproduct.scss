@@ -1,12 +1,146 @@
-.createproduct{
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,700;1,500;1,700&family=Sofia&display=swap');
+
+.create-product{
+    width: 100%;
+    
     .form-section{
-        .photo{
-            width: 100px;
-            height: 100px;
-            img{
-                width: 100px;
-                height: 100px;
+       width: 60%;
+       margin: 0 auto;
+       padding: 15px 40px 40px;
+       background-color: rgba(45, 146, 186, 0.2);
+       border-radius: 20px;
+       font-family: 'Raleway', sans-serif;
+       .form-title{
+            text-align: center;
+            font-family: 'Sofia', cursive;
+            font-size: 40px;
+            font-weight: 700;
+            padding-bottom: 10px;
+       }
+       .upload-photo{
+            cursor: pointer;
+            border-radius: 8px;
+            background-color: rgba(47, 79, 79, 0.2);
+            padding: 15px;
+       }
+       .form-group{
+        padding-top: 10px;
+            input,textarea{
+                cursor: pointer;
+                width: 100%;
+                padding: 15px;
+                font-size: 17px;
+                border: none;
+                outline: none;
+                background: rgba(47, 79, 79, 0.2);
+                border-radius: 8px;
+                color: #2f4f4f;
+            }
+            input::placeholder,textarea::placeholder {
+                color: #2f4f4f;
+                font-weight: 400; 
+            }
+              
+        }
+        .price{
+            padding-top: 3px;
+        }
+        .select-box{
+            margin-top: 10px;
+            border-radius: 8px;
+            #demo-simple-select-label{
+                color: #2f4f4f;
             }
         }
+        .MuiInputBase-root{
+            border-radius: 8px;
+            background: rgba(47, 79, 79, 0.2);
+            border: none;
+            outline: none;
+        }
+        .MuiSelect-select{
+            border-radius: 8px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            .notranslate{
+                font-size: 40px;
+            }
+        }
+        .form-btn{
+            padding-top: 10px;
+            button{
+                width: 100%;
+                padding: 13px;
+                font-size: 18px;
+                border: none;
+                cursor: pointer;
+                // color: #2f4f4f;
+                font-weight: 700;
+                border-radius: 8px;
+                background: #2f4f4f;
+                color:  #fffaf5;
+                transition: background-color 0.3s ease;
+            }
+            button:hover{
+                color: #2f4f4f;
+                background: rgba(47, 79, 79, 0.2);
+                border: 2px solid #2f4f4f;
+            }
+        }
+        
     }
 }
+
+
+// &-right{
+//     background-color: rgba(45, 146, 186, 0.2);
+//     border-radius: 20px;
+//     padding: 40px;
+//     font-family: 'Raleway', sans-serif;
+//     width: 50%;
+//     .form-title{
+//         font-family: 'Sofia', cursive;
+//         font-size: 40px;
+//         font-weight: 700;
+//     }
+//     .form-description{
+//         padding: 20px 0;
+//         line-height: 22px;
+//         font-size: 18px;
+//     }
+//     .form{
+//         form{
+//             .form-group{
+//                 padding: 10px 0;
+//                 input,textarea{
+//                     cursor: pointer;
+//                     width: 100%;
+//                     padding: 15px;
+//                     font-size: 17px;
+//                     border: none;
+//                     outline: none;
+//                     background: rgba(47, 79, 79, 0.2);
+//                     border-radius: 8px;
+//                     color: #2f4f4f;
+//                 }
+//             }
+//             button{
+//                 width: 100%;
+//                 padding: 12px;
+//                 font-size: 18px;
+//                 border: none;
+//                 border: 2px solid #2f4f4f;
+//                 cursor: pointer;
+//                 color: #2f4f4f;
+//                 font-weight: 700;
+//                 border-radius: 8px;
+//                 background: rgba(47, 79, 79, 0.2);
+
+//             }
+//             button:hover{
+//                 background: #2f4f4f;
+//                 color: #fffaf5;
+//             }
+//         }
+//     }
+// }

@@ -38,6 +38,9 @@ function Footer() {
             <div className="link">
               <a href="#">Announcement</a>
             </div>
+            <div className="link">
+              <a href="#">Contact</a>
+            </div>
           </div>
 
           {/* <div className="hours">
