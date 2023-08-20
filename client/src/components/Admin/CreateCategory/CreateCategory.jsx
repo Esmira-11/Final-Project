@@ -45,7 +45,7 @@ function CreateCategory() {
 
   useEffect(() => {
     getAllCategory();
-  }, [categories]);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -222,8 +222,7 @@ function CreateCategory() {
             <Button onClick={handleUpdate} className="subbtn" variant="text" style={{background: '#2f4f4f',color: '#fffaf5'}}>Update</Button>
 
             </div>
-           
-            
+
           </Box>
         </Modal>
       </div>
