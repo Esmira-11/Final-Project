@@ -149,6 +149,8 @@ function CreateCategory() {
             <TableHead className="thead">
               <TableRow>
                 <TableCell className="thcell">Name</TableCell>
+                <TableCell className="thcell">Action</TableCell>
+                <TableCell className="thcell">Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

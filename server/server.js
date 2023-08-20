@@ -17,6 +17,8 @@ app.use('/api/private',require('./routes/private'));
 app.use('/api/category',require('./routes/category'));
 app.use('/api/petcategory',require('./routes/petcategory'));
 app.use('/api/product',require('./routes/product'));
+app.use('/api/user',require('./routes/user'));
+
 
 
 //Error Handler

@@ -611,7 +611,7 @@ function CreateProduct() {
                       background: "rgba(47, 79, 79, 0.2)",
                       borderRadius: "8px",
                       color: "#2f4f4f",
-                      paddingTop: "3px",
+                      // paddingTop: "3px",
                     }}
                   />
                 </div>
