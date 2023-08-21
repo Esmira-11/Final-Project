@@ -29,15 +29,19 @@
                     }
                 }
                 &-content{
+                    :where(.css-dev-only-do-not-override-17a39f8).ant-checkbox-checked .ant-checkbox-inner {
+                    background-color: #2f4f4f;
+                    border: #2f4f4f;
+                    }
                     padding-top: 10px;
                     .category{
                         padding: 5px 0;
                         position: relative;
-                        a{
+                        span{
+                            font-family: 'Raleway', sans-serif;
                             text-decoration: none;
                             color: #2f4f4f;
-                            font-size: 18px;
-
+                            font-size: 16px;
                         }
                     }
                     .category::before{
@@ -109,13 +113,19 @@
                 }
                 &-content{
                     padding-top: 10px;
+                    :where(.css-dev-only-do-not-override-17a39f8).ant-radio-wrapper .ant-radio-checked .ant-radio-inner {
+                        background-color: #2f4f4f;
+                        border: #2f4f4f;
+                    }
                     .price{
                         position: relative;
                         padding: 5px 0;
-                        a{
+                        
+                        span{
                             text-decoration: none;
+                            font-family: 'Raleway', sans-serif;
                             color: #2f4f4f;
-                            font-size: 18px;
+                            font-size: 16px;
                         }
                     }
                     .price::before{
@@ -131,6 +141,28 @@
                     .price:hover::before{
                         width: 100%;
                       }
+                }
+            }
+
+            .reset-btn{
+                width: 100%;
+                button{
+                    width: 100%;
+                    padding: 12px;
+                    border-radius: 15px;
+                    border: none;
+                    font-size: 16px;
+                    border: none;
+                    cursor: pointer;
+                    color: #2f4f4f;
+                    font-weight: 700;
+                    border-radius: 8px;
+                    background-color: #d5e5e9;
+                }
+                
+                button:hover{
+                    background: #2f4f4f;
+                    color: #fffaf5;
                 }
             }
         }

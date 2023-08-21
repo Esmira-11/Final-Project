@@ -10,18 +10,25 @@ function Filter() {
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
   const [radio, setRadio] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+
+
 
   const getAllProducts = async () => {
     try {
+      setLoading(true)
       const response = await axios.get(
-        "http://localhost:5000/api/product/all-products"
+        `http://localhost:5000/api/product/product-list/${page}`
       );
       // setProduct(response.data.products);
-
+      setLoading(false)
       if (response.status == 200) {
         setProduct(response.data.products);
       }
     } catch (error) {
+      setLoading(false)
       console.log(error);
     }
   };
@@ -61,7 +68,35 @@ function Filter() {
 
   useEffect(() => {
     getAllCategories();
+    getTotal();
   }, []);
+
+  const getTotal = async () => {
+    try {
+      const {data} = await axios.get('http://localhost:5000/api/product/product-count')
+      setTotal(data?.total)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    if(page === 1) return;
+    loadMore();
+  }, [page])
+  
+
+  const loadMore = async () => {
+    try {
+      setLoading(true)
+      const {data} = await axios.get(`http://localhost:5000/api/product/product-list/${page}`)
+      setLoading(false)
+      setProduct([...product, ...data?.products])
+    } catch (error) {
+      console.log(error)
+      setLoading(false)
+    }
+  }
 
   const handleFilter = (value, id) => {
     let all = [...checked];
@@ -139,15 +174,13 @@ function Filter() {
                     </div>
                   ))}
                 </Radio.Group>
-                <button onClick={() => window.location.reload()}>Reset Filters</button>
               </div>
             </div>
-            <div className="price-bar">
-              
-              <div className="price-bar-content">
-                <button onClick={() => window.location.reload()}>Reset Filters</button>
-              </div>
+            
+            <div className="reset-btn">
+              <button onClick={() => window.location.reload()}>Reset Filters</button>
             </div>
+            
           </div>
           <div className="filter-section-container-right">
             <div className="filter-section-container-right-top">
@@ -165,6 +198,7 @@ function Filter() {
 
             <div className="filter-section-container-right-bottom">
               {/* <Card/> */}
+              {total}
               {JSON.stringify(checked, null, 4)}
               <div className="cards">
                 {product?.map((item) => (
@@ -202,6 +236,14 @@ function Filter() {
                 ))}
                 
               </div>
+              {product && product.length < total && (
+                <button className="button" onClick={(e) => {
+                  e.preventDefault();
+                  setPage(page + 1);
+                }}>
+                  {loading ? 'Loading ...' : 'Loadmore'}
+                </button>
+              )}
             </div>
           </div>
         </div>
