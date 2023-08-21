@@ -27,6 +27,7 @@ import PrivateRoute from './routes/Private'
 import AdminRoute from './routes/AdminRoute'
 import AdminProfile from './pages/AdminProfilePage/AdminProfile'
 import CreateCategory from './components/Admin/CreateCategory/CreateCategory'
+import Search from './pages/SearchPage/Search'
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
     <>
           <Routes>
             <Route path='/' element={<HomePage/>}/>
+            <Route path='/search' element={<Search/>}/>
             <Route path='/about' element={<AboutPage/>}/>
             <Route path='*' element={<NotFoundPage/>}/>
             <Route path='/login' element={<LoginPage/>}/>

@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,700;1,500;1,700&family=Sofia&display=swap');
+//                             font-family: 'Raleway', sans-serif;
+
+.search-container{
+    width: 80%;
+    margin: 0 auto;
+    padding: 100px 0;
+    text-align: center;
+    h1{
+        font-family: 'Sofia', cursive;
+        padding-bottom: 15px;
+        color: #2f4f4f;
+        font-size: 40px;
+        font-weight: 700
+    }
+    h6{
+        font-size: 20px;
+        color: #2f4f4f;
+        font-weight: 600;
+        padding-bottom: 15px;
+    }
+    .cards{
+        display: flex;
+        flex-wrap: wrap;
+    }
+}

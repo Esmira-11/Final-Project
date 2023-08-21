@@ -236,3 +236,24 @@ exports.productList = async (req, res) => {
     });
   }
 };
+
+exports.search = async (req,res) => {
+  try {
+    const {keyword} = req.params
+    const results = await Product
+    .find({
+      $or:[
+        {name:{$regex : keyword, $options: "i"}},
+        {description:{$regex : keyword, $options: "i"}}
+      ]
+    }).select("-photo");
+    res.json(results)
+  } catch (error) {
+    console.error(error)
+    res.status(400).send({
+      success:false,
+      message:'Error In Search Product API',
+      error
+    })
+  }
+}

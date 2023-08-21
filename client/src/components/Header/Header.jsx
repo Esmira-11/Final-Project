@@ -1,11 +1,15 @@
 import React from "react";
 import "./header.scss";
 import bowl from "../../assets/images/pet-bowl-3.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth";
+import { useSearch } from "../../context/search";
+import axios from 'axios'
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
+  const [values, setValues] = useSearch();
+  let navigate = useNavigate();
 
   const handleLogout = () => {
     setAuth({
@@ -16,6 +20,17 @@ const Header = () => {
     localStorage.removeItem('auth')
     localStorage.removeItem('authToken')
 
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const {data} = await axios.get(`http://localhost:5000/api/product/search/${values.keyword}`)
+      setValues({...values, results: data});
+      navigate("/search");
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -65,11 +80,19 @@ const Header = () => {
           <div className="icons">
             {/* <h2>{JSON.stringify(auth,null,4)}</h2> */}
             {console.log(JSON.stringify(auth, null, 4))}
-            <div className="search-icon icon">
-              <a href="">
-                <i className="fa-solid fa-magnifying-glass"></i>
-              </a>
-            </div>
+            <form onSubmit={handleSubmit}>
+            <div className="search-bar">
+            <input
+              type="text"
+              placeholder="Search for products..."
+              value={values.keyword}
+              onChange={(e) => setValues({...values, keyword: e.target.value})}
+            />
+            <a href="#" onClick={handleSubmit}>
+              <i className="fas fa-search "></i>
+            </a>
+          </div>
+          </form>
 
             <div className="profile-icon icon">
               <Link to={`/profile/${

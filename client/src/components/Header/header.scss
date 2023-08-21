@@ -55,6 +55,35 @@
         display: flex;
         align-items: center;
         height: 100%;
+        .search-bar {
+            width: 300px;
+            background-color: #fff;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+      
+            input {
+              width: 85%;
+              outline: none;
+              border: none;
+              font-size: 15px;
+              font-family: 'Raleway', sans-serif;
+              color: #2f4f4f;
+            }
+      
+            .fa-search {
+              margin-left: 5px;
+              font-size: 16px;
+              color: #2f4f4f;
+              transition: all 0.2s ease-in-out;
+      
+            //   &:hover {
+            //     color: #ff9400;
+            //   }
+            }
+        }
         
         .icon{
             a{
