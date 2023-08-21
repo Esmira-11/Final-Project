@@ -3,6 +3,7 @@ import "./filter.scss";
 import axios from "axios";
 import { Prices } from "../Prices";
 import { Radio, Checkbox } from "antd";
+import { withError } from "antd/es/modal/confirm";
 
 function Filter() {
   const [product, setProduct] = useState([]);
@@ -15,6 +16,7 @@ function Filter() {
       const response = await axios.get(
         "http://localhost:5000/api/product/all-products"
       );
+      // setProduct(response.data.products);
 
       if (response.status == 200) {
         setProduct(response.data.products);
@@ -27,9 +29,21 @@ function Filter() {
   //     console.log("product", product[1])
   // }
 
+  // useEffect(() => {
+  //   if(!checked.length && !radio.length) getAllProducts();
+  // }, [checked.length,radio.length]);
+
+  // useEffect(() => {
+  //   if(checked.length || radio.length) filteredProduct();
+  // }, [checked,radio]);
+
   useEffect(() => {
-    getAllProducts();
-  }, []);
+    if(checked.length || radio.length){
+      filteredProduct();
+    } else{
+      getAllProducts();
+    }
+  }, [checked.length,radio.length]);
 
   const getAllCategories = async () => {
     try {
@@ -59,6 +73,20 @@ function Filter() {
     setChecked(all);
   };
 
+  const filteredProduct = async () => {
+    try {
+      const {data} = await axios.post("http://localhost:5000/api/product/product-filters",{
+        checked,
+        radio
+      })
+      setProduct(data?.products)
+      console.log(data.products)
+      console.log(product)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <>
       <div className="filter-section">
@@ -73,7 +101,7 @@ function Filter() {
                   <div className="category">
                     <Checkbox
                       key={item._id}
-                      onChange={(e) => handleFilter(e.target.checked)}
+                      onChange={(e) => handleFilter(e.target.checked, item._id)}
                     >
                       {item.name}
                     </Checkbox>
@@ -111,6 +139,13 @@ function Filter() {
                     </div>
                   ))}
                 </Radio.Group>
+                <button onClick={() => window.location.reload()}>Reset Filters</button>
+              </div>
+            </div>
+            <div className="price-bar">
+              
+              <div className="price-bar-content">
+                <button onClick={() => window.location.reload()}>Reset Filters</button>
               </div>
             </div>
           </div>
@@ -130,7 +165,7 @@ function Filter() {
 
             <div className="filter-section-container-right-bottom">
               {/* <Card/> */}
-              {JSON.stringify(radio, null, 4)}
+              {JSON.stringify(checked, null, 4)}
               <div className="cards">
                 {product?.map((item) => (
                   <div className="shop-item">
