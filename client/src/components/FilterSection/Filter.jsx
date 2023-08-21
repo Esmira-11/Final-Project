@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./filter.scss";
-// import Card from "../Card/Card";
-import { useAuth } from "../../context/auth";
 import axios from "axios";
-// import img from "../../assets/images/shop-item.png";
-
+import { Prices } from "../Prices";
+import { Radio, Checkbox } from "antd";
 
 function Filter() {
-  const [auth, setAuth] = useAuth();
   const [product, setProduct] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [checked, setChecked] = useState([]);
+  const [radio, setRadio] = useState([]);
 
   const getAllProducts = async () => {
     try {
@@ -17,21 +16,20 @@ function Filter() {
         "http://localhost:5000/api/product/all-products"
       );
 
-      if (response.status ==200) {
-        setProduct(response.data.products)
+      if (response.status == 200) {
+        setProduct(response.data.products);
       }
     } catch (error) {
       console.log(error);
     }
   };
-// if (product.length != 0) {
-//     console.log("product", product[1])
-// }
-      
+  // if (product.length != 0) {
+  //     console.log("product", product[1])
+  // }
+
   useEffect(() => {
     getAllProducts();
   }, []);
-
 
   const getAllCategories = async () => {
     try {
@@ -39,8 +37,8 @@ function Filter() {
         "http://localhost:5000/api/category/all-categories"
       );
 
-      if (response.status ==200) {
-        setCategories(response.data.category)
+      if (response.status == 200) {
+        setCategories(response.data.category);
       }
     } catch (error) {
       console.log(error);
@@ -50,6 +48,17 @@ function Filter() {
   useEffect(() => {
     getAllCategories();
   }, []);
+
+  const handleFilter = (value, id) => {
+    let all = [...checked];
+    if (value) {
+      all.push(id);
+    } else {
+      all = all.filter((c) => c !== id);
+    }
+    setChecked(all);
+  };
+
   return (
     <>
       <div className="filter-section">
@@ -60,29 +69,16 @@ function Filter() {
                 <h2>All Categories</h2>
               </div>
               <div className="category-bar-content">
-              {categories?.map((item) => (
-                <div className="category">
-                <a href="#">{item.name}</a>
-              </div>
-              ))}
-                {/* <div className="category">
-                  <a href="#">Food</a>
-                </div>
-                <div className="category">
-                  <a href="#">Toys</a>
-                </div>
-                <div className="category">
-                  <a href="#">Beds</a>
-                </div>
-                <div className="category">
-                  <a href="#">Accessories</a>
-                </div>
-                <div className="category">
-                  <a href="#">Health and Wellness</a>
-                </div>
-                <div className="category">
-                  <a href="#">Grooming Supplies</a>
-                </div> */}
+                {categories?.map((item) => (
+                  <div className="category">
+                    <Checkbox
+                      key={item._id}
+                      onChange={(e) => handleFilter(e.target.checked)}
+                    >
+                      {item.name}
+                    </Checkbox>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -108,18 +104,13 @@ function Filter() {
                 <h2>Price Range</h2>
               </div>
               <div className="price-bar-content">
-                <div className="price">
-                  <a href="#">0$ - 50$</a>
-                </div>
-                <div className="price">
-                  <a href="#">0$ - 50$</a>
-                </div>
-                <div className="price">
-                  <a href="#">0$ - 50$</a>
-                </div>
-                <div className="price">
-                  <a href="#">0$ - 50$</a>
-                </div>
+                <Radio.Group onChange={(e) => setRadio(e.target.value)}>
+                  {Prices?.map((item) => (
+                    <div className="price" key={item._id}>
+                      <Radio value={item.array}>{item.name}</Radio>
+                    </div>
+                  ))}
+                </Radio.Group>
               </div>
             </div>
           </div>
@@ -139,12 +130,15 @@ function Filter() {
 
             <div className="filter-section-container-right-bottom">
               {/* <Card/> */}
+              {JSON.stringify(radio, null, 4)}
               <div className="cards">
-                 {product?.map((item) => (
-                  <div className="shop-item" >
+                {product?.map((item) => (
+                  <div className="shop-item">
                     <div className="shop-item-img">
-                      <img src={`http://localhost:5000/api/product/product-photo/${item._id}`} alt="shop-item" />
-                      {/* <img src={item.photo.data} alt="" /> */}
+                      <img
+                        src={`http://localhost:5000/api/product/product-photo/${item._id}`}
+                        alt="shop-item"
+                      />
                       <div className="shop-item-meta">
                         <div className="links">
                           <a href="#">
@@ -170,40 +164,9 @@ function Filter() {
                       <div className="shop-item-price">{item.price} $</div>
                     </div>
                   </div>
+                ))}
                 
-                 ))}
-                 {/* <h1>esi</h1> */}
-                 {/* {product && product.map((item) => (
-                    <h1>{item.name}</h1>
-                 ))} */}
               </div>
-
-{/* <div className="cards">
-        <div className="shop-item">
-        <div className="shop-item-img">
-            <img src={img} alt="shop-item" />
-            <div className="shop-item-meta">
-                <div className="links">
-                    <a href="#"><i className="far fa-heart"></i></a>
-                    <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
-                </div>
-            </div>
-        </div>
-        <div className="shop-item-info">
-            <div className="shop-item-rate">
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star"></i>
-            </div>
-            <a href="#">
-                <h4 className="shop-item-title">Pet Modern Toy</h4>
-            </a>
-            <div className="shop-item-price">$800</div>
-        </div>
-        </div>
-        </div> */}
             </div>
           </div>
         </div>
