@@ -20,6 +20,22 @@ function Filter() {
   const [loading, setLoading] = useState(false);
   const [card, setCard] = useCard()
 
+  const handleAddToCart = (item) => {
+    const existingProductIndex = card.findIndex((product) => product._id === item._id);
+    if (existingProductIndex !== -1) {
+      // Product already exists in the cart, update its quantity
+      const updatedCard = [...card];
+      updatedCard[existingProductIndex].quantity += 1;
+      setCard(updatedCard);
+    } else {
+      // Product doesn't exist in the cart, add it as a new entry
+      setCard([...card, { ...item, quantity: 1 }]);
+    }
+
+    localStorage.setItem('cart', JSON.stringify([...card, item])); // Update local storage
+    toast.success('Added to Cart'); // Show a success message
+  };
+
   const getAllProducts = async () => {
     try {
       setLoading(true)
@@ -217,9 +233,7 @@ function Filter() {
                           </button>
                           <button
                             onClick={() => {
-                            setCard([...card, item]);
-                            localStorage.setItem('cart',JSON.stringify([...card, item]));
-                            toast.success('Added to Card');
+                              handleAddToCart(item)
                           }
                           
                           }>

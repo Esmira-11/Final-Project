@@ -6,6 +6,7 @@ import { useAuth } from "../../context/auth";
 import { useSearch } from "../../context/search";
 import axios from 'axios'
 import { useCard } from "../../context/card";
+import Badge from '@mui/material/Badge';
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
@@ -112,8 +113,10 @@ const Header = () => {
 
             <div className="cart-icon icon">
               <NavLink to="/card" className='navlink'>
+              {/* <Badge badgeContent={card?.reduce((total, item) => total + item.quantity, 0)} color="primary"> */}
               <img src={bowl} alt="dog-bowl" />
-              <span>{card?.length}</span>
+              {/* </Badge> */}
+              <span>{card?.reduce((total, item) => total + item.quantity, 0)}</span>
               </NavLink>
             </div>
           </div>

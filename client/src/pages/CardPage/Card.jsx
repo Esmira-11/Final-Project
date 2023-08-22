@@ -10,18 +10,21 @@ const Card = () => {
   const [card, setCard] = useCard();
   let navigate = useNavigate();
 
+  
   const totalPrice = () => {
     try {
-        let total = 0;
-        card?.map(item => {total = total + item.price});
-        return total.toLocaleString("en-US", {
-            style: "currency",
-            currency:"USD"
-        });
+      let total = 0;
+      card?.forEach(item => {
+        total += item.price * item.quantity; // Multiply by quantity
+      });
+      return total.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD"
+      });
     } catch (error) {
-        console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const removeFromCart = (pid) => {
     try {
@@ -33,7 +36,20 @@ const Card = () => {
     } catch (error) {
         console.log(error)
     }
+   
   }
+
+  const handleQuantityChange = (productId, newQuantity) => {
+    const updatedCard = card.map(item => {
+      if (item._id === productId) {
+        return { ...item, quantity: newQuantity };
+      }
+      return item;
+    });
+
+    setCard(updatedCard);
+    localStorage.setItem('cart', JSON.stringify(updatedCard));
+  };
 
   return (
     <Layout>
@@ -50,7 +66,7 @@ const Card = () => {
               : "Your Cart Is Empty"}
           </h4>
             {card?.map((item) => (
-              <div className="card-box">
+              <div className="card-box" key={item._id}>
                 <div className="card-box-left">
                   <img
                     src={`http://localhost:5000/api/product/product-photo/${item._id}`}
@@ -64,25 +80,25 @@ const Card = () => {
                     
                 </div>
                 <div className="btns-center">
-                    <button>
-                      <i className="fa-solid fa-minus"></i>
+                    <button onClick={() => handleQuantityChange(item._id, item.quantity - 1)}>
+                      <i className="fa-solid fa-minus" ></i>
                     </button>
                     <input
-                      type="number"
-                      value="1"
-                      max
-                      min="1"
-                      step="1"
-                      placeholder
-                      inputmode="numeric"
-                      autocomplete="off"
+                     type="number"
+                     value={item.quantity}
+                     max
+                     min="1"
+                     step="1"
+                     placeholder
+                     inputmode="numeric"
+                     autoComplete="off"
                     />
-                    <button>
+                    <button onClick={() => handleQuantityChange(item._id, item.quantity + 1)}>
                       <i className="fa-solid fa-plus"></i>
                     </button>
                   </div>
                 <div className="card-btn">
-                        <button onClick={()=>removeFromCart(item._id)}>Remove</button>
+                    <button onClick={()=>removeFromCart(item._id)}>Remove</button>
                 </div>
               </div>
             ))}
