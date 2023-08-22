@@ -4,8 +4,10 @@ import axios from "axios";
 import { Prices } from "../Prices";
 import { Radio, Checkbox } from "antd";
 import { withError } from "antd/es/modal/confirm";
+import { useNavigate } from "react-router-dom";
 
 function Filter() {
+  let navigate = useNavigate();
   const [product, setProduct] = useState([]);
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
@@ -13,8 +15,6 @@ function Filter() {
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-
-
 
   const getAllProducts = async () => {
     try {
@@ -145,7 +145,7 @@ function Filter() {
               </div>
             </div>
 
-            <div className="size-bar">
+            {/* <div className="size-bar">
               <div className="size-bar-title">
                 <h2>Size</h2>
               </div>
@@ -160,7 +160,7 @@ function Filter() {
                   <a href="#">Large</a>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             <div className="price-bar">
               <div className="price-bar-title">
@@ -198,8 +198,6 @@ function Filter() {
 
             <div className="filter-section-container-right-bottom">
               {/* <Card/> */}
-              {total}
-              {JSON.stringify(checked, null, 4)}
               <div className="cards">
                 {product?.map((item) => (
                   <div className="shop-item">
@@ -219,7 +217,7 @@ function Filter() {
                         </div>
                       </div>
                     </div>
-                    <div className="shop-item-info">
+                    <div className="shop-item-info"  onClick={() => navigate(`/product/${item.slug}`)}>
                       <div className="shop-item-rate">
                         <i className="fas fa-star"></i>
                         <i className="fas fa-star"></i>

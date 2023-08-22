@@ -11,10 +11,20 @@
             display: flex;
             .detail-left{
                 width: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                img{
+                    width: 300px;
+                    height: 300px;
+                }
+                
             }
             .detail-right{
+                background-color: rgba(45, 146, 186, 0.2);
+                border-radius: 20px;
                 width: 50%;
-                padding:0 30px ;
+                padding:40px;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -45,10 +55,10 @@
                 }
                 .btns{
                     display: flex;
-                    // justify-content: space-between;
-                    gap: 20px;
+                    justify-content: space-between;
                     align-items: center;
-                    padding: 15px 0 30px;
+                    padding: 15px 0 20px;
+                    // width: 70%;
                     &-left{
                         padding: 10px;
                         border: 1px solid #2f4f4f;
@@ -76,15 +86,23 @@
                         }
                     }
                     &-center{
-                        select{
-                            width: 180px;
-                            padding: 10px;
-                            font-size: 16px;
-                            background-color: #fffaf5;
+                        button{
                             border-radius: 20px;
+                            background-color: #2f4f4f;
+                            color: #fffaf5;
+                            font-size: 18px;
+                            border: none;
                             outline: none;
+                            width: 250px;
+                            padding: 10px;
+                            font-family: 'Raleway', sans-serif;
+                            border: 1px solid #2f4f4f;
+                            transition: background-color 0.3s ease;
+                        }
+                        button:hover{
+                            background-color: transparent;
                             color: #2f4f4f;
-                            
+                            border: 1px solid #2f4f4f;
                         }
                     }
                     &-right{
@@ -101,6 +119,7 @@
                             text-align: center;
                             color: #2f4f4f;
                             font-size: 18px;
+                            transition: background-color 0.3s ease;
                             i{
                                 font-size: 20px;
                             }
@@ -117,7 +136,7 @@
                 }
                 .submit{
                     width: 100%;
-                    border: 2px solid #2f4f4f;
+                    border: 1px solid #2f4f4f;
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -125,15 +144,16 @@
                     cursor: pointer;
                     button{
                         cursor: pointer;
-                        font-size: 22px;
+                        font-size: 18px;
                         border: none;
                         outline: none;
                         background: transparent;
-                        padding: 10px;
+                        padding: 12px 10px;
                         color: #2f4f4f;
                         font-weight: 700;
+                       
                     }
-                    
+                    transition: background-color 0.3s ease;
                     
                 }
                 .submit:hover{
@@ -146,24 +166,82 @@
             }
         }
         &-bottom{
-            &-title{
+            .tabs{
                 display: flex;
-                gap: 20px;
-                align-items: center;
-                .write{
-                    cursor: pointer;
-                    padding: 10px 0;
-                    font-size: 20px;
-                  
-                    width: 200px;
-                    text-align: center;
+                flex-direction: column;
+                border-radius: 15px;
+                padding: 20px 0;
+                .tablist{
+                    display: flex;
+                    justify-content: center;
+                    .tab{
+                        outline: none;
+                        cursor: pointer;
+                        background-color: rgba(45, 146, 186, 0.2);
+                        font-size:25px;
+                        padding: 15px;
+                        text-align: center;
+                        width: 200px;
+                        margin-right: 15px;
+                        border-radius: 15px;
+                        font-family: 'Sofia', cursive;
+                        font-weight: 700;
+                        color: #2f4f4f;
+                        transition: background-color 0.6s, transform 0.6s;
+                        transition: color 0.6s transform 0.6s;
+                    }
+                    .tab:hover{
+                        background-color: #2f4f4f;
+                        color: #fffaf5;
+                    }
                 }
-                h1{
-                    font-weight: 700;
-                    font-size: 30px;
+                .first{
+                    padding-top: 20px;
                 }
-                
+            }
+        }
+        .detail-page-similar-products{
+            padding-bottom: 90px ;
+           
+            text-align: center;
+            h1{
+                padding: 10px 0 20px;
+                font-family: 'Sofia', cursive;
+                font-size: 40px;
+                font-weight: 700;
             }
         }
     }
 }
+
+// #tab{
+//     border-radius: 15px;
+//     padding: 20px 0;
+//     .tabname{
+//         display: flex;
+//         .react-tabs__tab:active{
+//             background-color: #2f4f4f;
+//             color: #fffaf5;
+//         }
+        
+//         .tabtitle{
+//             outline: none;
+//             cursor: pointer;
+//             background-color: rgba(45, 146, 186, 0.2);
+//             font-size:25px;
+//             padding: 15px;
+//             text-align: center;
+//             width: 150px;
+//             margin-right: 15px;
+//             border-radius: 15px;
+//             font-family: 'Sofia', cursive;
+//             font-weight: 700;
+//             color: #2f4f4f;
+//             transition: background-color 0.6s, transform 0.6s;
+//             transition: color 0.6s transform 0.6s;
+//         }
+//         .tabtitle:hover{
+//             background-color: #2f4f4f;
+//             color: #fffaf5;
+//         }
+//     }

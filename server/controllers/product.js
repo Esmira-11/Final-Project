@@ -70,6 +70,29 @@ exports.getAllProducts = async (req, res) => {
   }
 };
 
+exports.getProductBySlug = async (req,res) => {
+  try {
+    const product = await Product
+      .findOne({ slug: req.params.slug })
+      .select("-photo")
+      .populate("category")
+      .populate("petcategory", "name");
+
+    res.status(200).send({
+      success: true,
+      message: "Single Product Fetched",
+      product,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Eror while getitng single product",
+      error,
+    });
+  }
+}
+
 exports.getProductById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -253,6 +276,28 @@ exports.search = async (req,res) => {
     res.status(400).send({
       success:false,
       message:'Error In Search Product API',
+      error
+    })
+  }
+}
+
+exports.relatedProduct = async (req,res) => {
+  try {
+    const {pid,cid} = req.params
+    // console.log(pid,cid)
+    const products = await Product.find({
+      category:cid,
+      _id: {$ne:pid}
+    }).select("-photo").limit(3).populate("category").populate("petcategory", "name");
+    res.status(200).send({
+      success:true,
+      products
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(400).send({
+      success:false,
+      message:'Error while getting related products',
       error
     })
   }
