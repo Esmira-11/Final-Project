@@ -29,7 +29,12 @@
                     top: 50px;
                     right: -40%;
                 }
-                a{
+                .heart{
+                    font-size: 18px;
+                }
+                button{
+                    cursor: pointer;
+                    border: none;
                     display: block;
                     width: 40px;
                     height: 40px;
@@ -40,8 +45,12 @@
                     color: #2f4f4f;
                     margin-bottom: 15px;
                     font-size: 18px;
+                    border: 2px solid #fff;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                 }
-                a:hover{
+                button:hover{
                     background-color: transparent;
                     border: 2px solid #fff;
                     color:#fff;

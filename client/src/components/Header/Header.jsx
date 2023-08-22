@@ -1,14 +1,16 @@
 import React from "react";
 import "./header.scss";
 import bowl from "../../assets/images/pet-bowl-3.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import { useSearch } from "../../context/search";
 import axios from 'axios'
+import { useCard } from "../../context/card";
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
   const [values, setValues] = useSearch();
+  const [card] = useCard()
   let navigate = useNavigate();
 
   const handleLogout = () => {
@@ -109,7 +111,10 @@ const Header = () => {
             </div>
 
             <div className="cart-icon icon">
+              <NavLink to="/card" className='navlink'>
               <img src={bowl} alt="dog-bowl" />
+              <span>{card?.length}</span>
+              </NavLink>
             </div>
           </div>
         </>

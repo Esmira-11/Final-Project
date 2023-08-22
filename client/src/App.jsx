@@ -28,6 +28,7 @@ import AdminRoute from './routes/AdminRoute'
 import AdminProfile from './pages/AdminProfilePage/AdminProfile'
 import CreateCategory from './components/Admin/CreateCategory/CreateCategory'
 import Search from './pages/SearchPage/Search'
+import Card from './pages/CardPage/Card'
 
 function App() {
 
@@ -39,6 +40,7 @@ function App() {
             <Route path='/about' element={<AboutPage/>}/>
             <Route path='*' element={<NotFoundPage/>}/>
             <Route path='/login' element={<LoginPage/>}/>
+            <Route path='/card' element={<Card/>}/>
             <Route path='/register' element={<RegisterPage/>}/>
             <Route path='/forgotpassword' element={<ForgotPassword/>}/>
             <Route path='/resetpassword' element={<ChangePassword/>}/>

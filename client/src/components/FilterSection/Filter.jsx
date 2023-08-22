@@ -3,8 +3,11 @@ import "./filter.scss";
 import axios from "axios";
 import { Prices } from "../Prices";
 import { Radio, Checkbox } from "antd";
-import { withError } from "antd/es/modal/confirm";
+// import { withError } from "antd/es/modal/confirm";
 import { useNavigate } from "react-router-dom";
+import {useCard} from '../../context/card'
+import toast, { Toaster } from "react-hot-toast";
+
 
 function Filter() {
   let navigate = useNavigate();
@@ -15,6 +18,7 @@ function Filter() {
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [card, setCard] = useCard()
 
   const getAllProducts = async () => {
     try {
@@ -208,12 +212,19 @@ function Filter() {
                       />
                       <div className="shop-item-meta">
                         <div className="links">
-                          <a href="#">
-                            <i className="far fa-heart"></i>
-                          </a>
-                          <a href="#">
+                          <button className="heart">
+                          <i className="far fa-heart"></i>
+                          </button>
+                          <button
+                            onClick={() => {
+                            setCard([...card, item]);
+                            localStorage.setItem('cart',JSON.stringify([...card, item]));
+                            toast.success('Added to Card');
+                          }
+                          
+                          }>
                             <i className="fa-solid fa-cart-shopping"></i>
-                          </a>
+                            </button> 
                         </div>
                       </div>
                     </div>
@@ -246,6 +257,7 @@ function Filter() {
           </div>
         </div>
       </div>
+      <Toaster position="bottom-right" />
     </>
   );
 }
