@@ -60,8 +60,27 @@ const Card = () => {
                 <div className="card-box-right">
                     <p className="name">{item.name}</p>
                     <p className="description">{item.description}</p>
-                    <p className="price">Price: $ {item.price}</p>
+                    <p className="price">Price: $ {item.price} </p>
+                    
                 </div>
+                <div className="btns-center">
+                    <button>
+                      <i className="fa-solid fa-minus"></i>
+                    </button>
+                    <input
+                      type="number"
+                      value="1"
+                      max
+                      min="1"
+                      step="1"
+                      placeholder
+                      inputmode="numeric"
+                      autocomplete="off"
+                    />
+                    <button>
+                      <i className="fa-solid fa-plus"></i>
+                    </button>
+                  </div>
                 <div className="card-btn">
                         <button onClick={()=>removeFromCart(item._id)}>Remove</button>
                 </div>

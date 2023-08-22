@@ -172,7 +172,7 @@ function CreateCategory() {
                     </button>
                   </TableCell>
                   <TableCell component="th" scope="row">
-                    <button className="btn btn-primary"
+                    <button className="btn btn-primary" id="delete"
                      onClick={()=>{setOpen(true); setSelectedDelete(row._id)}}>Delete</button>
                   </TableCell>
                 </TableRow>

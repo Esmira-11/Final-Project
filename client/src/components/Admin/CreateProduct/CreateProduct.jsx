@@ -433,6 +433,7 @@ function CreateProduct() {
                   </TableCell>
                   <TableCell component="th" scope="row">
                     <button
+                      id="delete"
                       className="btn btn-primary"
                       onClick={() => {
                         setOpen(true);

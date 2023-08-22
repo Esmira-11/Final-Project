@@ -71,7 +71,7 @@ function Detail() {
                   <p>{product.petcategory.name}</p> */}
                 </div>
                 <div className="btns">
-                  <div className="btns-left">
+                  {/* <div className="btns-left">
                     <button>
                       <i className="fa-solid fa-minus"></i>
                     </button>
@@ -88,9 +88,9 @@ function Detail() {
                     <button>
                       <i className="fa-solid fa-plus"></i>
                     </button>
-                  </div>
-                  <div className="btns-center">
-                  <button>Add To Cart</button>
+                  </div> */}
+                  <div className="btns-center left">
+                      <button>Add To Cart</button>
                   </div>
                   <div className="btns-right">
                     <a href="#">

@@ -79,6 +79,16 @@
                 background: #2f4f4f;
                 color: #fffaf5;
             }
+            #delete{
+                border: 1px solid #E53935;
+                background-color:#fffaf5 ;
+                color: #E53935;
+                transition: background-color 0.3s ease;
+            }
+            #delete:hover{
+                color: #fffaf5;
+                background: #E53935;
+            }
         }
         
     }
