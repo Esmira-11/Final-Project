@@ -39,6 +39,9 @@ const Card = () => {
     <Layout>
       <div className="card-page">
         <div className="card-page-container">
+          {/* {console.log(auth)} */}
+          {/* {`Hello ${auth?.token && auth?.user?.username}`} */}
+          <div className="card-page-left">
           <h4>
             {card?.length
               ? `You Have ${card.length} items in your cart ${
@@ -46,9 +49,6 @@ const Card = () => {
                 }`
               : "Your Cart Is Empty"}
           </h4>
-          {/* {console.log(auth)} */}
-          {/* {`Hello ${auth?.token && auth?.user?.username}`} */}
-          <div className="card-page-left">
             {card?.map((item) => (
               <div className="card-box">
                 <div className="card-box-left">
@@ -58,16 +58,12 @@ const Card = () => {
                   />
                 </div>
                 <div className="card-box-right">
-                    <div className="card-details">
-                        <p>{item.name}</p>
-                        <p>{item.description}</p>
-                        <p>Price: $ {item.price}</p>
-                    </div>
-                    <div className="card-btn">
-                        <button onClick={()=>removeFromCart(item._id)}><i className="fa-solid fa-trash"></i></button>
-                    </div>
-                    
-                    
+                    <p className="name">{item.name}</p>
+                    <p className="description">{item.description}</p>
+                    <p className="price">Price: $ {item.price}</p>
+                </div>
+                <div className="card-btn">
+                        <button onClick={()=>removeFromCart(item._id)}>Remove</button>
                 </div>
               </div>
             ))}
