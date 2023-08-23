@@ -7,9 +7,10 @@ import { Radio, Checkbox } from "antd";
 import { useNavigate } from "react-router-dom";
 import {useCard} from '../../context/card'
 import toast, { Toaster } from "react-hot-toast";
-
+import { useFavorites } from '../../context/FavoritesContext'; 
 
 function Filter() {
+  const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
   let navigate = useNavigate();
   const [product, setProduct] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -19,6 +20,14 @@ function Filter() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [card, setCard] = useCard()
+
+  const handleFavoriteClick = (item) => {
+    if (favorites.includes(item._id)) {
+      removeFromFavorites(item._id);
+    } else {
+      addToFavorites(item._id);
+    }
+  };
 
   const handleAddToCart = (item) => {
     const existingProductIndex = card.findIndex((product) => product._id === item._id);
@@ -228,8 +237,12 @@ function Filter() {
                       />
                       <div className="shop-item-meta">
                         <div className="links">
-                          <button className="heart">
-                          <i className="far fa-heart"></i>
+                          <button className="heart" onClick={() => handleFavoriteClick(item)}>
+                          <i className={`${
+                      favorites.includes(item._id)
+                        ? "fa-solid fa-heart"
+                        : "fa-regular fa-heart"
+                    }`}></i>
                           </button>
                           <button
                             onClick={() => {

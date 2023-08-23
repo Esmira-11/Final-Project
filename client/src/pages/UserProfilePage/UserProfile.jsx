@@ -5,6 +5,7 @@ import Card from "../../components/Card/Card";
 import './userprofile.scss'
 import avatar from "../../assets/images/avatar-3.png"
 import { useAuth } from "../../context/auth";
+import FavoritesPage from "../FavoritesPage/FavoritesPage";
 
 function UserProfile() {
   const [auth, setAuth] = useAuth();
@@ -39,7 +40,8 @@ function UserProfile() {
             <TabPanel className='user-panel'>
               <div className="user-favorites" width='100%' height='100%'>
                 {/* <div className="cards"> */}
-                    <Card/>
+                    {/* <Card/> */}
+                    <FavoritesPage/>
                 {/* </div> */}
               </div>
             </TabPanel>

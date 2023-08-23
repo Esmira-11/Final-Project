@@ -29,6 +29,7 @@ import AdminProfile from './pages/AdminProfilePage/AdminProfile'
 import CreateCategory from './components/Admin/CreateCategory/CreateCategory'
 import Search from './pages/SearchPage/Search'
 import Card from './pages/CardPage/Card'
+import FavoritesPage from './pages/FavoritesPage/FavoritesPage'
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
             <Route path='*' element={<NotFoundPage/>}/>
             <Route path='/login' element={<LoginPage/>}/>
             <Route path='/card' element={<Card/>}/>
+            <Route path='/favorites' element={<FavoritesPage/>}/>
             <Route path='/register' element={<RegisterPage/>}/>
             <Route path='/forgotpassword' element={<ForgotPassword/>}/>
             <Route path='/resetpassword' element={<ChangePassword/>}/>

@@ -18,6 +18,7 @@ app.use('/api/category',require('./routes/category'));
 app.use('/api/petcategory',require('./routes/petcategory'));
 app.use('/api/product',require('./routes/product'));
 app.use('/api/user',require('./routes/user'));
+app.use('/api/favorites',require('./routes/favorite'));
 
 
 
