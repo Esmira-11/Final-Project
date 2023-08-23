@@ -5,13 +5,15 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import { useSearch } from "../../context/search";
 import axios from 'axios'
-import { useCard } from "../../context/card";
+import {useCart} from '../../context/CartContext'
+
 import Badge from '@mui/material/Badge';
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
   const [values, setValues] = useSearch();
-  const [card] = useCard()
+  const { cart, addToCart, removeFromCart } = useCart();
+
   let navigate = useNavigate();
 
   const handleLogout = () => {
@@ -116,7 +118,8 @@ const Header = () => {
               {/* <Badge badgeContent={card?.reduce((total, item) => total + item.quantity, 0)} color="primary"> */}
               <img src={bowl} alt="dog-bowl" />
               {/* </Badge> */}
-              <span>{card?.reduce((total, item) => total + item.quantity, 0)}</span>
+              {/* cart?.reduce((total, item) => total + item.quantity, 0) */}
+              <span>{cart?.length}</span>
               </NavLink>
             </div>
           </div>

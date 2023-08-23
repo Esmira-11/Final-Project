@@ -5,12 +5,14 @@ import { Prices } from "../Prices";
 import { Radio, Checkbox } from "antd";
 // import { withError } from "antd/es/modal/confirm";
 import { useNavigate } from "react-router-dom";
-import {useCard} from '../../context/card'
 import toast, { Toaster } from "react-hot-toast";
 import { useFavorites } from '../../context/FavoritesContext'; 
+import {useCart} from '../../context/CartContext'
 
 function Filter() {
   const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
+  const { cart, addToCart, removeFromCart } = useCart();
+
   let navigate = useNavigate();
   const [product, setProduct] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -19,30 +21,26 @@ function Filter() {
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [card, setCard] = useCard()
 
   const handleFavoriteClick = (item) => {
     if (favorites.includes(item._id)) {
       removeFromFavorites(item._id);
+      toast.success('Removed From Favorites'); 
     } else {
       addToFavorites(item._id);
+      toast.success('Added to Favorites'); 
     }
   };
 
   const handleAddToCart = (item) => {
-    const existingProductIndex = card.findIndex((product) => product._id === item._id);
-    if (existingProductIndex !== -1) {
-      // Product already exists in the cart, update its quantity
-      const updatedCard = [...card];
-      updatedCard[existingProductIndex].quantity += 1;
-      setCard(updatedCard);
-    } else {
-      // Product doesn't exist in the cart, add it as a new entry
-      setCard([...card, { ...item, quantity: 1 }]);
-    }
+    if (cart.includes(item._id)) {
+      removeFromCart(item._id);
+      toast.success('Removed From Cart'); 
 
-    localStorage.setItem('cart', JSON.stringify([...card, item])); // Update local storage
-    toast.success('Added to Cart'); // Show a success message
+    } else {
+      addToCart(item._id);
+      toast.success('Added to Cart'); 
+    }
   };
 
   const getAllProducts = async () => {
