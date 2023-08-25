@@ -27,10 +27,10 @@ exports.removeFromFavorites = async (req, res) => {
 };
 
 exports.getFavorites = async (req, res) => {
-    console.log(req.user.id)
+    // console.log(req.user.id)
   try {
     const favorites = await Favorite.find({ user: req.user.id }).populate('product');
-    console.log(favorites)
+    // console.log(favorites)
     res.json(favorites);
   } catch (error) {
     console.error(error);

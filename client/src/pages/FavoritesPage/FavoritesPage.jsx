@@ -82,59 +82,6 @@ function FavoritesPage() {
               </Table>
             </TableContainer>
               : <h4>Your Favorites Box Empty</h4>}
-{/* <TableContainer className="table" component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead className="thead">
-          <TableRow>
-                <TableCell className="thcell">Name</TableCell>
-                <TableCell className="thcell">Photo</TableCell>
-                <TableCell className="thcell">Price</TableCell>
-                <TableCell className="thcell">Size</TableCell>
-                <TableCell className="thcell">Description</TableCell>
-                <TableCell className="thcell">Action</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-              {favorites?.map((row) => (<>
-                <TableRow
-                  key={row._id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {row.product.name}
-                  </TableCell>
-                  <TableCell component="th" scope="row" width={110}>
-                    <img
-                      style={{ width: "100%", height: "100%" }}
-                      src={`http://localhost:5000/api/product/product-photo/${row.product._id}`}
-                      alt="product-img"
-                    />
-                  </TableCell>
-                  <TableCell component="th" scope="row">
-                    {row.product.price}
-                  </TableCell>
-                 
-                  <TableCell component="th" scope="row">
-                    {row.product.size}
-                  </TableCell>
-                  <TableCell component="th" scope="row">
-                    {row.product.description}
-                  </TableCell>
-                  <TableCell component="th" scope="row">
-                    <button
-                      id="delete"
-                      className="btn btn-primary"
-                      onClick={() => {removeFromFavorites(row.product._id)}}
-                    >
-                      Remove 
-                    </button>
-                  </TableCell>
-                </TableRow>
-                </>
-              ))}
-            </TableBody>
-      </Table>
-    </TableContainer> */}
     </div>
   );
 }
