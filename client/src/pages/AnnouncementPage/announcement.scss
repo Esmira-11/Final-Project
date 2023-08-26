@@ -20,8 +20,7 @@
                 }
             }
             .announcement-page-content{
-                width: 1000px;
-                margin: 0 auto;
+                // margin: 0 auto;
                 font-size: 20px;
                 text-align: center;
                 line-height: 25px;
@@ -55,14 +54,117 @@
             }
         }
         &-bottom{
-            display: flex;
-                flex-direction: column;
-                align-items: center;
-            .announcement-card{
-                height: 200px;
-                margin-bottom: 20px;
-                width: 500px;
-                background-color: #3e4348;
+            // display: flex;
+            //     flex-direction: column;
+            //     align-items: center;
+            // .announcement-card{
+            //     height: 200px;
+            //     margin-bottom: 20px;
+            //     width: 500px;
+            //     background-color: #3e4348;
+            // }
+            .announce-type-page{
+                &-container{
+                    border-radius: 15px;
+                    // padding: 40px 0;
+                    margin: 0 auto;
+                    width: 40%;
+                    background-color: #d5e5e9;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 40px 30px;
+                    .announce-type-head{
+                        font-family: 'Sofia', cursive;
+                        font-weight: 700;
+                        padding-bottom: 40px;
+                        text-align: center;
+                        font-size: 30px;
+                    }
+                    .btns{
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        button{
+                            font-family: 'Raleway', sans-serif;
+                            color: #2f4f4f;
+                            font-weight: 600;
+                            border-radius: 15px;
+                            background-color: #b3c7ca;
+                            width: 250px;
+                            padding: 15px;
+                            margin-bottom: 15px;
+                            border: none;
+                            font-size: 20px;
+                            cursor: pointer;
+                            transition: background-color 0.5s ease;
+                        }
+                        button:hover{
+                            background-color: #2f4f4f;
+                            color: #fffaf5;
+                        }
+                    }
+                    
+                }
+                
+
+            }
+            .announce-form{
+                &-container{
+                    margin: 0 auto;
+                    width: 50%;
+                    background-color: #d5e5e9;
+                    border-radius: 15px;
+                    padding: 40px 30px 20px;
+                    .form-title{
+                        text-align: center;
+                        font-size: 30px;
+                        font-family: 'Sofia', cursive;
+                        font-weight: 700;
+                        padding-bottom: 20px;
+                    }
+                    .form-group{
+                        padding-top: 10px;
+                        input,textarea{
+                            cursor: pointer;
+                            width: 100%;
+                            padding: 15px;
+                            font-size: 17px;
+                            border: none;
+                            outline: none;
+                            background: rgba(47, 79, 79, 0.2);
+                            border-radius: 8px;
+                            color: #2f4f4f;
+                        }
+                    }
+                    .form-btn{
+                        padding: 20px 0;
+                        display: flex;
+                        justify-content: space-between;
+                        button{
+                            padding: 12px 10px;
+                            font-size: 18px;
+                            font-family: 'Raleway', sans-serif;
+                            color: #2f4f4f;
+                            font-weight: 600;
+                            border-radius: 8px;
+                            background-color: #b3c7ca;
+                            border: none;
+                            cursor: pointer;
+                            transition: background-color 0.5s ease;
+                            width: 200px;
+                        }
+                        button:hover{
+                            background-color: #2f4f4f;
+                            color: #fffaf5;
+                        }
+                    }
+                    .upload-photo{
+                        cursor: pointer;
+                        border-radius: 8px;
+                        background-color: rgba(47, 79, 79, 0.2);
+                        padding: 15px;
+                   }
+                }
             }
         }
     }
