@@ -200,10 +200,11 @@ exports.updateProduct = async (req, res) => {
 
 exports.productFilters = async (req, res) => {
   try {
-    const { checked, radio } = req.body;
+    const { checked, radio, petCategories } = req.body;
     let args = {};
     if (checked.length > 0) args.category = checked;
     if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
+    if (petCategories.length > 0) args.petcategory = petCategories;
     const products = await Product.find(args);
     res.status(200).send({
       success: true,

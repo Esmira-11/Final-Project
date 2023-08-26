@@ -3,7 +3,6 @@ import "./filter.scss";
 import axios from "axios";
 import { Prices } from "../Prices";
 import { Radio, Checkbox } from "antd";
-// import { withError } from "antd/es/modal/confirm";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { useFavorites } from '../../context/FavoritesContext'; 
@@ -18,9 +17,36 @@ function Filter() {
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
   const [radio, setRadio] = useState([]);
+  const [selectedPetCategories, setSelectedPetCategories] = useState([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [petCategories, setPetCategories] = useState([]);
+
+  const handlePetCategoryFilter = (category) => {
+    const updatedCategories = selectedPetCategories.includes(category)
+      ? selectedPetCategories.filter((c) => c !== category)
+      : [...selectedPetCategories, category];
+    setSelectedPetCategories(updatedCategories);
+  };
+
+  const getAllPetCategories = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5000/api/petcategory/all-petcategories"
+      );
+
+      if (response.status ==200) {
+        setPetCategories(response.data.petCategory)
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getAllPetCategories();
+  }, []);
 
   const handleFavoriteClick = (item) => {
     if (favorites.includes(item._id)) {
@@ -72,12 +98,12 @@ function Filter() {
   // }, [checked,radio]);
 
   useEffect(() => {
-    if(checked.length || radio.length){
+    if(checked.length || radio.length || selectedPetCategories.length){
       filteredProduct();
     } else{
       getAllProducts();
     }
-  }, [checked.length,radio.length]);
+  }, [checked.length,radio.length, selectedPetCategories.length]);
 
   const getAllCategories = async () => {
     try {
@@ -139,7 +165,8 @@ function Filter() {
     try {
       const {data} = await axios.post("http://localhost:5000/api/product/product-filters",{
         checked,
-        radio
+        radio,
+        petCategories: selectedPetCategories,
       })
       setProduct(data?.products)
       console.log(data.products)
@@ -152,6 +179,31 @@ function Filter() {
   return (
     <>
       <div className="filter-section">
+        <div className="filter-section-petcategory-container">
+        <div className="shop-by-pet">
+        <div className="shop-by-pet-container">
+            <div className="title">
+                <h1>Shop By Category</h1>
+            </div>
+            <div className="shop-categories">
+            {petCategories?.toReversed().map((item) => (
+                <div className={`shop-category-item ${
+                  selectedPetCategories.includes(item._id) ? 'selected' : ''
+                }`}
+                onClick={() => handlePetCategoryFilter(item._id)}
+                >
+                <div className="shop-category-item-top">
+                    <img src={`http://localhost:5000/api/petcategory/petcategory-photo/${item._id}`} alt="pet-category" />
+                </div>
+                <div className="shop-category-item-bottom">
+                    <h3>{item.name}</h3>
+                </div>
+            </div>
+            ))}
+            </div>
+        </div>
+    </div>
+        </div>
         <div className="filter-section-container">
           <div className="filter-section-container-left">
             <div className="category-bar">
