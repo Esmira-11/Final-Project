@@ -10,6 +10,10 @@ function Announcement() {
   const [page, setpage] = useState(0);
   const [photo, setPhoto] = useState("");
   const [question, setQuestion] = useState("");
+  const [location, setLocation] = useState("");
+  const [description, setDescription] = useState("");
+  const [contact, setContact] = useState("");
+
 
   const nextStep = () => {
     setStep(step + 1);
@@ -18,6 +22,37 @@ function Announcement() {
   const prevStep = () => {
     setStep(step - 1);
   };
+
+  const handleCreateAnnouncement = async (e) => {
+    e.preventDefault();
+    try {
+      const productData = new FormData();
+      productData.append("location", location);
+      productData.append("description", description);
+      productData.append("contactInfo", contact);
+      productData.append("photo", photo);
+
+      const { data } = await axios.post(
+        "http://localhost:5000/api/announcement/create-announcement",
+        productData
+      );
+      if (data?.success) {
+        toast.success("Product Created Successfully");
+      } else {
+        toast.error(data?.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("something went wrong");
+    }
+    setLocation("");
+    setDescription("");
+    setContact("");
+    setPhoto("");
+    setStep(0);
+    // getAllProducts();
+  };
+
 
   const handleCreateQuestion = async (e) => {
     e.preventDefault();
@@ -119,7 +154,7 @@ function Announcement() {
                     <>
                       <div className="announce-form">
                         <div className="announce-form-container">
-                          <form action="" className="form">
+                          <form action="" className="form" onSubmit={handleCreateAnnouncement}>
                             <div className="form-title">
                               <h3>Create Announcement</h3>
                             </div>
@@ -131,7 +166,7 @@ function Announcement() {
                                   type="file"
                                   name="photo"
                                   accept="image/*"
-                                  //   onChange={(e) => setPhoto(e.target.files[0])}
+                                  onChange={(e) => setPhoto(e.target.files[0])}
                                   hidden
                                 />
                               </label>
@@ -140,8 +175,8 @@ function Announcement() {
                               <input
                                 type="text"
                                 placeholder="Where the pet was found"
-                                // value={name}
-                                // onChange={(e) => setName(e.target.value)}
+                                value={location}
+                                onChange={(e) => setLocation(e.target.value)}
                               />
                             </div>
 
@@ -152,9 +187,9 @@ function Announcement() {
                                   resize: "vertical",
                                   fontSize: "18px",
                                 }}
-                                // value={description}
+                                value={description}
                                 placeholder="Please write more detailed information. This can make it easier for the owner to find the pet"
-                                // onChange={(e) => setDescription(e.target.value)}
+                                onChange={(e) => setDescription(e.target.value)}
                               />
                             </div>
 
@@ -162,8 +197,8 @@ function Announcement() {
                               <input
                                 type="text"
                                 placeholder="Contact info"
-                                // value={name}
-                                // onChange={(e) => setName(e.target.value)}
+                                value={contact}
+                                onChange={(e) => setContact(e.target.value)}
                               />
                             </div>
                             <div className="form-btn">
@@ -190,6 +225,7 @@ function Announcement() {
                                   resize: "vertical",
                                   fontSize: "20px",
                                 }}
+                                value={question}
                                 placeholder="Question..."
                                 onChange={(e) => setQuestion(e.target.value)}                              />
                             </div>

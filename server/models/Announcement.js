@@ -23,7 +23,7 @@ const AnnouncementSchema = new mongoose.Schema(
         //   return this.type === 'found';
         // },
       },
-      photos: {
+      photo: {
         data:Buffer,
         contentType:String,
         // required: function () {
