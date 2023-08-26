@@ -4,42 +4,41 @@ const AnnouncementSchema = new mongoose.Schema(
     {
       type: {
         type: String,
-        enum: ['found', 'question'], // 'found' for found pets, 'question' for user questions
+        enum: ['found', 'question'], 
         required: true,
       },
       description: {
         type: String,
         required: true,
       },
-      // Location, contactInfo, and photos are conditional fields
       location: {
         type: String,
-        required: function () {
-          return this.type === 'found'; // Required only for 'found' announcements
-        },
+        // required: function () {
+        //   return this.type === 'found'; 
+        // },
       },
       contactInfo: {
         type: String,
-        required: function () {
-          return this.type === 'found'; // Required only for 'found' announcements
-        },
+        // required: function () {
+        //   return this.type === 'found';
+        // },
       },
       photos: {
         data:Buffer,
         contentType:String,
-        required: function () {
-          return this.type === 'found'; // Required only for 'found' announcements
-        },
+        // required: function () {
+        //   return this.type === 'found';
+        // },
       },
       user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', // Reference to the user who submitted the announcement
+        ref: 'User', 
       },
     //   likes: [
     //     {
     //       user: {
     //         type: mongoose.Schema.Types.ObjectId,
-    //         ref: 'User', // Reference to the user who liked the announcement
+    //         ref: 'User', 
     //       },
     //     },
     //   ],
@@ -47,7 +46,7 @@ const AnnouncementSchema = new mongoose.Schema(
         {
           user: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'User', // Reference to the user who made the comment
+            ref: 'User',
           },
           text: {
             type: String,

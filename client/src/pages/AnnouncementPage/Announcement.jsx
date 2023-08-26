@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./announcement.scss";
 import Layout from "../../components/Layout";
+import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
+
 
 function Announcement() {
   const [step, setStep] = useState(0);
   const [page, setpage] = useState(0);
   const [photo, setPhoto] = useState("");
+  const [question, setQuestion] = useState("");
 
   const nextStep = () => {
     setStep(step + 1);
@@ -13,6 +17,26 @@ function Announcement() {
 
   const prevStep = () => {
     setStep(step - 1);
+  };
+
+  const handleCreateQuestion = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post(
+        "http://localhost:5000/api/announcement/create-question",
+        { description: question }
+      );
+      if (data?.success) {
+        toast.success("Question Created Successfully");
+      } else {
+        toast.error(data?.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("something went wrong");
+    }
+    setQuestion("");
+    setStep(0);
   };
 
   return (
@@ -58,22 +82,6 @@ function Announcement() {
               className="announcement-page-container-bottom"
               style={{ paddingBottom: "70px" }}
             >
-              {/* <div className="announcement-card">
-                        <div className="announcement-card-img">
-                            <img src="" alt="" />
-                        </div>
-                        <div className="announcement-card-detail">
-                            <p></p>
-                        </div>
-                    </div>
-                    <div className="announcement-card">
-                        <div className="announcement-card-img">
-                            <img src="" alt="" />
-                        </div>
-                        <div className="announcement-card-detail">
-                            <p></p>
-                        </div>
-                    </div> */}
               {step === 1 && (
                 <>
                   <div className="announce-type-page">
@@ -171,7 +179,7 @@ function Announcement() {
                     <>
                       <div className="announce-form">
                         <div className="announce-form-container">
-                          <form action="" className="form">
+                          <form action="" className="form" onSubmit={handleCreateQuestion}>
                             <div className="form-title">
                               <h3>Please enter your question about your pet</h3>
                             </div>
@@ -182,37 +190,25 @@ function Announcement() {
                                   resize: "vertical",
                                   fontSize: "20px",
                                 }}
-                                // value={description}
                                 placeholder="Question..."
-                                // onChange={(e) => setDescription(e.target.value)}
-                              />
+                                onChange={(e) => setQuestion(e.target.value)}                              />
                             </div>
                             <div className="form-btn">
                               <button onClick={prevStep}>Previous</button>
-                              <button type="submit">Create</button>
+                              <button type="submit" >Create</button>
                             </div>
                           </form>
                         </div>
                       </div>
                     </>
                   )}
-                  {/* <h2>Found Pet Form</h2>
-                        <button onClick={prevStep}>Previous</button>
-                        <button onClick={nextStep}>Next</button> */}
-                </>
-              )}
-              {step === 3 && (
-                <>
-                  <div>
-                    <h2>Question Form</h2>
-                    <button onClick={prevStep}>Previous</button>
-                  </div>
                 </>
               )}
             </div>
           </div>
         </div>
       </Layout>
+      <Toaster position="bottom-right" />
     </>
   );
 }
