@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./announcement.scss";
 import Layout from "../../components/Layout";
 import toast, { Toaster } from "react-hot-toast";
+import Avatar from '@mui/material/Avatar';
+import avatar1 from '../../assets/images/avatar-2.png'
 import axios from "axios";
-
 
 function Announcement() {
   const [step, setStep] = useState(0);
@@ -13,7 +14,43 @@ function Announcement() {
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
   const [contact, setContact] = useState("");
+  const [announcements, setAnnouncements] = useState([]);
+  // const [userMap, setUserMap] = useState({});
 
+  // const getAllUsers = async () => {
+  //   try {
+  //     const { data } = await axios.get(
+  //       "http://localhost:5000/api/user/all-users"
+  //     );
+  //     const userMapping = {};
+  //     data.users.forEach((user) => {
+  //       userMapping[user._id] = user.username;
+  //     });
+  //     setUserMap(userMapping);
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast.error("something went wrong");
+  //   }
+  // };
+  // useEffect(() => {
+  //   getAllUsers();
+  // }, []);
+
+  const getAllAnnouncement = async () => {
+    try {
+      const { data } = await axios.get(
+        "http://localhost:5000/api/announcement/all-announcement"
+      );
+      setAnnouncements(data.announcement);
+    } catch (error) {
+      console.log(error);
+      toast.error("something went wrong");
+    }
+  };
+
+  useEffect(() => {
+    getAllAnnouncement();
+  }, []);
 
   const nextStep = () => {
     setStep(step + 1);
@@ -50,9 +87,8 @@ function Announcement() {
     setContact("");
     setPhoto("");
     setStep(0);
-    // getAllProducts();
+    getAllAnnouncement();
   };
-
 
   const handleCreateQuestion = async (e) => {
     e.preventDefault();
@@ -72,7 +108,37 @@ function Announcement() {
     }
     setQuestion("");
     setStep(0);
+    getAllAnnouncement();
   };
+
+  //   function formatDate(dateString) {
+  //     const date = new Date(dateString);
+
+  //     const year = date.getFullYear();
+  //     const month = String(date.getMonth() + 1).padStart(2, '0');
+  //     const day = String(date.getDate()).padStart(2, '0');
+  //     const hours = String(date.getHours()).padStart(2, '0');
+  //     const minutes = String(date.getMinutes()).padStart(2, '0');
+
+  //     return `${year}-${month}-${day} ${hours}:${minutes}`;
+  //   }
+
+  function formatDate(dateString) {
+    const options = {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    };
+
+    const formattedDate = new Intl.DateTimeFormat("en-US", options).format(
+      new Date(dateString)
+    );
+
+    return formattedDate;
+  }
 
   return (
     <>
@@ -97,7 +163,13 @@ function Announcement() {
             <div className="announcement-page-container-center">
               <div className="announcement-page-container-center-left">
                 <div className="filters">
-                  <h3>All Posts</h3>
+                  <h3
+                    onClick={() => {
+                      setStep(0);
+                    }}
+                  >
+                    All Posts
+                  </h3>
                 </div>
                 <div className="filters">
                   <h3>My Posts</h3>
@@ -117,6 +189,102 @@ function Announcement() {
               className="announcement-page-container-bottom"
               style={{ paddingBottom: "70px" }}
             >
+              {step === 0 && (
+                <>
+                  {announcements?.map(
+                    (item) =>
+                      item.type === "question" && (
+                        <>
+                          <div className="announcement-card">
+                            <div className="announcement-card-container">
+                              <div className="user">
+                                <div className="user-avatar">
+                                  <Avatar className="avatar" alt="Remy Sharp" src={avatar1} />
+                                </div>
+                                <div className="user-name">
+                                  <h3>{item.user.username}</h3>
+                                </div>
+                              </div>
+                              <div className="question">
+                                <p>{item.description}</p>
+                              </div>
+                              <div className="question-details">
+                                <div className="date">
+                                  <p>{formatDate(item.createdAt)}</p>
+                                </div>
+                                <div className="icon">
+                                  <p>{item.comments.length} <span>replies</span></p>
+                                  {/* <i className="fa-solid fa-comment-dots"></i> */}
+                                </div>
+                              </div>
+                              <div className="comment-box">
+                                <div className="comment-box-left">
+                                <Avatar className="miniavatar" alt="Remy Sharp" src={avatar1} />
+                                </div>
+                                <div className="comment-box-right">
+                                  <input type="text" placeholder="your reply"/>
+                                </div>
+                                <button className="icon">
+                                  <i className="fa-solid fa-comment-dots"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </>
+                      )
+                  )}
+                  {announcements?.map(
+                    (item) =>
+                      item.type === "found" && (
+                        <>
+                          <div className="announcement-card">
+                            <div className="announcement-card-container">
+                              <div className="user">
+                                <div className="user-avatar">
+                                <Avatar className="avatar" alt="Remy Sharp" src={avatar1} />
+                                </div>
+                                <div className="user-name">
+                                  <h3>{item.user.username}</h3>
+                                </div>
+                              </div>
+                              <div className="question">
+                                <p>{item.description}</p>
+                              </div>
+                              <div className="location">
+                                <p>Location : {item.location}</p>
+                              </div>
+                              <div className="contactInfo">
+                                <p>Contact : {item.contactInfo}</p>
+                              </div>
+                              <div className="announce-img">
+                                <img src={`http://localhost:5000/api/announcement/announcement-photo/${item._id}`} alt="announcement-img" />
+                              </div>
+                              <div className="question-details">
+                                <div className="date">
+                                  <p>{formatDate(item.createdAt)}</p>
+                                </div>
+                                {/* <div className="icon">
+                                  <i class="fa-solid fa-comment-dots"></i>
+                                </div> */}
+                              </div>
+                              <div className="comment-box">
+                                <div className="comment-box-left">
+                                <Avatar className="miniavatar" alt="Remy Sharp" src={avatar1} />
+                                </div>
+                                <div className="comment-box-right">
+                                  <input type="text" placeholder="your reply"/>
+                                </div>
+                                <button className="icon">
+                                  <i className="fa-solid fa-comment-dots"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </>
+                      )
+                  )}
+                </>
+              )}
               {step === 1 && (
                 <>
                   <div className="announce-type-page">
@@ -154,7 +322,11 @@ function Announcement() {
                     <>
                       <div className="announce-form">
                         <div className="announce-form-container">
-                          <form action="" className="form" onSubmit={handleCreateAnnouncement}>
+                          <form
+                            action=""
+                            className="form"
+                            onSubmit={handleCreateAnnouncement}
+                          >
                             <div className="form-title">
                               <h3>Create Announcement</h3>
                             </div>
@@ -214,7 +386,11 @@ function Announcement() {
                     <>
                       <div className="announce-form">
                         <div className="announce-form-container">
-                          <form action="" className="form" onSubmit={handleCreateQuestion}>
+                          <form
+                            action=""
+                            className="form"
+                            onSubmit={handleCreateQuestion}
+                          >
                             <div className="form-title">
                               <h3>Please enter your question about your pet</h3>
                             </div>
@@ -227,11 +403,12 @@ function Announcement() {
                                 }}
                                 value={question}
                                 placeholder="Question..."
-                                onChange={(e) => setQuestion(e.target.value)}                              />
+                                onChange={(e) => setQuestion(e.target.value)}
+                              />
                             </div>
                             <div className="form-btn">
                               <button onClick={prevStep}>Previous</button>
-                              <button type="submit" >Create</button>
+                              <button type="submit">Create</button>
                             </div>
                           </form>
                         </div>

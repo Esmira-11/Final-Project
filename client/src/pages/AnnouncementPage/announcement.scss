@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,700;1,500;1,700&family=Sofia&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Raleway:ital,wght@0,400;0,500;0,700;1,500;1,700&family=Sofia&display=swap');
 
 .announcement-page{
     font-family: 'Raleway', sans-serif;
@@ -79,19 +78,110 @@
             }
         }
         &-bottom{
-            // display: flex;
-            //     flex-direction: column;
-            //     align-items: center;
-            // .announcement-card{
-            //     height: 200px;
-            //     margin-bottom: 20px;
-            //     width: 500px;
-            //     background-color: #3e4348;
-            // }
+            .announcement-card{
+                font-family: 'Lato', sans-serif;                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 500px;
+                margin: 0 auto;
+                &-container{
+                    width: 100%;
+                    padding: 30px;
+                    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+                    border: 1px solid #2f4f4f;
+                    margin-bottom: 20px;
+                    border-radius: 20px;
+                    .user{
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        &-name{
+                            font-size: 17px;
+
+                        }
+                        &-avatar{
+                            width: 30px;
+                            height: 30px;
+                            .avatar{
+                                width: 100%;
+                                height: 100%;
+                            }
+                        }
+                    }
+                    .question{
+                        padding: 10px 0 0;
+                        font-size: 18px;
+                        text-align: justify;
+                    }
+                    .location{
+                        padding: 5px 0;
+                    }
+                    .announce-img{
+                        padding-top: 10px;
+                        // width: 250px;
+                        height: 250px;
+                        margin: 0 auto;
+                        img{
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                    .question-details{
+                        padding: 10px 0;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        .date{
+                            font-size: 11px;
+                        }
+                        .icon{
+                            font-size: 13px;
+                            p{
+                                cursor: pointer;
+                                span{
+                                    text-decoration: underline;
+                                }
+                            }
+                        }
+                    }
+                    .comment-box{
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        // gap: 8px;
+                        // width: 100%;
+                        &-left{
+                             width: 20px !important;
+                             height: 20px;
+                            .miniavatar{
+                                width: 100%;
+                                height: 100%;
+                            }
+                        }
+                        &-right{
+                            width: 85%;
+                            input{
+                                outline: none;
+                                padding: 5px;
+                                border: 1px solid #2f4f4f;
+                                border-radius: 10px;
+                                width: 100%;
+                            }
+                        }
+                        .icon{
+                            padding: 0;
+                            color: #3e4348;
+                            font-size: 20px;
+                            border: none;
+                            background: transparent;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
             .announce-type-page{
                 &-container{
                     border-radius: 15px;
-                    // padding: 40px 0;
                     margin: 0 auto;
                     width: 40%;
                     background-color: #d5e5e9;
@@ -128,10 +218,7 @@
                             color: #fffaf5;
                         }
                     }
-                    
                 }
-                
-
             }
             .announce-form{
                 &-container{

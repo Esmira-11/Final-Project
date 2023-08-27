@@ -31,8 +31,18 @@ const AnnouncementSchema = new mongoose.Schema(
         // },
       },
       user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', 
+        id: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User', 
+          required: true,
+        },
+        username: {
+          type: String,
+          required: true,
+        },
+        // avatar: {
+        //   type: String, // Assuming it's a URL to the user's avatar
+        // },
       },
     //   likes: [
     //     {
