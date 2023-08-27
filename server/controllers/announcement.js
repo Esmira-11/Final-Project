@@ -143,3 +143,26 @@ exports.deleteAnnouncementById = async (req, res) => {
     });
   }
 }
+
+exports.getAnnouncementsByUserId = async (req, res) => {
+  try {
+    const userId = req.user.id; // Get the user ID from the request parameters
+    const announcements = await Announcement.find({ "user.id": userId })
+      .select("-photo") // Exclude photo field
+      .sort({ createdAt: -1 });
+
+    res.status(200).send({
+      success: true,
+      count: announcements.length,
+      message: "Announcements by User",
+      announcements,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error in getting announcements by user",
+      error: error.message,
+    });
+  }
+};
