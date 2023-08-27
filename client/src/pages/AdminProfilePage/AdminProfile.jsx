@@ -13,6 +13,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import Post from "../../components/Admin/Posts/Post";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -110,7 +111,7 @@ function AdminProfile() {
               <CreateProduct/>
             </TabPanel>
             <TabPanel className="tabpanel" value={value} index={5}>
-              Announcement
+              <Post/>
             </TabPanel>
             <TabPanel className="tabpanel" value={value} index={6}>
               Messages

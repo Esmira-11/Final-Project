@@ -125,3 +125,21 @@ exports.getAnnouncementPhoto = async (req, res) => {
     });
   }
 };
+
+exports.deleteAnnouncementById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Announcement.findByIdAndDelete(id);
+    res.status(200).send({
+      success: true,
+      message: "Announcement Deleted Successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error while deleting announcement",
+      error,
+    });
+  }
+}

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./announcement.scss";
 import Layout from "../../components/Layout";
 import toast, { Toaster } from "react-hot-toast";
-import Avatar from '@mui/material/Avatar';
-import avatar1 from '../../assets/images/avatar-2.png'
+import Avatar from "@mui/material/Avatar";
+import avatar1 from "../../assets/images/avatar-2.png";
 import axios from "axios";
 
 function Announcement() {
@@ -15,7 +15,6 @@ function Announcement() {
   const [description, setDescription] = useState("");
   const [contact, setContact] = useState("");
   const [announcements, setAnnouncements] = useState([]);
-  // const [userMap, setUserMap] = useState({});
 
   // const getAllUsers = async () => {
   //   try {
@@ -171,9 +170,16 @@ function Announcement() {
                     All Posts
                   </h3>
                 </div>
-                <div className="filters">
-                  <h3>My Posts</h3>
-                </div>
+                {/* <div className="filters">
+                  <h3
+                    onClick={() => {
+                      setStep(0);
+                      setonlyMy(true)
+                    }}
+                  >
+                    My Posts
+                  </h3>
+                </div> */}
               </div>
               <div className="announcement-page-container-center-right">
                 <button
@@ -191,7 +197,7 @@ function Announcement() {
             >
               {step === 0 && (
                 <>
-                  {announcements?.map(
+                {announcements?.map(
                     (item) =>
                       item.type === "question" && (
                         <>
@@ -233,7 +239,7 @@ function Announcement() {
                         </>
                       )
                   )}
-                  {announcements?.map(
+                {announcements?.map(
                     (item) =>
                       item.type === "found" && (
                         <>
