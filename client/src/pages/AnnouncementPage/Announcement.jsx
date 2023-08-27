@@ -15,25 +15,21 @@ function Announcement() {
   const [description, setDescription] = useState("");
   const [contact, setContact] = useState("");
   const [announcements, setAnnouncements] = useState([]);
+  const [type, setType] = useState('');
 
-  // const getAllUsers = async () => {
-  //   try {
-  //     const { data } = await axios.get(
-  //       "http://localhost:5000/api/user/all-users"
-  //     );
-  //     const userMapping = {};
-  //     data.users.forEach((user) => {
-  //       userMapping[user._id] = user.username;
-  //     });
-  //     setUserMap(userMapping);
-  //   } catch (error) {
-  //     console.log(error);
-  //     toast.error("something went wrong");
-  //   }
-  // };
-  // useEffect(() => {
-  //   getAllUsers();
-  // }, []);
+
+  const filteredAnnouncements = async () => {
+    try {
+      const {data} = await axios.post("http://localhost:5000/api/announcement/announcement-filters",{
+          type
+      })
+      setAnnouncements(data?.announcements)
+      // console.log(data.announcements)
+      // console.log(announcements)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const getAllAnnouncement = async () => {
     try {
@@ -47,9 +43,18 @@ function Announcement() {
     }
   };
 
+  // useEffect(() => {
+  //   getAllAnnouncement();
+  // }, []);
+
+  
   useEffect(() => {
-    getAllAnnouncement();
-  }, []);
+    if(type != ''){
+      filteredAnnouncements();
+    } else{
+      getAllAnnouncement();
+    }
+  }, [type]);
 
   const nextStep = () => {
     setStep(step + 1);
@@ -165,21 +170,32 @@ function Announcement() {
                   <h3
                     onClick={() => {
                       setStep(0);
+                      setType('')
                     }}
                   >
                     All Posts
                   </h3>
                 </div>
-                {/* <div className="filters">
-                  <h3
+                <div className="filters">
+                <h3
                     onClick={() => {
                       setStep(0);
-                      setonlyMy(true)
+                      setType('question')
                     }}
                   >
-                    My Posts
+                    Questions
                   </h3>
-                </div> */}
+                </div>
+                <div className="filters">
+                <h3
+                    onClick={() => {
+                      setStep(0);
+                      setType('found')
+                    }}
+                  >
+                    Found
+                  </h3>
+                </div>
               </div>
               <div className="announcement-page-container-center-right">
                 <button
@@ -202,7 +218,7 @@ function Announcement() {
                       item.type === "question" && (
                         <>
                           <div className="announcement-card">
-                            <div className="announcement-card-container">
+                            <div className="announcement-card-container" key={item._id}>
                               <div className="user">
                                 <div className="user-avatar">
                                   <Avatar className="avatar" alt="Remy Sharp" src={avatar1} />
@@ -220,7 +236,6 @@ function Announcement() {
                                 </div>
                                 <div className="icon">
                                   <p>{item.comments.length} <span>replies</span></p>
-                                  {/* <i className="fa-solid fa-comment-dots"></i> */}
                                 </div>
                               </div>
                               <div className="comment-box">
@@ -243,8 +258,8 @@ function Announcement() {
                     (item) =>
                       item.type === "found" && (
                         <>
-                          <div className="announcement-card">
-                            <div className="announcement-card-container">
+                          <div className="announcement-card" >
+                            <div className="announcement-card-container" key={item._id}>
                               <div className="user">
                                 <div className="user-avatar">
                                 <Avatar className="avatar" alt="Remy Sharp" src={avatar1} />
@@ -269,9 +284,6 @@ function Announcement() {
                                 <div className="date">
                                   <p>{formatDate(item.createdAt)}</p>
                                 </div>
-                                {/* <div className="icon">
-                                  <i class="fa-solid fa-comment-dots"></i>
-                                </div> */}
                               </div>
                               <div className="comment-box">
                                 <div className="comment-box-left">

@@ -146,9 +146,9 @@ exports.deleteAnnouncementById = async (req, res) => {
 
 exports.getAnnouncementsByUserId = async (req, res) => {
   try {
-    const userId = req.user.id; // Get the user ID from the request parameters
+    const userId = req.user.id; 
     const announcements = await Announcement.find({ "user.id": userId })
-      .select("-photo") // Exclude photo field
+      .select("-photo") 
       .sort({ createdAt: -1 });
 
     res.status(200).send({
@@ -166,3 +166,26 @@ exports.getAnnouncementsByUserId = async (req, res) => {
     });
   }
 };
+
+exports.announcementFilters = async (req,res) => {
+  try {
+    const { type } = req.body;
+    const announcements = await Announcement.find({ type: type })
+      .select("-photo")
+      .sort({ createdAt: -1 });
+
+    res.status(200).send({
+      success: true,
+      count: announcements.length,
+      message: "Announcements by type",
+      announcements,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Error while filtering announcements",
+      error,
+    });
+  }
+}
