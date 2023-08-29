@@ -337,6 +337,24 @@
                         right: 8%;
                     }
                 }
+                .load-button{
+                    margin-top:20px;
+                    width: 100%;
+                    padding: 12px;
+                    border-radius: 15px;
+                    border: none;
+                    font-size: 16px;
+                    border: none;
+                    cursor: pointer;
+                    color: #2f4f4f;
+                    font-weight: 700;
+                    border-radius: 8px;
+                    background-color: #d5e5e9;
+                }
+                .load-button:hover{
+                    background: #2f4f4f;
+                    color: #fffaf5;
+                }
 
             }
         }

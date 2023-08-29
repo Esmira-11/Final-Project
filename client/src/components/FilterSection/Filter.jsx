@@ -276,7 +276,6 @@ function Filter() {
             </div>
 
             <div className="filter-section-container-right-bottom">
-              {/* <Card/> */}
               <div className="cards">
                 {product?.map((item) => (
                   <div className="shop-item">
@@ -323,7 +322,7 @@ function Filter() {
                 
               </div>
               {product && product.length < total && (
-                <button className="button" onClick={(e) => {
+                <button className="load-button" onClick={(e) => {
                   e.preventDefault();
                   setPage(page + 1);
                 }}>
