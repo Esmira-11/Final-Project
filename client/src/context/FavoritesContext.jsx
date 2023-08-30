@@ -27,7 +27,6 @@ const FavoritesProvider = ({ children }) => {
   const addToFavorites = (productId) => {
     axios.post('http://localhost:5000/api/favorites/add-to-favorites', { productId })
       .then(response => {
-        // Update the favorites state
         setFavorites([...favorites, productId]);
       })
       .catch(error => console.error(error));
@@ -36,7 +35,6 @@ const FavoritesProvider = ({ children }) => {
   const removeFromFavorites = (productId) => {
     axios.delete(`http://localhost:5000/api/favorites/remove-from-favorites/${productId}`)
       .then(response => {
-        // Update the favorites state
         setFavorites(favorites.filter(id => id !== productId));
         getFavorites();
         
