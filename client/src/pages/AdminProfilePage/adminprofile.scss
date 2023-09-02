@@ -52,6 +52,25 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                .update-photo{
+                    padding-top: 10px;
+                    button{
+                        padding: 0;
+                        border: none;
+                        outline: none;
+                        background-color: transparent;
+                        color: #2f4f4f;
+                        cursor: pointer;
+                        transition: transform 0.3s ease;
+                    }
+                    button:hover{
+                        transform: translateY(-5px);
+                    }
+                    i{
+                        font-size: 25px;
+                    }
+                  
+                }
                 &-img{
                     width: 180px;
                     height: 180px;
@@ -65,7 +84,7 @@
                 &-info{
                     color: #2f4f4f;
                     .user-name{
-                        padding: 10px 0;
+                        padding: 5px 0;
                         text-align: center;
                         h3{
                             font-size: 25px;

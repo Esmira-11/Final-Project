@@ -91,7 +91,7 @@ function Post() {
                               <div className="user">
                                 <div className="user-left">
                                 <div className="user-avatar">
-                                  <Avatar className="avatar" alt="Remy Sharp" src={avatar1} />
+                                  <Avatar className="avatar" alt="Remy Sharp" src={'' || `data:${item.user.avatar.contentType};base64,${item.user.avatar.data}`} />
                                 </div>
                                 <div className="user-name">
                                   <h3>{item.user.username}</h3>
@@ -124,7 +124,7 @@ function Post() {
                             <div className="user">
                                 <div className="user-left">
                                 <div className="user-avatar">
-                                  <Avatar className="avatar" alt="Remy Sharp" src={avatar1} />
+                                  <Avatar className="avatar" alt="Remy Sharp" src={'' || `data:${item.user.avatar.contentType};base64,${item.user.avatar.data}`} />
                                 </div>
                                 <div className="user-name">
                                   <h3>{item.user.username}</h3>

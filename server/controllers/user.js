@@ -60,6 +60,7 @@ exports.uploadPhoto = async (req,res) => {
 
     res.status(200).json({ success: true, message: "Avatar uploaded successfully" });
   } catch (error) {
+    console.log("esi")
     console.error("Error uploading avatar:", error);
     res.status(500).json({ success: false, message: "Avatar upload failed" });
   }

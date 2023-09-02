@@ -84,7 +84,7 @@ const Header = () => {
         <>
           <div className="icons">
             {/* <h2>{JSON.stringify(auth,null,4)}</h2> */}
-            {/* {console.log(JSON.stringify(auth, null, 4))} */}
+            {console.log(JSON.stringify(auth, null, 4))}
             <form onSubmit={handleSubmit}>
             <div className="search-bar">
             <input
