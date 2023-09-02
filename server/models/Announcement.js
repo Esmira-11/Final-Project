@@ -40,9 +40,10 @@ const AnnouncementSchema = new mongoose.Schema(
           type: String,
           required: true,
         },
-        // avatar: {
-        //   type: String, // Assuming it's a URL to the user's avatar
-        // },
+        avatar: {
+          data:String,
+          contentType:String,
+        },
       },
     //   likes: [
     //     {

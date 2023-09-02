@@ -217,11 +217,11 @@ function Announcement() {
                     (item) =>
                       item.type === "question" && (
                         <>
-                          <div className="announcement-card">
-                            <div className="announcement-card-container" key={item._id}>
+                          <div className="announcement-card" key={item._id}>
+                            <div className="announcement-card-container">
                               <div className="user">
                                 <div className="user-avatar">
-                                  <Avatar className="avatar" alt="Remy Sharp" src={avatar1} />
+                                  <Avatar className="avatar" alt="Remy Sharp" src={ '' ||`data:${item.user.avatar.contentType};base64,${item.user.avatar.data}`} />
                                 </div>
                                 <div className="user-name">
                                   <h3>{item.user.username}</h3>
@@ -240,7 +240,7 @@ function Announcement() {
                               </div>
                               <div className="comment-box">
                                 <div className="comment-box-left">
-                                <Avatar className="miniavatar" alt="Remy Sharp" src={avatar1} />
+                                <Avatar className="miniavatar" alt="Remy Sharp" src={'' || `data:image/png;base64,${item.user.avatar?.data}`}  />
                                 </div>
                                 <div className="comment-box-right">
                                   <input type="text" placeholder="your reply"/>
@@ -258,11 +258,11 @@ function Announcement() {
                     (item) =>
                       item.type === "found" && (
                         <>
-                          <div className="announcement-card" >
-                            <div className="announcement-card-container" key={item._id}>
+                          <div className="announcement-card" key={item._id}>
+                            <div className="announcement-card-container" >
                               <div className="user">
                                 <div className="user-avatar">
-                                <Avatar className="avatar" alt="Remy Sharp" src={avatar1} />
+                                <Avatar className="avatar" alt="Remy Sharp" src={'' || `data:${item.user.avatar.contentType};base64,${item.user.avatar.data}`}  />
                                 </div>
                                 <div className="user-name">
                                   <h3>{item.user.username}</h3>
@@ -287,7 +287,7 @@ function Announcement() {
                               </div>
                               <div className="comment-box">
                                 <div className="comment-box-left">
-                                <Avatar className="miniavatar" alt="Remy Sharp" src={avatar1} />
+                                <Avatar className="miniavatar" alt="Remy Sharp" src={'' || `data:${item.user.avatar.contentType};base64,${item.user.avatar.data}`}  />
                                 </div>
                                 <div className="comment-box-right">
                                   <input type="text" placeholder="your reply"/>

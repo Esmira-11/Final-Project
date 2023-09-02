@@ -80,6 +80,7 @@ function UserProfile() {
     }
     setAvatar("");
     handleClose();
+    window.location.reload();
   };
 
   const style = {

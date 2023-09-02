@@ -18,7 +18,10 @@ exports.createQuestion = async (req, res) => {
       user: {
         id: user._id,
         username: user.username,
-        // avatar: user.avatar
+        avatar: {
+          data: user.avatar.data.toString('base64'), 
+          contentType: user.avatar.contentType, 
+        },
       },
     });
 
@@ -64,7 +67,10 @@ exports.createAnnouncement = async (req, res) => {
     const announcements = new Announcement({ ...req.fields,type: "found",user: {
       id: user._id,
       username: user.username,
-      // avatar: user.avatar
+      avatar: {
+        data: user.avatar.data.toString('base64'), 
+        contentType: user.avatar.contentType, 
+      },
     }, });
     if (photo) {
       announcements.photo.data = fs.readFileSync(photo.path);
