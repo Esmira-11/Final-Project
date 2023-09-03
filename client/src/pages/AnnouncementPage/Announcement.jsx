@@ -5,8 +5,11 @@ import toast, { Toaster } from "react-hot-toast";
 import Avatar from "@mui/material/Avatar";
 import avatar1 from "../../assets/images/avatar-2.png";
 import axios from "axios";
+import { useAuth } from "../../context/auth";
 
 function Announcement() {
+  const [auth, setAuth] = useAuth();
+  const [commentText, setCommentText] = useState("");
   const [step, setStep] = useState(0);
   const [page, setpage] = useState(0);
   const [photo, setPhoto] = useState("");
@@ -15,21 +18,52 @@ function Announcement() {
   const [description, setDescription] = useState("");
   const [contact, setContact] = useState("");
   const [announcements, setAnnouncements] = useState([]);
-  const [type, setType] = useState('');
+  const [type, setType] = useState("");
+  const [commentTexts, setCommentTexts] = useState({});
 
+  const handleCommentSubmit = async (item) => {
+    // e.preventDefault();
+    try {
+      const { data } = await axios.post(
+        "http://localhost:5000/api/announcement/create-comment",
+        {
+          announcementId: item._id,
+          text: commentTexts[item._id] || "",
+        }
+      );
+
+      if (data?.success) {
+        toast.success("Comment Created Successfully");
+        setCommentTexts((prevState) => ({
+          ...prevState,
+          [item._id]: "", // Clear the input field after submitting
+        }));
+        // closeComments();
+        getAllAnnouncement();
+      } else {
+        toast.error(data?.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong");
+    }
+  };
 
   const filteredAnnouncements = async () => {
     try {
-      const {data} = await axios.post("http://localhost:5000/api/announcement/announcement-filters",{
-          type
-      })
-      setAnnouncements(data?.announcements)
+      const { data } = await axios.post(
+        "http://localhost:5000/api/announcement/announcement-filters",
+        {
+          type,
+        }
+      );
+      setAnnouncements(data?.announcements);
       // console.log(data.announcements)
       // console.log(announcements)
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const getAllAnnouncement = async () => {
     try {
@@ -47,11 +81,10 @@ function Announcement() {
   //   getAllAnnouncement();
   // }, []);
 
-  
   useEffect(() => {
-    if(type != ''){
+    if (type != "") {
       filteredAnnouncements();
-    } else{
+    } else {
       getAllAnnouncement();
     }
   }, [type]);
@@ -170,27 +203,27 @@ function Announcement() {
                   <h3
                     onClick={() => {
                       setStep(0);
-                      setType('')
+                      setType("");
                     }}
                   >
                     All Posts
                   </h3>
                 </div>
                 <div className="filters">
-                <h3
+                  <h3
                     onClick={() => {
                       setStep(0);
-                      setType('question')
+                      setType("question");
                     }}
                   >
                     Questions
                   </h3>
                 </div>
                 <div className="filters">
-                <h3
+                  <h3
                     onClick={() => {
                       setStep(0);
-                      setType('found')
+                      setType("found");
                     }}
                   >
                     Found
@@ -213,7 +246,7 @@ function Announcement() {
             >
               {step === 0 && (
                 <>
-                {announcements?.map(
+                  {announcements?.map(
                     (item) =>
                       item.type === "question" && (
                         <>
@@ -221,7 +254,14 @@ function Announcement() {
                             <div className="announcement-card-container">
                               <div className="user">
                                 <div className="user-avatar">
-                                  <Avatar className="avatar" alt="Remy Sharp" src={ '' ||`data:${item.user.avatar.contentType};base64,${item.user.avatar.data}`} />
+                                  <Avatar
+                                    className="avatar"
+                                    alt="Remy Sharp"
+                                    src={
+                                      "" ||
+                                      `data:${item.user.avatar.contentType};base64,${item.user.avatar.data}`
+                                    }
+                                  />
                                 </div>
                                 <div className="user-name">
                                   <h3>{item.user.username}</h3>
@@ -235,34 +275,68 @@ function Announcement() {
                                   <p>{formatDate(item.createdAt)}</p>
                                 </div>
                                 <div className="icon">
-                                  <p>{item.comments.length} <span>replies</span></p>
+                                  <p>
+                                    {item.comments.length} <span>replies</span>
+                                  </p>
                                 </div>
                               </div>
                               <div className="comment-box">
-                                <div className="comment-box-left">
-                                <Avatar className="miniavatar" alt="Remy Sharp" src={'' || `data:image/png;base64,${item.user.avatar?.data}`}  />
-                                </div>
+                                {/* <div className="comment-box-left">
+                                  <Avatar
+                                    className="miniavatar"
+                                    alt="Remy Sharp"
+                                    src={
+                                      "" ||
+                                      `data:${item.user.avatar.contentType};base64,${item.user.avatar.data}`
+                                    }
+                                  />
+                                </div> */}
                                 <div className="comment-box-right">
-                                  <input type="text" placeholder="your reply"/>
+                                  <form
+                                    onSubmit={() => {
+                                      handleCommentSubmit(item);
+                                    }}
+                                  >
+                                    <input
+                                      type="text"
+                                      placeholder="add comment"
+                                      value={commentTexts[item._id] || ""}
+                                      onChange={(e) => {
+                                        const newText = e.target.value;
+                                        setCommentTexts((prevState) => ({
+                                          ...prevState,
+                                          [item._id]: newText,
+                                        }));
+                                      }}
+                                    />
+
+                                    <button className="icon" type="submit">
+                                      <i className="fa-solid fa-comment-dots"></i>
+                                    </button>
+                                  </form>
                                 </div>
-                                <button className="icon">
-                                  <i className="fa-solid fa-comment-dots"></i>
-                                </button>
                               </div>
                             </div>
                           </div>
                         </>
                       )
                   )}
-                {announcements?.map(
+                  {announcements?.map(
                     (item) =>
                       item.type === "found" && (
                         <>
                           <div className="announcement-card" key={item._id}>
-                            <div className="announcement-card-container" >
+                            <div className="announcement-card-container">
                               <div className="user">
                                 <div className="user-avatar">
-                                <Avatar className="avatar" alt="Remy Sharp" src={'' || `data:${item.user.avatar.contentType};base64,${item.user.avatar.data}`}  />
+                                  <Avatar
+                                    className="avatar"
+                                    alt="Remy Sharp"
+                                    src={
+                                      "" ||
+                                      `data:${item.user.avatar.contentType};base64,${item.user.avatar.data}`
+                                    }
+                                  />
                                 </div>
                                 <div className="user-name">
                                   <h3>{item.user.username}</h3>
@@ -278,23 +352,56 @@ function Announcement() {
                                 <p>Contact : {item.contactInfo}</p>
                               </div>
                               <div className="announce-img">
-                                <img src={`http://localhost:5000/api/announcement/announcement-photo/${item._id}`} alt="announcement-img" />
+                                <img
+                                  src={`http://localhost:5000/api/announcement/announcement-photo/${item._id}`}
+                                  alt="announcement-img"
+                                />
                               </div>
                               <div className="question-details">
                                 <div className="date">
                                   <p>{formatDate(item.createdAt)}</p>
                                 </div>
+                                <div className="icon">
+                                  <p>
+                                    {item.comments.length} <span>replies</span>
+                                  </p>
+                                </div>
                               </div>
                               <div className="comment-box">
-                                <div className="comment-box-left">
-                                <Avatar className="miniavatar" alt="Remy Sharp" src={'' || `data:${item.user.avatar.contentType};base64,${item.user.avatar.data}`}  />
-                                </div>
+                                {/* <div className="comment-box-left">
+                                  <Avatar
+                                    className="miniavatar"
+                                    alt="Remy Sharp"
+                                    src={
+                                      "" ||
+                                      `data:${item.user.avatar.contentType};base64,${item.user.avatar.data}`
+                                    }
+                                  />
+                                </div> */}
                                 <div className="comment-box-right">
-                                  <input type="text" placeholder="your reply"/>
+                                  <form
+                                    onSubmit={() => {
+                                      handleCommentSubmit(item);
+                                    }}
+                                  >
+                                    <input
+                                      type="text"
+                                      placeholder="add comment"
+                                      value={commentTexts[item._id] || ""}
+                                      onChange={(e) => {
+                                        const newText = e.target.value;
+                                        setCommentTexts((prevState) => ({
+                                          ...prevState,
+                                          [item._id]: newText,
+                                        }));
+                                      }}
+                                    />
+
+                                    <button className="icon" type="submit">
+                                      <i className="fa-solid fa-comment-dots"></i>
+                                    </button>
+                                  </form>
                                 </div>
-                                <button className="icon">
-                                  <i className="fa-solid fa-comment-dots"></i>
-                                </button>
                               </div>
                             </div>
                           </div>

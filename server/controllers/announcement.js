@@ -23,6 +23,7 @@ exports.createQuestion = async (req, res) => {
           contentType: user.avatar.contentType, 
         },
       },
+      comments: [],
     });
 
     await announcement.save();
@@ -71,6 +72,7 @@ exports.createAnnouncement = async (req, res) => {
         data: user.avatar.data.toString('base64'), 
         contentType: user.avatar.contentType, 
       },
+      comments: [],
     }, });
     if (photo) {
       announcements.photo.data = fs.readFileSync(photo.path);
@@ -195,3 +197,53 @@ exports.announcementFilters = async (req,res) => {
     });
   }
 }
+
+exports.createComment = async (req, res) => {
+  try {
+    const { announcementId, text } = req.body;
+
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).send({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    const announcement = await Announcement.findById(announcementId);
+    if (!announcement) {
+      return res.status(404).send({
+        success: false,
+        message: "Announcement not found",
+      });
+    }
+
+    const newComment = {
+      user: {
+        id: user._id,
+        username: user.username,
+        avatar: {
+          data: user.avatar.data.toString('base64'),
+          contentType: user.avatar.contentType,
+        },
+      },
+      text,
+    };
+
+    announcement.comments.push(newComment);
+    await announcement.save();
+
+    res.status(201).send({
+      success: true,
+      message: "Comment Created Successfully",
+      comment: newComment,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Error while created comment",
+      error,
+    });
+  }
+};
