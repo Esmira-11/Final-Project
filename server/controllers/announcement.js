@@ -98,6 +98,7 @@ exports.getAllAnnouncement = async (req, res) => {
   try {
     const announcement = await Announcement.find({})
     .select("-photo")
+    .select("-comments.user")
     .sort({ createdAt: -1 });
     res.status(200).send({
       success: true,
@@ -244,6 +245,39 @@ exports.createComment = async (req, res) => {
       success: false,
       message: "Error while created comment",
       error,
+    });
+  }
+};
+
+exports.getCommentsByAnnouncementId = async (req, res) => {
+  try {
+    const { announcementId } = req.params;
+
+    const announcement = await Announcement.findById(announcementId)
+      .select('comments')
+      // .populate({
+      //   path: 'comments.user',
+      //   select: 'username avatar',
+      // });
+
+    if (!announcement) {
+      return res.status(404).send({
+        success: false,
+        message: 'Announcement not found',
+      });
+    }
+
+    res.status(200).send({
+      success: true,
+      message: 'Comments by Announcement ID',
+      comments: announcement.comments,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error in getting comments by Announcement ID',
+      error: error.message,
     });
   }
 };

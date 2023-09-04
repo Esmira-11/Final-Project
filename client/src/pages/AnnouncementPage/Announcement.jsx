@@ -6,10 +6,12 @@ import Avatar from "@mui/material/Avatar";
 import avatar1 from "../../assets/images/avatar-2.png";
 import axios from "axios";
 import { useAuth } from "../../context/auth";
+import Modal from "@mui/material/Modal";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
 function Announcement() {
   const [auth, setAuth] = useAuth();
-  const [commentText, setCommentText] = useState("");
   const [step, setStep] = useState(0);
   const [page, setpage] = useState(0);
   const [photo, setPhoto] = useState("");
@@ -20,6 +22,32 @@ function Announcement() {
   const [announcements, setAnnouncements] = useState([]);
   const [type, setType] = useState("");
   const [commentTexts, setCommentTexts] = useState({});
+  // const [openAnnouncementId, setOpenAnnouncementId] = useState(null);
+  const [open, setOpen] = React.useState(false);
+  const [comments, setcomments] =  useState([]);
+
+
+  const handleClose = () => {
+    setOpen(false);
+    setcomments([])
+  }
+    
+  
+  const getComments = async (id) => {
+    try {
+      const { data } = await axios.get(
+        `http://localhost:5000/api/announcement/comments/${id}`);
+      if (data?.success) {
+        setcomments(data.comments)
+      }
+      else{
+        console.log("announcement undefined")
+      } 
+    } catch (error) {
+      console.log(error);
+      // toast.error("Something went wrong");
+    }
+  }
 
   const handleCommentSubmit = async (item) => {
     // e.preventDefault();
@@ -38,8 +66,18 @@ function Announcement() {
           ...prevState,
           [item._id]: "", // Clear the input field after submitting
         }));
-        // closeComments();
-        getAllAnnouncement();
+        const updatedAnnouncements = announcements.map((announcement) => {
+          if (announcement._id === item._id) {
+            return {
+              ...announcement,
+              comments: [...announcement.comments, data.comment], // Add the new comment to the announcement
+            };
+          }
+          return announcement;
+        });
+        setAnnouncements(updatedAnnouncements);
+        handleClose();
+        // getAllAnnouncement();
       } else {
         toast.error(data?.message);
       }
@@ -148,18 +186,6 @@ function Announcement() {
     getAllAnnouncement();
   };
 
-  //   function formatDate(dateString) {
-  //     const date = new Date(dateString);
-
-  //     const year = date.getFullYear();
-  //     const month = String(date.getMonth() + 1).padStart(2, '0');
-  //     const day = String(date.getDate()).padStart(2, '0');
-  //     const hours = String(date.getHours()).padStart(2, '0');
-  //     const minutes = String(date.getMinutes()).padStart(2, '0');
-
-  //     return `${year}-${month}-${day} ${hours}:${minutes}`;
-  //   }
-
   function formatDate(dateString) {
     const options = {
       year: "numeric",
@@ -176,6 +202,38 @@ function Announcement() {
 
     return formattedDate;
   }
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 600,
+    borderRadius: "15px",
+    backgroundColor: "#d5e5e9",
+    color: "#2f4f4f",
+    boxShadow: 24,
+    p: 4,
+    border: "none",
+    outline:"none",
+    maxHeight: "85vh",
+    overflowY: "auto",
+    "&::-webkit-scrollbar": {
+      width: "9px",
+    },
+    "&::-webkit-scrollbar-thumb": {
+      background: "#3e4348",
+      borderRadius: "3px",
+    },
+    "&::-webkit-scrollbar-track": {
+      background: "transparent", 
+    },
+    "&::-webkit-scrollbar-corner": {
+      background: "transparent", 
+    },
+    scrollbarWidth: "thin", 
+    scrollbarColor: "#3e4348 transparent", 
+  };
 
   return (
     <>
@@ -276,7 +334,15 @@ function Announcement() {
                                 </div>
                                 <div className="icon">
                                   <p>
-                                    {item.comments.length} <span>replies</span>
+                                    {item.comments.length}{" "}
+                                    <span
+                                      onClick={() => {
+                                        getComments(item._id)
+                                        setOpen(true);
+                                      }}
+                                    >
+                                      replies
+                                    </span>
                                   </p>
                                 </div>
                               </div>
@@ -293,7 +359,8 @@ function Announcement() {
                                 </div> */}
                                 <div className="comment-box-right">
                                   <form
-                                    onSubmit={() => {
+                                    onSubmit={(e) => {
+                                      e.preventDefault();
                                       handleCommentSubmit(item);
                                     }}
                                   >
@@ -363,7 +430,15 @@ function Announcement() {
                                 </div>
                                 <div className="icon">
                                   <p>
-                                    {item.comments.length} <span>replies</span>
+                                    {item.comments.length}{" "}
+                                    <span
+                                      onClick={() => {
+                                        getComments(item._id)
+                                        setOpen(true);
+                                      }}
+                                    >
+                                      replies
+                                    </span>
                                   </p>
                                 </div>
                               </div>
@@ -380,7 +455,8 @@ function Announcement() {
                                 </div> */}
                                 <div className="comment-box-right">
                                   <form
-                                    onSubmit={() => {
+                                    onSubmit={(e) => {
+                                      e.preventDefault();
                                       handleCommentSubmit(item);
                                     }}
                                   >
@@ -546,6 +622,50 @@ function Announcement() {
           </div>
         </div>
       </Layout>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+            style={{
+              display:'flex',
+              justifyContent:"space-between",
+              alignItems:"center",
+              fontSize: "30px",
+              fontFamily: "'Sofia', cursive",
+              fontWeight:'700'
+            }}
+          >
+            Announcement Comments
+            <i className="fa-regular fa-rectangle-xmark" onClick={handleClose}></i>
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2}}>
+          {comments && comments.map((comment) => (
+            
+              <div className="comment-body" style={{display: "flex", gap:'10px'}}>
+                <div style={{paddingTop:'5px'}}>
+                  <Avatar
+                    className="avatar"
+                    alt={comment.user.username}
+                    src={`data:${comment.user.avatar.contentType};base64,${comment.user.avatar.data}`}
+                  />
+                </div>
+                <div>
+                  <p style={{fontSize:'17px',fontWeight:'700'}}>{comment.user.username}</p>
+                  <p style={{textAlign:'justify'}}>{comment.text}</p>
+                </div>
+              </div>
+          ))
+        }
+          </Typography>
+        </Box>
+      </Modal>
       <Toaster position="bottom-right" />
     </>
   );
