@@ -1,7 +1,7 @@
 const express = require('express');
 const formidable = require('express-formidable')
 const { requireSignIn, isAdmin } = require('../middleware/authMiddleware');
-const { relatedProduct, getProductBySlug ,search, productList, productCount, productFilters, createProduct, getAllProducts, getProductById, getProductPhoto, deleteProductById, updateProduct } = require('../controllers/product');
+const { getCommentsByProductId, addCommentAndRating, relatedProduct, getProductBySlug ,search, productList, productCount, productFilters, createProduct, getAllProducts, getProductById, getProductPhoto, deleteProductById, updateProduct } = require('../controllers/product');
 
 const router = express.Router();
 
@@ -17,6 +17,9 @@ router.route("/product-count").get(productCount);
 router.route("/product-list/:page").get(productList);
 router.route("/search/:keyword").get(search);
 router.route("/related-product/:pid/:cid").get(relatedProduct);
+router.route("/add-comment-and-rating").post(requireSignIn, addCommentAndRating);
+router.route("/comments/:productId").get(requireSignIn,getCommentsByProductId);
+
 
 
 //get-photo

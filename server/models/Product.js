@@ -32,6 +32,43 @@ const ProductSchema = new mongoose.Schema({
         enum: ["Small", "Medium", "Large"],
         required:true
     },
+    comments: [
+        {
+          user: {
+            id: {
+              type: mongoose.Schema.Types.ObjectId,
+              ref: 'User', 
+              required: true,
+            },
+            username: {
+              type: String,
+              required: true,
+            },
+            avatar: {
+              data:String,
+              contentType:String,
+            },
+          },
+          rating: {
+            type: Number,
+            required: true,
+            min: 1,
+            max: 5,
+          },
+          text: {
+            type: String,
+            required: true,
+          },
+          createdAt: {
+            type: Date,
+            default: Date.now,
+          },
+        },
+      ],
+    averageRating: {
+        type: Number,
+        default: 0,
+    },  
     photo:{
         data:Buffer,
         contentType:String

@@ -1,4 +1,5 @@
 const Product = require("../models/Product");
+const User = require("../models/User");
 const slugify = require("slugify");
 const fs = require("fs");
 
@@ -52,6 +53,7 @@ exports.getAllProducts = async (req, res) => {
       .populate("category")
       .populate("petcategory", "name")
       .select("-photo")
+      .select("-comments.user")
       .limit(12)
       .sort({ createdAt: -1 });
     res.status(200).send({
@@ -75,8 +77,10 @@ exports.getProductBySlug = async (req,res) => {
     const product = await Product
       .findOne({ slug: req.params.slug })
       .select("-photo")
+      .select("-comments")
       .populate("category")
       .populate("petcategory", "name");
+      
 
     res.status(200).send({
       success: true,
@@ -98,6 +102,7 @@ exports.getProductById = async (req, res) => {
     const { id } = req.params;
     const product = await Product.findById(id)
       .select("-photo")
+      .select("-comments")
       .populate("category")
       .populate("petcategory", "name");
     res.status(200).send({
@@ -301,5 +306,95 @@ exports.relatedProduct = async (req,res) => {
       message:'Error while getting related products',
       error
     })
+  }
+}
+
+exports.addCommentAndRating = async (req, res) => {
+  try {
+      const { productId, text, rating } = req.body;
+
+      const user = await User.findById(req.user.id);
+
+      if (!user) {
+        return res.status(404).send({
+          success: false,
+          message: "User not found",
+        });
+      }
+
+      const product = await Product.findById(productId);
+
+      if (!product) {
+        return res.status(404).send({
+          success: false,
+          message: "product not found",
+        });
+      }
+
+      const newComment = {
+        user: {
+          id: user._id,
+          username: user.username,
+          avatar: {
+            data: user.avatar.data.toString('base64'),
+            contentType: user.avatar.contentType,
+          },
+        },
+        text,
+        rating,
+      };
+
+      product.comments.push(newComment);
+
+      const totalRating = product.comments.reduce((acc, comment) => acc + comment.rating, 0);
+      product.averageRating = totalRating / product.comments.length;
+
+      await product.save();
+
+      res.status(201).send({
+          success: true,
+          message: "Comment and rating added successfully",
+          comment: newComment,
+      });
+  } catch (error) {
+      console.log(error);
+      res.status(500).send({
+          success: false,
+          error,
+          message: "Error in adding comment and rating",
+      });
+  }
+};
+
+exports.getCommentsByProductId = async (req, res) => {
+  try {
+    const { productId } = req.params;
+
+    const product = await Product.findById(productId)
+      .select('comments')
+      // .populate({
+      //   path: 'comments.user',
+      //   select: 'username avatar',
+      // });
+
+    if (!product) {
+      return res.status(404).send({
+        success: false,
+        message: 'Product not found',
+      });
+    }
+
+    res.status(200).send({
+      success: true,
+      message: 'Comments by Product ID',
+      comments: product.comments,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error in getting comments by Product ID',
+      error: error.message,
+    });
   }
 }
