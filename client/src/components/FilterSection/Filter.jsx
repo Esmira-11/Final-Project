@@ -186,11 +186,12 @@ function Filter() {
                 <h1>Shop By Category</h1>
             </div>
             <div className="shop-categories">
-            {petCategories?.toReversed().map((item) => (
+              {petCategories?.toReversed().map((item) => (
                 <div className={`shop-category-item ${
                   selectedPetCategories.includes(item._id) ? 'selected' : ''
                 }`}
                 onClick={() => handlePetCategoryFilter(item._id)}
+                key={item._id}
                 >
                 <div className="shop-category-item-top">
                     <img src={`http://localhost:5000/api/petcategory/petcategory-photo/${item._id}`} alt="pet-category" />
@@ -212,7 +213,7 @@ function Filter() {
               </div>
               <div className="category-bar-content">
                 {categories?.map((item) => (
-                  <div className="category">
+                  <div className="category" key={item._id}>
                     <Checkbox
                       key={item._id}
                       onChange={(e) => handleFilter(e.target.checked, item._id)}
@@ -278,7 +279,7 @@ function Filter() {
             <div className="filter-section-container-right-bottom">
               <div className="cards">
                 {product?.map((item) => (
-                  <div className="shop-item">
+                  <div className="shop-item" key={item._id}>
                     <div className="shop-item-img">
                       <img
                         src={`http://localhost:5000/api/product/product-photo/${item._id}`}
