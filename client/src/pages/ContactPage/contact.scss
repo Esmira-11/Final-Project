@@ -1,121 +1,120 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,700;1,500;1,700&family=Sofia&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,700;1,500;1,700&family=Sofia&display=swap");
 
-.contact-page{
-    // font-family: 'Raleway', sans-serif;
-    color: #2f4f4f;
+.contact-page {
+  // font-family: 'Raleway', sans-serif;
+  color: #2f4f4f;
+  display: flex;
+  flex-direction: column;
+  padding: 120px 0 0;
+  &-container {
+    padding-bottom: 40px;
+    width: 80%;
+    margin: 0 auto;
     display: flex;
-    flex-direction: column;
-    padding: 120px 0 0;
-    &-container{
-        padding-bottom: 40px;
-        width: 80%;
-        margin: 0 auto;
+    align-items: center;
+    &-left {
+      width: 50%;
+      &-title {
+        h2 {
+          font-family: "Sofia", cursive;
+          font-size: 40px;
+          font-weight: 700;
+        }
+      }
+      &-details {
+        padding: 20px 0;
         display: flex;
-        align-items: center;
-        &-left{
-            width: 50%;
-            &-title{
-                h2{
-                    font-family: 'Sofia', cursive;
-                    font-size: 40px;
-                    font-weight: 700;
-                }
+        flex-direction: column;
+        .detail {
+          padding: 15px 0;
+          display: flex;
+          align-items: center;
+          &-left {
+            margin-right: 20px;
+            i {
+              font-size: 30px;
             }
-            &-details{
-                padding: 20px 0;
-                display: flex;
-                flex-direction: column;
-                .detail{
-                    padding: 15px 0;
-                    display: flex;
-                    align-items: center;
-                    &-left{
-                        margin-right: 20px;
-                        i{
-                            font-size: 30px;
-                        }
-                    }
-                    &-right{
-                        display: flex;
-                        flex-direction: column; 
-                        .detail-title{
-                            font-family: 'Raleway', sans-serif;
-                            padding-bottom: 8px;
-                            h3{
-                                font-size: 25px;
-                                font-weight: 700;
-                            }
-                        }
-                        .detail-content{
-                            p{
-                                font-size: 18px;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        &-right{
-            background-color: rgba(45, 146, 186, 0.2);
-            border-radius: 20px;
-            padding: 40px;
-            font-family: 'Raleway', sans-serif;
-            width: 50%;
-            .form-title{
-                font-family: 'Sofia', cursive;
-                font-size: 40px;
+          }
+          &-right {
+            display: flex;
+            flex-direction: column;
+            .detail-title {
+              font-family: "Raleway", sans-serif;
+              padding-bottom: 8px;
+              h3 {
+                font-size: 25px;
                 font-weight: 700;
+              }
             }
-            .form-description{
-                padding: 20px 0;
-                line-height: 22px;
+            .detail-content {
+              p {
                 font-size: 18px;
+              }
             }
-            .form{
-                form{
-                    .form-group{
-                        padding: 10px 0;
-                        input,textarea{
-                            cursor: pointer;
-                            width: 100%;
-                            padding: 15px;
-                            font-size: 17px;
-                            border: none;
-                            outline: none;
-                            background: rgba(47, 79, 79, 0.2);
-                            border-radius: 8px;
-                            color: #2f4f4f;
-                        }
-                    }
-                    button{
-                        width: 100%;
-                        padding: 12px;
-                        font-size: 18px;
-                        border: none;
-                        border: 2px solid #2f4f4f;
-                        cursor: pointer;
-                        color: #2f4f4f;
-                        font-weight: 700;
-                        border-radius: 8px;
-                        background: rgba(47, 79, 79, 0.2);
-
-                    }
-                    button:hover{
-                        background: #2f4f4f;
-                        color: #fffaf5;
-                    }
-                }
-            }
+          }
         }
-        
+      }
     }
-    &-bottom{
-        width: 100%;
-        height: 400px;
-        iframe{
+    &-right {
+      background-color: rgba(45, 146, 186, 0.2);
+      border-radius: 20px;
+      padding: 40px;
+      font-family: "Raleway", sans-serif;
+      width: 50%;
+      .form-title {
+        font-family: "Sofia", cursive;
+        font-size: 40px;
+        font-weight: 700;
+      }
+      .form-description {
+        padding: 20px 0;
+        line-height: 22px;
+        font-size: 18px;
+      }
+      .form {
+        form {
+          .form-group {
+            padding: 10px 0;
+            input,
+            textarea {
+              cursor: pointer;
+              width: 100%;
+              padding: 15px;
+              font-size: 17px;
+              border: none;
+              outline: none;
+              background: rgba(47, 79, 79, 0.2);
+              border-radius: 8px;
+              color: #2f4f4f;
+            }
+          }
+          button {
             width: 100%;
-            
-            height: 100%;
+            padding: 12px;
+            font-size: 18px;
+            border: none;
+            border: 2px solid #2f4f4f;
+            cursor: pointer;
+            color: #2f4f4f;
+            font-weight: 700;
+            border-radius: 8px;
+            background: rgba(47, 79, 79, 0.2);
+          }
+          button:hover {
+            background: #2f4f4f;
+            color: #fffaf5;
+          }
         }
+      }
     }
+  }
+  &-bottom {
+    width: 100%;
+    height: 400px;
+    iframe {
+      width: 100%;
+
+      height: 100%;
+    }
+  }
 }

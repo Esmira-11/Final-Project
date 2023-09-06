@@ -192,7 +192,9 @@ function Detail() {
                         />
                       </div>
                       <div className="form-group rating">
-                        <label htmlFor="rating" className="ratlabel">Rating:</label>
+                        <label htmlFor="rating" className="ratlabel">
+                          Rating:
+                        </label>
                         <div className="star-rating-input">
                           {[1, 2, 3, 4, 5].map((star) => (
                             <span
@@ -209,39 +211,44 @@ function Detail() {
                         </div>
                       </div>
                       <StarRating rating={rating} />
-                      <button className="form-btn" type="submit">Submit</button>
+                      <button className="form-btn" type="submit">
+                        Submit
+                      </button>
                     </form>
                   </div>
                   <div className="comment-section">
                     <h2>All Comments</h2>
-                  {comments &&
-                    comments.map((comment) => (
-                      <div
-                        className="comment-body"
-                        style={{ display: "flex", borderRadius:'8px' }}
-                      >
-                        <div className="comment-body-left">
-                        <div style={{ paddingTop: "5px" }}>
-                          <Avatar
-                            className="avatar"
-                            alt={comment.user.username}
-                            src={`data:${comment.user.avatar.contentType};base64,${comment.user.avatar.data}`}
-                          />
+                    {comments &&
+                      comments.map((comment) => (
+                        <div
+                          className="comment-body"
+                          style={{ display: "flex", borderRadius: "8px" }}
+                        >
+                          <div className="comment-body-left">
+                            <div style={{ paddingTop: "5px" }}>
+                              <Avatar
+                                className="avatar"
+                                alt={comment.user.username}
+                                src={`data:${comment.user.avatar.contentType};base64,${comment.user.avatar.data}`}
+                              />
+                            </div>
+                            <div>
+                              <p
+                                style={{ fontSize: "17px", fontWeight: "700" }}
+                              >
+                                {comment.user.username}
+                              </p>
+                              <p style={{ textAlign: "justify" }}>
+                                {comment.text}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="comment-rating">
+                            <StarRating rating={comment.rating} />
+                          </div>
                         </div>
-                        <div>
-                          <p style={{ fontSize: "17px", fontWeight: "700" }}>
-                            {comment.user.username}
-                          </p>
-                          <p style={{ textAlign: "justify" }}>{comment.text}</p>
-                        </div>
-                        </div>
-                        <div className="comment-rating">
-                        <StarRating rating={comment.rating} />
-                        </div>
-                      </div>
-                    ))}
+                      ))}
                   </div>
-                  
                 </TabPanel>
               </Tabs>
             </div>

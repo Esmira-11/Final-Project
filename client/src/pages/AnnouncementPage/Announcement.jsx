@@ -24,30 +24,28 @@ function Announcement() {
   const [commentTexts, setCommentTexts] = useState({});
   // const [openAnnouncementId, setOpenAnnouncementId] = useState(null);
   const [open, setOpen] = React.useState(false);
-  const [comments, setcomments] =  useState([]);
-
+  const [comments, setcomments] = useState([]);
 
   const handleClose = () => {
     setOpen(false);
-    setcomments([])
-  }
-    
-  
+    setcomments([]);
+  };
+
   const getComments = async (id) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:5000/api/announcement/comments/${id}`);
+        `http://localhost:5000/api/announcement/comments/${id}`
+      );
       if (data?.success) {
-        setcomments(data.comments)
+        setcomments(data.comments);
+      } else {
+        console.log("announcement undefined");
       }
-      else{
-        console.log("announcement undefined")
-      } 
     } catch (error) {
       console.log(error);
       // toast.error("Something went wrong");
     }
-  }
+  };
 
   const handleCommentSubmit = async (item) => {
     // e.preventDefault();
@@ -215,7 +213,7 @@ function Announcement() {
     boxShadow: 24,
     p: 4,
     border: "none",
-    outline:"none",
+    outline: "none",
     maxHeight: "85vh",
     overflowY: "auto",
     "&::-webkit-scrollbar": {
@@ -226,13 +224,13 @@ function Announcement() {
       borderRadius: "3px",
     },
     "&::-webkit-scrollbar-track": {
-      background: "transparent", 
+      background: "transparent",
     },
     "&::-webkit-scrollbar-corner": {
-      background: "transparent", 
+      background: "transparent",
     },
-    scrollbarWidth: "thin", 
-    scrollbarColor: "#3e4348 transparent", 
+    scrollbarWidth: "thin",
+    scrollbarColor: "#3e4348 transparent",
   };
 
   return (
@@ -337,7 +335,7 @@ function Announcement() {
                                     {item.comments.length}{" "}
                                     <span
                                       onClick={() => {
-                                        getComments(item._id)
+                                        getComments(item._id);
                                         setOpen(true);
                                       }}
                                     >
@@ -433,7 +431,7 @@ function Announcement() {
                                     {item.comments.length}{" "}
                                     <span
                                       onClick={() => {
-                                        getComments(item._id)
+                                        getComments(item._id);
                                         setOpen(true);
                                       }}
                                     >
@@ -634,35 +632,42 @@ function Announcement() {
             variant="h6"
             component="h2"
             style={{
-              display:'flex',
-              justifyContent:"space-between",
-              alignItems:"center",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
               fontSize: "30px",
               fontFamily: "'Sofia', cursive",
-              fontWeight:'700'
+              fontWeight: "700",
             }}
           >
             Announcement Comments
-            <i className="fa-regular fa-rectangle-xmark" onClick={handleClose}></i>
+            <i
+              className="fa-regular fa-rectangle-xmark"
+              onClick={handleClose}
+            ></i>
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2}}>
-          {comments && comments.map((comment) => (
-            
-              <div className="comment-body" style={{display: "flex", gap:'10px'}}>
-                <div style={{paddingTop:'5px'}}>
-                  <Avatar
-                    className="avatar"
-                    alt={comment.user.username}
-                    src={`data:${comment.user.avatar.contentType};base64,${comment.user.avatar.data}`}
-                  />
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            {comments &&
+              comments.map((comment) => (
+                <div
+                  className="comment-body"
+                  style={{ display: "flex", gap: "10px" }}
+                >
+                  <div style={{ paddingTop: "5px" }}>
+                    <Avatar
+                      className="avatar"
+                      alt={comment.user.username}
+                      src={`data:${comment.user.avatar.contentType};base64,${comment.user.avatar.data}`}
+                    />
+                  </div>
+                  <div>
+                    <p style={{ fontSize: "17px", fontWeight: "700" }}>
+                      {comment.user.username}
+                    </p>
+                    <p style={{ textAlign: "justify" }}>{comment.text}</p>
+                  </div>
                 </div>
-                <div>
-                  <p style={{fontSize:'17px',fontWeight:'700'}}>{comment.user.username}</p>
-                  <p style={{textAlign:'justify'}}>{comment.text}</p>
-                </div>
-              </div>
-          ))
-        }
+              ))}
           </Typography>
         </Box>
       </Modal>

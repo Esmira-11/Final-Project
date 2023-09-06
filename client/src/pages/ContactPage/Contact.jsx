@@ -17,8 +17,8 @@ function Contact() {
 
   return (
     <>
-    <Layout>
-      <div className="contact-page">
+      <Layout>
+        <div className="contact-page">
           <div className="contact-page-container">
             <div className="contact-page-container-left">
               <div className="contact-page-container-left-title">
@@ -86,8 +86,8 @@ function Contact() {
               </div>
               <div className="form-description">
                 <p>
-                  Please feel free to get in touch with us using the contact form
-                  below. We’d love to hear for you.
+                  Please feel free to get in touch with us using the contact
+                  form below. We’d love to hear for you.
                 </p>
               </div>
               <div className="form">
@@ -122,11 +122,16 @@ function Contact() {
           </div>
 
           <div className="contact-page-bottom">
-          <iframe loading="lazy" src="https://maps.google.com/maps?q=London%20Eye%2C%20London%2C%20United%20Kingdom&amp;t=m&amp;z=10&amp;output=embed&amp;iwloc=near" title="London Eye, London, United Kingdom" aria-label="London Eye, London, United Kingdom"></iframe>
-          {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d96708.34194156103!2d-74.03927096447748!3d40.759040329405195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4a01c8df6fb3cb8!2sSolomon%20R.%20Guggenheim%20Museum!5e0!3m2!1sen!2sbd!4v1619410634508!5m2!1sen!2s"  allowfullscreen="" loading="lazy"></iframe> */}
+            <iframe
+              loading="lazy"
+              src="https://maps.google.com/maps?q=London%20Eye%2C%20London%2C%20United%20Kingdom&amp;t=m&amp;z=10&amp;output=embed&amp;iwloc=near"
+              title="London Eye, London, United Kingdom"
+              aria-label="London Eye, London, United Kingdom"
+            ></iframe>
+            {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d96708.34194156103!2d-74.03927096447748!3d40.759040329405195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4a01c8df6fb3cb8!2sSolomon%20R.%20Guggenheim%20Museum!5e0!3m2!1sen!2sbd!4v1619410634508!5m2!1sen!2s"  allowfullscreen="" loading="lazy"></iframe> */}
           </div>
-      </div>
-    </Layout>
+        </div>
+      </Layout>
     </>
   );
 }
