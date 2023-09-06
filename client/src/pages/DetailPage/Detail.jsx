@@ -213,7 +213,7 @@ function Detail() {
               <Tabs className="tabs">
                 <TabList className="tablist">
                   <Tab className="tab">Description</Tab>
-                  <Tab className="tab">Reviews</Tab>
+                  <Tab className="tab">Reviews ({comments.length})</Tab>
                 </TabList>
 
                 <TabPanel className="tabpanel first">
@@ -258,7 +258,8 @@ function Detail() {
                       </button>
                     </form>
                   </div>
-                  <div className="comment-section">
+                  {comments.length > 0 ? <>
+                    <div className="comment-section">
                     <h2>All Comments</h2>
                     {comments &&
                       comments.map((comment) => (
@@ -291,6 +292,12 @@ function Detail() {
                         </div>
                       ))}
                   </div>
+                  </> : <>
+                  <div className="comment-section">
+                    <h3>There are no reviews yet.</h3>
+                  </div>
+                  </>}
+                  
                 </TabPanel>
               </Tabs>
             </div>
@@ -321,13 +328,9 @@ function Detail() {
                       </div>
                     </div>
                     <div className="shop-item-info">
-                      {/* <div className="shop-item-rate">
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                      </div> */}
+                      <div className="shop-item-rate">
+                        <StarRating rating={item.averageRating} />
+                      </div>
                       <a href="#">
                         <h4 className="shop-item-title">{item.name}</h4>
                       </a>
