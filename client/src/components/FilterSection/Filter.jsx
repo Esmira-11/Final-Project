@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { useFavorites } from '../../context/FavoritesContext'; 
 import {useCart} from '../../context/CartContext'
+import StarRating from "../../components/StarRating";
 
 function Filter() {
   const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
@@ -15,6 +16,7 @@ function Filter() {
   let navigate = useNavigate();
   const [product, setProduct] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [sortingOption, setSortingOption] = useState("");
   const [checked, setChecked] = useState([]);
   const [radio, setRadio] = useState([]);
   const [selectedPetCategories, setSelectedPetCategories] = useState([]);
@@ -28,6 +30,10 @@ function Filter() {
       ? selectedPetCategories.filter((c) => c !== category)
       : [...selectedPetCategories, category];
     setSelectedPetCategories(updatedCategories);
+  };
+
+  const handleSortingChange = (value) => {
+    setSortingOption(value);
   };
 
   const getAllPetCategories = async () => {
@@ -98,12 +104,12 @@ function Filter() {
   // }, [checked,radio]);
 
   useEffect(() => {
-    if(checked.length || radio.length || selectedPetCategories.length){
+    if(checked.length || radio.length || selectedPetCategories.length || sortingOption){
       filteredProduct();
     } else{
       getAllProducts();
     }
-  }, [checked.length,radio.length, selectedPetCategories.length]);
+  }, [checked.length,radio.length, selectedPetCategories.length, sortingOption]);
 
   const getAllCategories = async () => {
     try {
@@ -167,6 +173,7 @@ function Filter() {
         checked,
         radio,
         petCategories: selectedPetCategories,
+        sorting: sortingOption,
       })
       setProduct(data?.products)
       console.log(data.products)
@@ -268,10 +275,15 @@ function Filter() {
                 <h2>Results</h2>
               </div>
               <div className="right">
-                <select name="price" id="price">
-                  <option value="">Sort by price</option>
-                  <option value="">low to high</option>
-                  <option value="">high to low</option>
+                <select 
+                name="price" 
+                id="price"
+                value={sortingOption}
+                onChange={(e) => handleSortingChange(e.target.value)}
+                >
+                  <option className="sortoption" value="">Sort by price</option>
+                  <option className="sortoption" value="lowToHigh">low to high</option>
+                  <option className="sortoption" value="highToLow">high to low</option>
                 </select>
               </div>
             </div>
@@ -307,11 +319,7 @@ function Filter() {
                     </div>
                     <div className="shop-item-info"  onClick={() => navigate(`/product/${item.slug}`)}>
                       <div className="shop-item-rate">
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
+                        <StarRating rating={item.averageRating} />
                       </div>
                       <a href="#">
                         <h4 className="shop-item-title">{item.name}</h4>

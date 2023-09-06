@@ -205,12 +205,21 @@ exports.updateProduct = async (req, res) => {
 
 exports.productFilters = async (req, res) => {
   try {
-    const { checked, radio, petCategories } = req.body;
+    const { checked, radio, petCategories, sorting } = req.body;
     let args = {};
     if (checked.length > 0) args.category = checked;
     if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
     if (petCategories.length > 0) args.petcategory = petCategories;
-    const products = await Product.find(args);
+
+     let sortOptions = {};
+
+     if (sorting === "lowToHigh") {
+       sortOptions = { price: 1 }; 
+     } else if (sorting === "highToLow") {
+       sortOptions = { price: -1 }; 
+     }
+
+    const products = await Product.find(args).sort(sortOptions);
     res.status(200).send({
       success: true,
       products,
