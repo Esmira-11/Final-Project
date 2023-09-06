@@ -86,19 +86,19 @@
                             font-size: 16px;
                         }
                     }
-                    .category::before{
-                        content: '';
-                        position: absolute;
-                        bottom: -2px;
-                        left: 0;
-                        width: 0;
-                        height: 2px;
-                        background-color: #2f4f4f; 
-                        transition: width 0.6s ease;
-                      }
-                    .category:hover::before{
-                        width: 100%;
-                      }
+                    // .category::before{
+                    //     content: '';
+                    //     position: absolute;
+                    //     bottom: -2px;
+                    //     left: 0;
+                    //     width: 0;
+                    //     height: 2px;
+                    //     background-color: #2f4f4f; 
+                    //     transition: width 0.6s ease;
+                    //   }
+                    // .category:hover::before{
+                    //     width: 100%;
+                    //   }
                 }
             }
 
@@ -125,19 +125,19 @@
                             font-size: 18px;
                         }
                     }
-                    .size::before{
-                        content: '';
-                        position: absolute;
-                        bottom: -2px;
-                        left: 0;
-                        width: 0;
-                        height: 2px;
-                        background-color: #2f4f4f;
-                        transition: width 0.6s ease;
-                    }
-                    .size:hover::before{
-                        width: 100%;
-                    }
+                    // .size::before{
+                    //     content: '';
+                    //     position: absolute;
+                    //     bottom: -2px;
+                    //     left: 0;
+                    //     width: 0;
+                    //     height: 2px;
+                    //     background-color: #2f4f4f;
+                    //     transition: width 0.6s ease;
+                    // }
+                    // .size:hover::before{
+                    //     width: 100%;
+                    // }
                 }
             }
 
@@ -170,19 +170,19 @@
                             font-size: 16px;
                         }
                     }
-                    .price::before{
-                        content: '';
-                        position: absolute;
-                        bottom: -2px;
-                        left: 0;
-                        width: 0;
-                        height: 2px;
-                        background-color: #2f4f4f;
-                        transition: width 0.6s ease;
-                      }
-                    .price:hover::before{
-                        width: 100%;
-                      }
+                    // .price::before{
+                    //     content: '';
+                    //     position: absolute;
+                    //     bottom: -2px;
+                    //     left: 0;
+                    //     width: 0;
+                    //     height: 2px;
+                    //     background-color: #2f4f4f;
+                    //     transition: width 0.6s ease;
+                    //   }
+                    // .price:hover::before{
+                    //     width: 100%;
+                    //   }
                 }
             }
 

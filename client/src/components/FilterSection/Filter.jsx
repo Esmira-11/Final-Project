@@ -5,8 +5,8 @@ import { Prices } from "../Prices";
 import { Radio, Checkbox } from "antd";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
-import { useFavorites } from '../../context/FavoritesContext'; 
-import {useCart} from '../../context/CartContext'
+import { useFavorites } from "../../context/FavoritesContext";
+import { useCart } from "../../context/CartContext";
 import StarRating from "../../components/StarRating";
 
 function Filter() {
@@ -42,8 +42,8 @@ function Filter() {
         "http://localhost:5000/api/petcategory/all-petcategories"
       );
 
-      if (response.status ==200) {
-        setPetCategories(response.data.petCategory)
+      if (response.status == 200) {
+        setPetCategories(response.data.petCategory);
       }
     } catch (error) {
       console.log(error);
@@ -57,37 +57,36 @@ function Filter() {
   const handleFavoriteClick = (item) => {
     if (favorites.includes(item._id)) {
       removeFromFavorites(item._id);
-      toast.success('Removed From Favorites'); 
+      toast.success("Removed From Favorites");
     } else {
       addToFavorites(item._id);
-      toast.success('Added to Favorites'); 
+      toast.success("Added to Favorites");
     }
   };
 
   const handleAddToCart = (item) => {
     if (cart.includes(item._id)) {
       removeFromCart(item._id);
-      toast.success('Removed From Cart'); 
-
+      toast.success("Removed From Cart");
     } else {
       addToCart(item._id);
-      toast.success('Added to Cart'); 
+      toast.success("Added to Cart");
     }
   };
 
   const getAllProducts = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await axios.get(
         `http://localhost:5000/api/product/product-list/${page}`
       );
       // setProduct(response.data.products);
-      setLoading(false)
+      setLoading(false);
       if (response.status == 200) {
         setProduct(response.data.products);
       }
     } catch (error) {
-      setLoading(false)
+      setLoading(false);
       console.log(error);
     }
   };
@@ -104,12 +103,22 @@ function Filter() {
   // }, [checked,radio]);
 
   useEffect(() => {
-    if(checked.length || radio.length || selectedPetCategories.length || sortingOption){
+    if (
+      checked.length ||
+      radio.length ||
+      selectedPetCategories.length ||
+      sortingOption
+    ) {
       filteredProduct();
-    } else{
+    } else {
       getAllProducts();
     }
-  }, [checked.length,radio.length, selectedPetCategories.length, sortingOption]);
+  }, [
+    checked.length,
+    radio.length,
+    selectedPetCategories.length,
+    sortingOption,
+  ]);
 
   const getAllCategories = async () => {
     try {
@@ -132,30 +141,33 @@ function Filter() {
 
   const getTotal = async () => {
     try {
-      const {data} = await axios.get('http://localhost:5000/api/product/product-count')
-      setTotal(data?.total)
+      const { data } = await axios.get(
+        "http://localhost:5000/api/product/product-count"
+      );
+      setTotal(data?.total);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
-    if(page === 1) return;
+    if (page === 1) return;
     loadMore();
-  }, [page])
-  
+  }, [page]);
 
   const loadMore = async () => {
     try {
-      setLoading(true)
-      const {data} = await axios.get(`http://localhost:5000/api/product/product-list/${page}`)
-      setLoading(false)
-      setProduct([...product, ...data?.products])
+      setLoading(true);
+      const { data } = await axios.get(
+        `http://localhost:5000/api/product/product-list/${page}`
+      );
+      setLoading(false);
+      setProduct([...product, ...data?.products]);
     } catch (error) {
-      console.log(error)
-      setLoading(false)
+      console.log(error);
+      setLoading(false);
     }
-  }
+  };
 
   const handleFilter = (value, id) => {
     let all = [...checked];
@@ -169,48 +181,55 @@ function Filter() {
 
   const filteredProduct = async () => {
     try {
-      const {data} = await axios.post("http://localhost:5000/api/product/product-filters",{
-        checked,
-        radio,
-        petCategories: selectedPetCategories,
-        sorting: sortingOption,
-      })
-      setProduct(data?.products)
-      console.log(data.products)
-      console.log(product)
+      const { data } = await axios.post(
+        "http://localhost:5000/api/product/product-filters",
+        {
+          checked,
+          radio,
+          petCategories: selectedPetCategories,
+          sorting: sortingOption,
+        }
+      );
+      setProduct(data?.products);
+      console.log(data.products);
+      console.log(product);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
     <>
       <div className="filter-section">
         <div className="filter-section-petcategory-container">
-        <div className="shop-by-pet">
-        <div className="shop-by-pet-container">
-            <div className="title">
+          <div className="shop-by-pet">
+            <div className="shop-by-pet-container">
+              <div className="title">
                 <h1>Shop By Category</h1>
+              </div>
+              <div className="shop-categories">
+                {petCategories?.toReversed().map((item) => (
+                  <div
+                    className={`shop-category-item ${
+                      selectedPetCategories.includes(item._id) ? "selected" : ""
+                    }`}
+                    onClick={() => handlePetCategoryFilter(item._id)}
+                    key={item._id}
+                  >
+                    <div className="shop-category-item-top">
+                      <img
+                        src={`http://localhost:5000/api/petcategory/petcategory-photo/${item._id}`}
+                        alt="pet-category"
+                      />
+                    </div>
+                    <div className="shop-category-item-bottom">
+                      <h3>{item.name}</h3>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="shop-categories">
-              {petCategories?.toReversed().map((item) => (
-                <div className={`shop-category-item ${
-                  selectedPetCategories.includes(item._id) ? 'selected' : ''
-                }`}
-                onClick={() => handlePetCategoryFilter(item._id)}
-                key={item._id}
-                >
-                <div className="shop-category-item-top">
-                    <img src={`http://localhost:5000/api/petcategory/petcategory-photo/${item._id}`} alt="pet-category" />
-                </div>
-                <div className="shop-category-item-bottom">
-                    <h3>{item.name}</h3>
-                </div>
-            </div>
-            ))}
-            </div>
-        </div>
-    </div>
+          </div>
         </div>
         <div className="filter-section-container">
           <div className="filter-section-container-left">
@@ -232,23 +251,6 @@ function Filter() {
               </div>
             </div>
 
-            {/* <div className="size-bar">
-              <div className="size-bar-title">
-                <h2>Size</h2>
-              </div>
-              <div className="size-bar-content">
-                <div className="size">
-                  <a href="#">Small</a>
-                </div>
-                <div className="size">
-                  <a href="#">Medium</a>
-                </div>
-                <div className="size">
-                  <a href="#">Large</a>
-                </div>
-              </div>
-            </div> */}
-
             <div className="price-bar">
               <div className="price-bar-title">
                 <h2>Price Range</h2>
@@ -263,11 +265,12 @@ function Filter() {
                 </Radio.Group>
               </div>
             </div>
-            
+
             <div className="reset-btn">
-              <button onClick={() => window.location.reload()}>Reset Filters</button>
+              <button onClick={() => window.location.reload()}>
+                Reset Filters
+              </button>
             </div>
-            
           </div>
           <div className="filter-section-container-right">
             <div className="filter-section-container-right-top">
@@ -275,15 +278,21 @@ function Filter() {
                 <h2>Results</h2>
               </div>
               <div className="right">
-                <select 
-                name="price" 
-                id="price"
-                value={sortingOption}
-                onChange={(e) => handleSortingChange(e.target.value)}
+                <select
+                  name="price"
+                  id="price"
+                  value={sortingOption}
+                  onChange={(e) => handleSortingChange(e.target.value)}
                 >
-                  <option className="sortoption" value="">Sort by price</option>
-                  <option className="sortoption" value="lowToHigh">low to high</option>
-                  <option className="sortoption" value="highToLow">high to low</option>
+                  <option className="sortoption" value="">
+                    Sort by price
+                  </option>
+                  <option className="sortoption" value="lowToHigh">
+                    low to high
+                  </option>
+                  <option className="sortoption" value="highToLow">
+                    high to low
+                  </option>
                 </select>
               </div>
             </div>
@@ -299,25 +308,32 @@ function Filter() {
                       />
                       <div className="shop-item-meta">
                         <div className="links">
-                          <button className="heart" onClick={() => handleFavoriteClick(item)}>
-                          <i className={`${
-                      favorites.includes(item._id)
-                        ? "fa-solid fa-heart"
-                        : "fa-regular fa-heart"
-                    }`}></i>
+                          <button
+                            className="heart"
+                            onClick={() => handleFavoriteClick(item)}
+                          >
+                            <i
+                              className={`${
+                                favorites.includes(item._id)
+                                  ? "fa-solid fa-heart"
+                                  : "fa-regular fa-heart"
+                              }`}
+                            ></i>
                           </button>
                           <button
                             onClick={() => {
-                              handleAddToCart(item)
-                          }
-                          
-                          }>
+                              handleAddToCart(item);
+                            }}
+                          >
                             <i className="fa-solid fa-cart-shopping"></i>
-                            </button> 
+                          </button>
                         </div>
                       </div>
                     </div>
-                    <div className="shop-item-info"  onClick={() => navigate(`/product/${item.slug}`)}>
+                    <div
+                      className="shop-item-info"
+                      onClick={() => navigate(`/product/${item.slug}`)}
+                    >
                       <div className="shop-item-rate">
                         <StarRating rating={item.averageRating} />
                       </div>
@@ -328,14 +344,16 @@ function Filter() {
                     </div>
                   </div>
                 ))}
-                
               </div>
               {product && product.length < total && (
-                <button className="load-button" onClick={(e) => {
-                  e.preventDefault();
-                  setPage(page + 1);
-                }}>
-                  {loading ? 'Loading ...' : 'Loadmore'}
+                <button
+                  className="load-button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setPage(page + 1);
+                  }}
+                >
+                  {loading ? "Loading ..." : "Loadmore"}
                 </button>
               )}
             </div>

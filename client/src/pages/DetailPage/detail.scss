@@ -109,25 +109,46 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            a {
-              display: block;
+            // a {
+            //   display: block;
+            //   width: 40px;
+            //   height: 40px;
+            //   line-height: 43px;
+            //   border: 1px solid #2f4f4f;
+            //   border-radius: 10px;
+            //   text-align: center;
+            //   color: #2f4f4f;
+            //   font-size: 18px;
+            //   transition: background-color 0.3s ease;
+            //   i {
+            //     font-size: 20px;
+            //   }
+            // }
+            // a:hover {
+            //   background: #2f4f4f;
+            //   color: #fffaf5;
+            // }
+            button{
+              display: flex;
+              align-items: center;
+              justify-content: center;
               width: 40px;
               height: 40px;
-              line-height: 43px;
-              border: 1px solid #2f4f4f;
               border-radius: 10px;
               text-align: center;
+              background: transparent;
               color: #2f4f4f;
-              font-size: 18px;
-              transition: background-color 0.3s ease;
-              i {
-                font-size: 20px;
-              }
-            }
-            a:hover {
-              background: #2f4f4f;
-              color: #fffaf5;
-            }
+              font-size: 19px;
+              border: 1px solid #2f4f4f;
+              
+          }
+          button:hover{
+              background-color: #2f4f4f;
+              color:#fff;
+              transition: all 0.2s linear 0s;
+
+              
+          }
           }
         }
         .submit {

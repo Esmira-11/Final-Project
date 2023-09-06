@@ -7,14 +7,26 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import StarRating from "../../components/StarRating";
+import { useFavorites } from "../../context/FavoritesContext";
 
 function Detail() {
+  const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
   const params = useParams();
   const [product, setProduct] = useState({});
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
   const [comments, setcomments] = useState([]);
+
+  const handleFavoriteClick = (item) => {
+    if (favorites.includes(item?._id)) {
+      removeFromFavorites(item?._id);
+      toast.success("Removed From Favorites");
+    } else {
+      addToFavorites(item?._id);
+      toast.success("Added to Favorites");
+    }
+  };
 
   const getComments = async (id) => {
     try {
@@ -157,9 +169,21 @@ function Detail() {
                     <button>Add To Cart</button>
                   </div>
                   <div className="btns-right">
-                    <a href="#">
+                    <button
+                      className="heart"
+                      onClick={() => handleFavoriteClick(product)}
+                    >
+                      <i
+                        className={`${
+                          favorites.includes(product._id)
+                            ? "fa-solid fa-heart"
+                            : "fa-regular fa-heart"
+                        }`}
+                      ></i>
+                    </button>
+                    {/* <a href="#">
                       <i className="far fa-heart"></i>
-                    </a>
+                    </a> */}
                   </div>
                 </div>
                 <div className="submit">
