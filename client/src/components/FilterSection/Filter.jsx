@@ -275,7 +275,7 @@ function Filter() {
           <div className="filter-section-container-right">
             <div className="filter-section-container-right-top">
               <div className="left">
-                <h2>Results</h2>
+                <h2>Results : {product.length}</h2>
               </div>
               <div className="right">
                 <select

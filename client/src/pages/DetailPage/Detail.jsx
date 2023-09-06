@@ -8,9 +8,11 @@ import { useParams } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import StarRating from "../../components/StarRating";
 import { useFavorites } from "../../context/FavoritesContext";
+import { useCart } from "../../context/CartContext";
 
 function Detail() {
   const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
+  const { cart, addToCart, removeFromCart } = useCart();
   const params = useParams();
   const [product, setProduct] = useState({});
   const [relatedProducts, setRelatedProducts] = useState([]);
@@ -25,6 +27,16 @@ function Detail() {
     } else {
       addToFavorites(item?._id);
       toast.success("Added to Favorites");
+    }
+  };
+
+  const handleAddToCart = (item) => {
+    if (cart.includes(item._id)) {
+      removeFromCart(item._id);
+      toast.success("Removed From Cart");
+    } else {
+      addToCart(item._id);
+      toast.success("Added to Cart");
     }
   };
 
@@ -166,7 +178,13 @@ function Detail() {
                     </button>
                   </div> */}
                   <div className="btns-center left">
-                    <button>Add To Cart</button>
+                    <button
+                      onClick={() => {
+                        handleAddToCart(product);
+                      }}
+                    >
+                      Add To Cart
+                    </button>
                   </div>
                   <div className="btns-right">
                     <button
