@@ -19,9 +19,9 @@ function CreateCategory() {
   const [name, setName] = useState("");
   const [open, setOpen] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
-  const [selected, setSelected] = useState(null)
-  const [updatedName, setUpdatedName] = useState("")
-  const [selectedDelete, setSelectedDelete] = useState(0)
+  const [selected, setSelected] = useState(null);
+  const [updatedName, setUpdatedName] = useState("");
+  const [selectedDelete, setSelectedDelete] = useState(0);
 
   // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -74,53 +74,54 @@ function CreateCategory() {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const {data} = await axios.put(`http://localhost:5000/api/category/update-category/${selected._id}`,
-      {name: updatedName})
-      if(data.success){
-        toast.success(`${updatedName} is updated`)
-        setSelected(null)
-        setUpdatedName("")
-        setOpenEdit(false),
-        getAllCategory()
-      }else{
-        toast.error(data.message)
+      const { data } = await axios.put(
+        `http://localhost:5000/api/category/update-category/${selected._id}`,
+        { name: updatedName }
+      );
+      if (data.success) {
+        toast.success(`${updatedName} is updated`);
+        setSelected(null);
+        setUpdatedName("");
+        setOpenEdit(false), getAllCategory();
+      } else {
+        toast.error(data.message);
       }
     } catch (error) {
-      toast.error('Something went wrong')
+      toast.error("Something went wrong");
     }
-  }
-
-  const handleDelete = async(id) => {
-    try {
-      const {data} = await axios.delete(`http://localhost:5000/api/category/delete-category/${id}`)
-      if(data.success){
-        toast.success(`Category deleted`);
-        setSelectedDelete(0);
-        getAllCategory()
-        handleClose()
-      }
-      else{
-        toast.error(data.message)
-      }
-    } catch (error) {
-      toast.error('Something went wrong')
-    }
-  }
-
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    borderRadius:'15px',
-    backgroundColor:' #fffaf5',
-    color:'#2f4f4f',
-    boxShadow: 24,
-    p: 4,
-    border:'none'
   };
 
+  const handleDelete = async (id) => {
+    try {
+      const { data } = await axios.delete(
+        `http://localhost:5000/api/category/delete-category/${id}`
+      );
+      if (data.success) {
+        toast.success(`Category deleted`);
+        setSelectedDelete(0);
+        getAllCategory();
+        handleClose();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
+  };
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    borderRadius: "15px",
+    backgroundColor: " #fffaf5",
+    color: "#2f4f4f",
+    boxShadow: 24,
+    p: 4,
+    border: "none",
+  };
 
   return (
     <>
@@ -163,17 +164,28 @@ function CreateCategory() {
                     {row.name}
                   </TableCell>
                   <TableCell component="th" scope="row">
-                    <button onClick={() => {
-                      setOpenEdit(true) ; 
-                      setUpdatedName(row.name);
-                      setSelected(row)
-                      }} className="btn btn-primary">
+                    <button
+                      onClick={() => {
+                        setOpenEdit(true);
+                        setUpdatedName(row.name);
+                        setSelected(row);
+                      }}
+                      className="btn btn-primary"
+                    >
                       Edit
                     </button>
                   </TableCell>
                   <TableCell component="th" scope="row">
-                    <button className="btn btn-primary" id="delete"
-                     onClick={()=>{setOpen(true); setSelectedDelete(row._id)}}>Delete</button>
+                    <button
+                      className="btn btn-primary"
+                      id="delete"
+                      onClick={() => {
+                        setOpen(true);
+                        setSelectedDelete(row._id);
+                      }}
+                    >
+                      Delete
+                    </button>
                   </TableCell>
                 </TableRow>
               ))}
@@ -188,16 +200,41 @@ function CreateCategory() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2" style={{textAlign:'center',fontSize:'20px'}}>
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h2"
+              style={{ textAlign: "center", fontSize: "20px" }}
+            >
               Are you sure ?
             </Typography>
-            <div className="btns" style={{display:'flex',justifyContent:'space-between',paddingTop:'20px'}}>
-            <Button className="subbtn" onClick={handleClose} variant="text" style={{background: '#2f4f4f',color: '#fffaf5'}}>Cancel</Button>
-            <Button onClick={()=>{handleDelete(selectedDelete)}} className="subbtn" variant="text" style={{background: '#2f4f4f',color: '#fffaf5'}}>Delete</Button>
-
+            <div
+              className="btns"
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                paddingTop: "20px",
+              }}
+            >
+              <Button
+                className="subbtn"
+                onClick={handleClose}
+                variant="text"
+                style={{ background: "#2f4f4f", color: "#fffaf5" }}
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={() => {
+                  handleDelete(selectedDelete);
+                }}
+                className="subbtn"
+                variant="text"
+                style={{ background: "#2f4f4f", color: "#fffaf5" }}
+              >
+                Delete
+              </Button>
             </div>
-           
-            
           </Box>
         </Modal>
 
@@ -208,23 +245,55 @@ function CreateCategory() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2" style={{textAlign:'center',fontSize:'20px'}}>
-            <form onSubmit={handleUpdate}>
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h2"
+              style={{ textAlign: "center", fontSize: "20px" }}
+            >
+              <form onSubmit={handleUpdate}>
                 <input
-                  style={{width:'80%',padding:'15px',fontSize:'17px', borderRadius:'15px',border:'none',outline:'none',background:'rgba(47, 79, 79, 0.2)'}}
+                  style={{
+                    width: "80%",
+                    padding: "15px",
+                    fontSize: "17px",
+                    borderRadius: "15px",
+                    border: "none",
+                    outline: "none",
+                    background: "rgba(47, 79, 79, 0.2)",
+                  }}
                   type="text"
                   // placeholder="Category name"
                   value={updatedName}
                   onChange={(e) => setUpdatedName(e.target.value)}
                 />
-            </form>
+              </form>
             </Typography>
-            <div className="btns" style={{display:'flex',justifyContent:'space-between',paddingTop:'20px'}}>
-            <Button className="subbtn" onClick={handleCloseEdit} variant="text" style={{background: '#2f4f4f',color: '#fffaf5'}}>Cancel</Button>
-            <Button onClick={handleUpdate} className="subbtn" variant="text" style={{background: '#2f4f4f',color: '#fffaf5'}}>Update</Button>
-
+            <div
+              className="btns"
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                paddingTop: "20px",
+              }}
+            >
+              <Button
+                className="subbtn"
+                onClick={handleCloseEdit}
+                variant="text"
+                style={{ background: "#2f4f4f", color: "#fffaf5" }}
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={handleUpdate}
+                className="subbtn"
+                variant="text"
+                style={{ background: "#2f4f4f", color: "#fffaf5" }}
+              >
+                Update
+              </Button>
             </div>
-
           </Box>
         </Modal>
       </div>

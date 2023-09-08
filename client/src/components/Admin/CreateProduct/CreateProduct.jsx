@@ -503,10 +503,7 @@ function CreateProduct() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box
-          sx={style}
-          style={{ backgroundColor: "#fffaf5" ,width:'40%'}}
-        >
+        <Box sx={style} style={{ backgroundColor: "#fffaf5", width: "40%" }}>
           <Typography
             id="modal-modal-title"
             variant="h6"

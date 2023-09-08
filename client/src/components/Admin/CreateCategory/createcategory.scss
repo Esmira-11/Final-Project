@@ -1,97 +1,95 @@
-.create-category{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    .form-section{
-        margin-bottom: 20px;
-        background-color: rgba(45, 146, 186, 0.2);
-        border-radius: 20px;
-        padding:10px 30px 30px;
-        font-family: 'Raleway', sans-serif;
-        // width: 50%;
-        .form-title{
-            text-align: center;
-            font-family: 'Sofia', cursive;
-            font-size: 35px;
-            font-weight: 700;
-        }
-        .form-description{
-            padding: 20px 0;
-            line-height: 22px;
-            font-size: 18px;
-        }
-        .form{
-            form{
-                .form-group{
-                    padding: 10px 0;
-                    input,textarea{
-                        cursor: pointer;
-                        width: 100%;
-                        padding: 15px;
-                        font-size: 17px;
-                        border: none;
-                        outline: none;
-                        background: rgba(47, 79, 79, 0.2);
-                        border-radius: 8px;
-                        color: #2f4f4f;
-                    }
-                }
-                button{
-                    width: 100%;
-                    padding: 12px;
-                    font-size: 18px;
-                    border: none;
-                    border: 2px solid #2f4f4f;
-                    cursor: pointer;
-                    color: #2f4f4f;
-                    font-weight: 700;
-                    border-radius: 8px;
-                    background: rgba(47, 79, 79, 0.2);
-                    transition: background-color 0.3s ease;
-                }
-                button:hover{
-                    background: #2f4f4f;
-                    color: #fffaf5;
-                }
-            }
-        }
+.create-category {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .form-section {
+    margin-bottom: 20px;
+    background-color: rgba(45, 146, 186, 0.2);
+    border-radius: 20px;
+    padding: 10px 30px 30px;
+    font-family: "Raleway", sans-serif;
+    // width: 50%;
+    .form-title {
+      text-align: center;
+      font-family: "Sofia", cursive;
+      font-size: 35px;
+      font-weight: 700;
     }
-
-    .table{
-        background-color: #fffaf5;
-        .MuiTableCell-root{
-            padding: 10px;
+    .form-description {
+      padding: 20px 0;
+      line-height: 22px;
+      font-size: 18px;
+    }
+    .form {
+      form {
+        .form-group {
+          padding: 10px 0;
+          input,
+          textarea {
+            cursor: pointer;
+            width: 100%;
+            padding: 15px;
             font-size: 17px;
+            border: none;
+            outline: none;
+            background: rgba(47, 79, 79, 0.2);
+            border-radius: 8px;
             color: #2f4f4f;
-            button{
-                padding: 12px;
-                font-size: 16px;
-                border: none;
-                cursor: pointer;
-                color: #2f4f4f;
-                font-weight: 700;
-                border-radius: 8px;
-                // background: rgba(47, 79, 79, 0.2);
-                background-color: #d5e5e9;
-            }
-            button:hover{
-                background: #2f4f4f;
-                color: #fffaf5;
-            }
-            #delete{
-                border: 1px solid #E53935;
-                background-color:#fffaf5 ;
-                color: #E53935;
-                transition: background-color 0.3s ease;
-            }
-            #delete:hover{
-                color: #fffaf5;
-                background: #E53935;
-            }
+          }
         }
-        
+        button {
+          width: 100%;
+          padding: 12px;
+          font-size: 18px;
+          border: none;
+          border: 2px solid #2f4f4f;
+          cursor: pointer;
+          color: #2f4f4f;
+          font-weight: 700;
+          border-radius: 8px;
+          background: rgba(47, 79, 79, 0.2);
+          transition: background-color 0.3s ease;
+        }
+        button:hover {
+          background: #2f4f4f;
+          color: #fffaf5;
+        }
+      }
     }
-    
-}
+  }
 
+  .table {
+    background-color: #fffaf5;
+    .MuiTableCell-root {
+      padding: 10px;
+      font-size: 17px;
+      color: #2f4f4f;
+      button {
+        padding: 12px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        color: #2f4f4f;
+        font-weight: 700;
+        border-radius: 8px;
+        // background: rgba(47, 79, 79, 0.2);
+        background-color: #d5e5e9;
+      }
+      button:hover {
+        background: #2f4f4f;
+        color: #fffaf5;
+      }
+      #delete {
+        border: 1px solid #e53935;
+        background-color: #fffaf5;
+        color: #e53935;
+        transition: background-color 0.3s ease;
+      }
+      #delete:hover {
+        color: #fffaf5;
+        background: #e53935;
+      }
+    }
+  }
+}

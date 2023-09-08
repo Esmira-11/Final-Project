@@ -12,16 +12,15 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import './users.scss'
+import "./users.scss";
 function Users() {
   const [users, setUsers] = useState([]);
   const [open, setOpen] = useState(false);
-  const [selectedDelete, setSelectedDelete] = useState(0)
-
+  const [selectedDelete, setSelectedDelete] = useState(0);
 
   const handleClose = () => setOpen(false);
 
-  const getAllUsers = async() =>{
+  const getAllUsers = async () => {
     try {
       const { data } = await axios.get(
         "http://localhost:5000/api/user/all-users"
@@ -33,48 +32,48 @@ function Users() {
       console.log(error);
       toast.error("Something went wrong in getting users");
     }
-  }
-  
-  useEffect(() => {
-    getAllUsers()
-  }, [])
-  
-  const handleDelete = async(id) => {
-    try {
-      const {data} = await axios.delete(`http://localhost:5000/api/user/delete-user/${id}`)
-      if(data.success){
-        toast.success(`User deleted`);
-        setSelectedDelete(0);
-        getAllUsers()
-        handleClose()
-      }
-      else{
-        toast.error(data.message)
-      }
-    } catch (error) {
-      toast.error('Something went wrong')
-    }
-  }
-
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    borderRadius:'15px',
-    backgroundColor:' #fffaf5',
-    color:'#2f4f4f',
-    boxShadow: 24,
-    p: 4,
-    border:'none'
   };
 
+  useEffect(() => {
+    getAllUsers();
+  }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      const { data } = await axios.delete(
+        `http://localhost:5000/api/user/delete-user/${id}`
+      );
+      if (data.success) {
+        toast.success(`User deleted`);
+        setSelectedDelete(0);
+        getAllUsers();
+        handleClose();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
+  };
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    borderRadius: "15px",
+    backgroundColor: " #fffaf5",
+    color: "#2f4f4f",
+    boxShadow: 24,
+    p: 4,
+    border: "none",
+  };
 
   return (
     <>
-    <div className="users">
-    <TableContainer className="table" component={Paper}>
+      <div className="users">
+        <TableContainer className="table" component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead className="thead">
               <TableRow>
@@ -85,7 +84,7 @@ function Users() {
               </TableRow>
             </TableHead>
             <TableBody>
-            {users.map((row) => (
+              {users.map((row) => (
                 <TableRow
                   key={row._id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -97,7 +96,7 @@ function Users() {
                     {row.email}
                   </TableCell>
                   <TableCell component="th" scope="row">
-                    {row.role===1 ? 'Admin' : 'User'}
+                    {row.role === 1 ? "Admin" : "User"}
                   </TableCell>
                   {/* <TableCell component="th" scope="row">
                     <button onClick={() => {
@@ -109,15 +108,23 @@ function Users() {
                     </button>
                   </TableCell> */}
                   <TableCell component="th" scope="row">
-                    <button className="btn btn-primary" id="delete"
-                     onClick={()=>{setOpen(true); setSelectedDelete(row._id)}}>Delete</button>
+                    <button
+                      className="btn btn-primary"
+                      id="delete"
+                      onClick={() => {
+                        setOpen(true);
+                        setSelectedDelete(row._id);
+                      }}
+                    >
+                      Delete
+                    </button>
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
-        
+
         <Modal
           open={open}
           onClose={handleClose}
@@ -125,22 +132,46 @@ function Users() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2" style={{textAlign:'center',fontSize:'20px'}}>
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h2"
+              style={{ textAlign: "center", fontSize: "20px" }}
+            >
               Are you sure ?
             </Typography>
-            <div className="btns" style={{display:'flex',justifyContent:'space-between',paddingTop:'20px'}}>
-            <Button className="subbtn" onClick={handleClose} variant="text" style={{background: '#2f4f4f',color: '#fffaf5'}}>Cancel</Button>
-            <Button onClick={()=>{handleDelete(selectedDelete)}} className="subbtn" variant="text" style={{background: '#2f4f4f',color: '#fffaf5'}}>Delete</Button>
-
+            <div
+              className="btns"
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                paddingTop: "20px",
+              }}
+            >
+              <Button
+                className="subbtn"
+                onClick={handleClose}
+                variant="text"
+                style={{ background: "#2f4f4f", color: "#fffaf5" }}
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={() => {
+                  handleDelete(selectedDelete);
+                }}
+                className="subbtn"
+                variant="text"
+                style={{ background: "#2f4f4f", color: "#fffaf5" }}
+              >
+                Delete
+              </Button>
             </div>
-           
-            
           </Box>
         </Modal>
-    </div>
-     
+      </div>
     </>
-  )
+  );
 }
 
-export default Users
+export default Users;
