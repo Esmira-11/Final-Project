@@ -22,7 +22,53 @@ const Card = () => {
   const { cart, setCart, addToCart, removeFromCart } = useCart();
   let navigate = useNavigate();
 
+  const calculateTotalPrice = () => {
+    let totalPrice = 0;
+    for (const item of cart) {
+      totalPrice += item.product.price * item.product.quantity;
+    }
+    return totalPrice;
+  };
+
   const handleClose = () => setOpen(false);
+
+  const handlePlaceOrder = () => {
+    const orderData = {
+      user: {
+        id: auth.user._id,
+        username: auth.user.username,
+        email: auth.user.email,
+      }, 
+      products: cart.map((item) => ({
+        product: item.product._id,
+        quantity: item.product.quantity,
+      })),
+      shippingDetails: {
+        country,
+        city,
+        street,
+        zipcode,
+      },
+      totalPrice: calculateTotalPrice(),
+    };
+
+    axios
+      .post("http://localhost:5000/api/order/add-to-order", orderData)
+      .then((response) => {
+        console.log("Order placed successfully");
+        toast.success("Order placed successfully");
+        setCart([]);
+      })
+      .catch((error) => {
+        console.error("Failed to place the order");
+        toast.error("something went wrong");
+      });
+      handleClose();
+      setCountry("");
+      setCity("");
+      setStreet("");
+      setZipCode("");
+  };
 
   const handleQuantityChange = (productId, newQuantity) => {
     const updatedCart = cart.map((item) => {
@@ -182,7 +228,7 @@ const Card = () => {
             component="h2"
             style={{ textAlign: "center", fontSize: "20px" }}
           >
-            <form className="form-section" >
+            <form className="form-section" onSubmit={(e)=>{e.preventDefault();handlePlaceOrder()}}>
               <div className="form-container">
                 <div
                   className="form-title"
@@ -302,6 +348,7 @@ const Card = () => {
               className="subbtn"
               variant="text"
               style={{ background: "#2f4f4f", color: "#fffaf5" }}
+              onClick={(e)=>{e.preventDefault();handlePlaceOrder()}}
             >
               Place Order
             </Button>

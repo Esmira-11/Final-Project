@@ -29,7 +29,7 @@ exports.removeFromCart = async (req, res) => {
 exports.getCart = async (req, res) => {
     // console.log(req.user.id)
   try {
-    const cart = await Cart.find({ user: req.user.id }).populate('product');
+    const cart = await Cart.find({ user: req.user.id }).populate('product').select("-product.photo");
     // console.log(favorites)
     res.json(cart);
   } catch (error) {

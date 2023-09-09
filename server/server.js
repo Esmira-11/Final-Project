@@ -21,6 +21,7 @@ app.use('/api/user',require('./routes/user'));
 app.use('/api/favorites',require('./routes/favorite'));
 app.use('/api/cart',require('./routes/cart'));
 app.use('/api/announcement',require('./routes/announcement'));
+app.use('/api/order',require('./routes/order'));
 
 
 
