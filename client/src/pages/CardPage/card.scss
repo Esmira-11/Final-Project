@@ -96,15 +96,35 @@
     .card-page-right {
       margin-top: 30px;
       width: 40%;
-      height: 100px;
+      height: 200px;
       padding: 20px;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: space-evenly;
       background-color: rgba(47, 79, 79, 0.2);
       font-size: 25px;
       border-radius: 10px;
       color: #2f4f4f;
+      h3{
+        padding: 10px 0;
+      }
+      button {
+        width: 200px;
+        padding: 12px;
+        font-size: 18px;
+        border: none;
+        border: 2px solid #2f4f4f;
+        cursor: pointer;
+        color: #2f4f4f;
+        font-weight: 700;
+        border-radius: 8px;
+        background: rgba(47, 79, 79, 0.2);
+      }
+      button:hover {
+        background: #2f4f4f;
+        color: #fffaf5;
+      }
     }
   }
 }
