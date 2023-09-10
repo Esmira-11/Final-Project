@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./filter.scss";
 import axios from "axios";
 import { Prices } from "../Prices";
-import { Radio, Checkbox } from "antd";
+import { Radio, Checkbox, Layout } from "antd";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { useFavorites } from "../../context/FavoritesContext";
@@ -15,7 +15,7 @@ function Filter() {
   const { cart, addToCart, removeFromCart } = useCart();
 
   let navigate = useNavigate();
-  const [auth,setAuth] = useAuth();
+  const [auth, setAuth] = useAuth();
   const [product, setProduct] = useState([]);
   const [categories, setCategories] = useState([]);
   const [sortingOption, setSortingOption] = useState("");
@@ -24,7 +24,8 @@ function Filter() {
   const [selectedPetCategories, setSelectedPetCategories] = useState([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [filterloading, setfilterLoading] = useState(false);
   const [petCategories, setPetCategories] = useState([]);
 
   const handlePetCategoryFilter = (category) => {
@@ -115,7 +116,7 @@ function Filter() {
   useEffect(() => {
     if (
       checked.length ||
-      radio.length ||
+      radio ||
       selectedPetCategories.length ||
       sortingOption
     ) {
@@ -125,7 +126,7 @@ function Filter() {
     }
   }, [
     checked.length,
-    radio.length,
+    radio,
     selectedPetCategories.length,
     sortingOption,
   ]);
@@ -167,11 +168,11 @@ function Filter() {
 
   const loadMore = async () => {
     try {
-      setLoading(true);
+      filterloading(true);
       const { data } = await axios.get(
         `http://localhost:5000/api/product/product-list/${page}`
       );
-      setLoading(false);
+      filterloading(false);
       setProduct([...product, ...data?.products]);
     } catch (error) {
       console.log(error);
@@ -191,6 +192,7 @@ function Filter() {
 
   const filteredProduct = async () => {
     try {
+      setfilterLoading(true)
       const { data } = await axios.post(
         "http://localhost:5000/api/product/product-filters",
         {
@@ -201,8 +203,9 @@ function Filter() {
         }
       );
       setProduct(data?.products);
-      console.log(data.products);
-      console.log(product);
+      // console.log(data.products);
+      // console.log(product);
+      setfilterLoading(false)
     } catch (error) {
       console.log(error);
     }
@@ -210,166 +213,201 @@ function Filter() {
 
   return (
     <>
-      <div className="filter-section">
-        <div className="filter-section-petcategory-container">
-          <div className="shop-by-pet">
-            <div className="shop-by-pet-container">
-              <div className="title">
-                <h1>Shop By Category</h1>
-              </div>
-              <div className="shop-categories">
-                {petCategories?.toReversed().map((item) => (
-                  <div
-                    className={`shop-category-item ${
-                      selectedPetCategories.includes(item._id) ? "selected" : ""
-                    }`}
-                    onClick={() => handlePetCategoryFilter(item._id)}
-                    key={item._id}
-                  >
-                    <div className="shop-category-item-top">
-                      <img
-                        src={`http://localhost:5000/api/petcategory/petcategory-photo/${item._id}`}
-                        alt="pet-category"
-                      />
-                    </div>
-                    <div className="shop-category-item-bottom">
-                      <h3>{item.name}</h3>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+      {loading ? (
+        <div
+          className="loading-container"
+          style={{ display: "flex", justifyContent: "center" }}
+        >
+          <img
+            src="https://cdn.dribbble.com/users/1491744/screenshots/11560338/media/c307b001214bc9f967c277be28bc446c.gif"
+            alt="Loading GIF"
+            className="loading-gif"
+            width={420}
+          />
         </div>
-        <div className="filter-section-container">
-          <div className="filter-section-container-left">
-            <div className="category-bar">
-              <div className="category-bar-title">
-                <h2>All Categories</h2>
-              </div>
-              <div className="category-bar-content">
-                {categories?.map((item) => (
-                  <div className="category" key={item._id}>
-                    <Checkbox
-                      key={item._id}
-                      onChange={(e) => handleFilter(e.target.checked, item._id)}
-                    >
-                      {item.name}
-                    </Checkbox>
+      ) : (
+        <>
+          <div className="filter-section">
+            <div className="filter-section-petcategory-container">
+              <div className="shop-by-pet">
+                <div className="shop-by-pet-container">
+                  <div className="title">
+                    <h1>Shop By Category</h1>
                   </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="price-bar">
-              <div className="price-bar-title">
-                <h2>Price Range</h2>
-              </div>
-              <div className="price-bar-content">
-                <Radio.Group onChange={(e) => setRadio(e.target.value)}>
-                  {Prices?.map((item) => (
-                    <div className="price" key={item._id}>
-                      <Radio value={item.array}>{item.name}</Radio>
-                    </div>
-                  ))}
-                </Radio.Group>
-              </div>
-            </div>
-
-            <div className="reset-btn">
-              <button onClick={() => window.location.reload()}>
-                Reset Filters
-              </button>
-            </div>
-          </div>
-          <div className="filter-section-container-right">
-            <div className="filter-section-container-right-top">
-              <div className="left">
-                <h2>Results : {product.length}</h2>
-              </div>
-              <div className="right">
-                <select
-                  name="price"
-                  id="price"
-                  value={sortingOption}
-                  onChange={(e) => handleSortingChange(e.target.value)}
-                >
-                  <option className="sortoption" value="">
-                    Sort by price
-                  </option>
-                  <option className="sortoption" value="lowToHigh">
-                    low to high
-                  </option>
-                  <option className="sortoption" value="highToLow">
-                    high to low
-                  </option>
-                </select>
-              </div>
-            </div>
-
-            <div className="filter-section-container-right-bottom">
-              <div className="cards">
-                {product?.map((item) => (
-                  <div className="shop-item" key={item._id}>
-                    <div className="shop-item-img">
-                      <img
-                        src={`http://localhost:5000/api/product/product-photo/${item._id}`}
-                        alt="shop-item"
-                      />
-                      <div className="shop-item-meta">
-                        <div className="links">
-                          <button
-                            className="heart"
-                            onClick={() => handleFavoriteClick(item)}
-                          >
-                            <i
-                              className={`${
-                                favorites.includes(item._id)
-                                  ? "fa-solid fa-heart"
-                                  : "fa-regular fa-heart"
-                              }`}
-                            ></i>
-                          </button>
-                          <button
-                            onClick={() => {
-                              handleAddToCart(item);
-                            }}
-                          >
-                            <i className="fa-solid fa-cart-shopping"></i>
-                          </button>
+                  <div className="shop-categories">
+                    {petCategories?.toReversed().map((item) => (
+                      <div
+                        className={`shop-category-item ${
+                          selectedPetCategories.includes(item._id)
+                            ? "selected"
+                            : ""
+                        }`}
+                        onClick={() => handlePetCategoryFilter(item._id)}
+                        key={item._id}
+                      >
+                        <div className="shop-category-item-top">
+                          <img
+                            src={`http://localhost:5000/api/petcategory/petcategory-photo/${item._id}`}
+                            alt="pet-category"
+                          />
+                        </div>
+                        <div className="shop-category-item-bottom">
+                          <h3>{item.name}</h3>
                         </div>
                       </div>
-                    </div>
-                    <div
-                      className="shop-item-info"
-                      onClick={() => navigate(`/product/${item.slug}`)}
-                    >
-                      <div className="shop-item-rate">
-                        <StarRating rating={item.averageRating} />
-                      </div>
-                      <a href="#">
-                        <h4 className="shop-item-title">{item.name}</h4>
-                      </a>
-                      <div className="shop-item-price">{item.price} $</div>
-                    </div>
+                    ))}
                   </div>
-                ))}
+                </div>
               </div>
-              {product && product.length < total && (
-                <button
-                  className="load-button"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setPage(page + 1);
-                  }}
-                >
-                  {loading ? "Loading ..." : "Loadmore"}
-                </button>
-              )}
+            </div>
+            <div className="filter-section-container">
+              <div className="filter-section-container-left">
+                <div className="category-bar">
+                  <div className="category-bar-title">
+                    <h2>All Categories</h2>
+                  </div>
+                  <div className="category-bar-content">
+                    {categories?.map((item) => (
+                      <div className="category" key={item._id}>
+                        <Checkbox
+                          key={item._id}
+                          onChange={(e) =>
+                            handleFilter(e.target.checked, item._id)
+                          }
+                        >
+                          {item.name}
+                        </Checkbox>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="price-bar">
+                  <div className="price-bar-title">
+                    <h2>Price Range</h2>
+                  </div>
+                  <div className="price-bar-content">
+                    <Radio.Group onChange={(e) => setRadio(e.target.value)}>
+                      {Prices?.map((item) => (
+                        <div className="price" key={item._id}>
+                          <Radio value={item.array}>{item.name}</Radio>
+                        </div>
+                      ))}
+                    </Radio.Group>
+                  </div>
+                </div>
+
+                <div className="reset-btn">
+                  <button onClick={() => window.location.reload()}>
+                    Reset Filters
+                  </button>
+                </div>
+              </div>
+              <div className="filter-section-container-right">
+                <div className="filter-section-container-right-top">
+                  <div className="left">
+                    <h2>Results : {product.length}</h2>
+                  </div>
+                  <div className="right">
+                    <select
+                      name="price"
+                      id="price"
+                      value={sortingOption}
+                      onChange={(e) => handleSortingChange(e.target.value)}
+                    >
+                      <option className="sortoption" value="">
+                        Sort by price
+                      </option>
+                      <option className="sortoption" value="lowToHigh">
+                        low to high
+                      </option>
+                      <option className="sortoption" value="highToLow">
+                        high to low
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                {filterloading ? (
+        <div
+          className="loading-container"
+          style={{ display: "flex", justifyContent: "center" }}
+        >
+          <img
+            src="https://cdn.dribbble.com/users/1491744/screenshots/11560338/media/c307b001214bc9f967c277be28bc446c.gif"
+            alt="Loading GIF"
+            className="loading-gif"
+            width={420}
+          />
+        </div>
+      ) : (
+        <>
+        <div className="filter-section-container-right-bottom">
+                  <div className="cards">
+                    {product?.map((item) => (
+                      <div className="shop-item" key={item._id}>
+                        <div className="shop-item-img">
+                          <img
+                            src={`http://localhost:5000/api/product/product-photo/${item._id}`}
+                            alt="shop-item"
+                          />
+                          <div className="shop-item-meta">
+                            <div className="links">
+                              <button
+                                className="heart"
+                                onClick={() => handleFavoriteClick(item)}
+                              >
+                                <i
+                                  className={`${
+                                    favorites.includes(item._id)
+                                      ? "fa-solid fa-heart"
+                                      : "fa-regular fa-heart"
+                                  }`}
+                                ></i>
+                              </button>
+                              <button
+                                onClick={() => {
+                                  handleAddToCart(item);
+                                }}
+                              >
+                                <i className="fa-solid fa-cart-shopping"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          className="shop-item-info"
+                          onClick={() => navigate(`/product/${item.slug}`)}
+                        >
+                          <div className="shop-item-rate">
+                            <StarRating rating={item.averageRating} />
+                          </div>
+                          <a href="#">
+                            <h4 className="shop-item-title">{item.name}</h4>
+                          </a>
+                          <div className="shop-item-price">{item.price} $</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  {product && product.length < total && (
+                    <button
+                      className="load-button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setPage(page + 1);
+                      }}
+                    >
+                      {loading ? "Loading ..." : "Loadmore"}
+                    </button>
+                  )}
+                </div></>)}
+                
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
+
       <Toaster position="bottom-right" />
     </>
   );

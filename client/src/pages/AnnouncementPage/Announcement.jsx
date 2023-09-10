@@ -22,6 +22,8 @@ function Announcement() {
   const [announcements, setAnnouncements] = useState([]);
   const [type, setType] = useState("");
   const [commentTexts, setCommentTexts] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [commentloading, setcommentLoading] = useState(false);
   // const [openAnnouncementId, setOpenAnnouncementId] = useState(null);
   const [open, setOpen] = React.useState(false);
   const [comments, setcomments] = useState([]);
@@ -33,6 +35,7 @@ function Announcement() {
 
   const getComments = async (id) => {
     try {
+      setcommentLoading(true);
       const { data } = await axios.get(
         `http://localhost:5000/api/announcement/comments/${id}`
       );
@@ -41,6 +44,7 @@ function Announcement() {
       } else {
         console.log("announcement undefined");
       }
+      setcommentLoading(false)
     } catch (error) {
       console.log(error);
       // toast.error("Something went wrong");
@@ -87,12 +91,14 @@ function Announcement() {
 
   const filteredAnnouncements = async () => {
     try {
+      setLoading(true);
       const { data } = await axios.post(
         "http://localhost:5000/api/announcement/announcement-filters",
         {
           type,
         }
       );
+      setLoading(false);
       setAnnouncements(data?.announcements);
       // console.log(data.announcements)
       // console.log(announcements)
@@ -103,9 +109,11 @@ function Announcement() {
 
   const getAllAnnouncement = async () => {
     try {
+      setLoading(true);
       const { data } = await axios.get(
         "http://localhost:5000/api/announcement/all-announcement"
       );
+      setLoading(false);
       setAnnouncements(data.announcement);
     } catch (error) {
       console.log(error);
@@ -302,7 +310,21 @@ function Announcement() {
             >
               {step === 0 && (
                 <>
-                  {announcements?.map(
+                  {loading ? (
+                    <div
+                      className="loading-container"
+                      style={{ display: "flex", justifyContent: "center" }}
+                    >
+                      <img
+                        src="https://cdn.dribbble.com/users/1491744/screenshots/11560338/media/c307b001214bc9f967c277be28bc446c.gif"
+                        alt="Loading GIF"
+                        className="loading-gif"
+                        width={420}
+                      />
+                    </div>
+                  ) : (
+                    <>
+                    {announcements?.map(
                     (item) =>
                       item.type === "question" && (
                         <>
@@ -482,6 +504,9 @@ function Announcement() {
                         </>
                       )
                   )}
+                    </>
+                  )}
+                  
                 </>
               )}
               {step === 1 && (
@@ -647,6 +672,20 @@ function Announcement() {
             ></i>
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          {commentloading ? (
+                    <div
+                      className="loading-container"
+                      style={{ display: "flex", justifyContent: "center" }}
+                    >
+                      <img
+                        src="https://cdn.dribbble.com/users/1491744/screenshots/11560338/media/c307b001214bc9f967c277be28bc446c.gif"
+                        alt="Loading GIF"
+                        className="loading-gif"
+                        width={420}
+                      />
+                    </div>
+                  ) : (
+                    <></>)}
             {comments &&
               comments.map((comment) => (
                 <div
