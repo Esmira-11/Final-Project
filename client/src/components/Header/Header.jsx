@@ -118,11 +118,11 @@ const Header = () => {
 
             <div className="cart-icon icon">
               <NavLink to="/card" className="navlink">
-                {/* <Badge badgeContent={card?.reduce((total, item) => total + item.quantity, 0)} color="primary"> */}
+                <Badge badgeContent={cart?.length} color="primary">
                 <img src={bowl} alt="dog-bowl" />
-                {/* </Badge> */}
+                </Badge>
                 {/* cart?.reduce((total, item) => total + item.quantity, 0) */}
-                <span>{cart?.length}</span>
+                {/* <span>{cart?.length}</span> */}
               </NavLink>
             </div>
           </div>

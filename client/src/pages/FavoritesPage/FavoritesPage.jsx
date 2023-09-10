@@ -35,7 +35,6 @@ function FavoritesPage() {
                         <TableCell className="thcell">Name</TableCell>
                         <TableCell className="thcell">Photo</TableCell>
                         <TableCell className="thcell">Price</TableCell>
-                        <TableCell className="thcell">Size</TableCell>
                         <TableCell className="thcell">Description</TableCell>
                         <TableCell className="thcell">Action</TableCell>
                   </TableRow>
@@ -59,12 +58,8 @@ function FavoritesPage() {
                           <TableCell component="th" scope="row">
                             {row.product.price}
                           </TableCell>
-                         
                           <TableCell component="th" scope="row">
-                            {row.product.size}
-                          </TableCell>
-                          <TableCell component="th" scope="row">
-                            {row.product.description}
+                            {row.product.description.substring(0,40)}...
                           </TableCell>
                           <TableCell component="th" scope="row">
                             <button

@@ -12,7 +12,7 @@ function Require() {
             <img src={requireimg} alt="img" />
         </div>
         <div className="require-container-bottom">  
-            <p>Please login to view the posts.</p>
+            <p>Please login to view the page.</p>
             <p> Even if you don't have an account, feel free to register and continue</p>
         </div>
     </div>

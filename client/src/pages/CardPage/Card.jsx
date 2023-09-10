@@ -168,8 +168,8 @@ const Card = () => {
                     />
                   </div>
                   <div className="card-box-right">
-                    <p className="name">{item?.product.name}</p>
-                    <p className="description">{item?.product.description}</p>
+                    <p className="name">Name: {item?.product?.name}</p>
+                    <p className="description">Description: {item?.product.description.substring(0,40)}...</p>
                     <p className="price">Price: $ {item?.product.price} </p>
                   </div>
                   <div className="btns-center">

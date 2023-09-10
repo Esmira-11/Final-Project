@@ -42,25 +42,20 @@ function App() {
             <Route path='/about' element={<AboutPage/>}/>
             <Route path='*' element={<NotFoundPage/>}/>
             <Route path='/login' element={<LoginPage/>}/>
-            <Route path='/card' element={<Card/>}/>
-            <Route path='/favorites' element={<FavoritesPage/>}/>
             <Route path='/register' element={<RegisterPage/>}/>
             <Route path='/forgotpassword' element={<ForgotPassword/>}/>
             <Route path='/resetpassword' element={<ChangePassword/>}/>
-            {/* <Route path='/announsements' element={<Announcement/>}/> */}
             <Route path='/product/:slug' element={<Detail/>}/>
-            {/* <Route path='/detail' element={<Detail/>}/> */}
             <Route path='/shop' element={<Shop/>}/>
             <Route path='/profile' element={<PrivateRoute/>}>
                 <Route path='user' element={<UserProfile/>}/>
             </Route>
             <Route element={<RequireRoute/>}>
                 <Route path='/announsements' element={<Announcement/>}/>
+                <Route path='/card' element={<Card/>}/>
             </Route>
-
             <Route path='/profile' element={<AdminRoute/>}>
                 <Route path='admin' element={<AdminProfile/>}/>
-                {/* <Route path='admin/create-category' element={<CreateCategory/>}/> */}
             </Route>
             <Route path='/contact' element={<Contact/>}/>
             <Route path='/verify' element={<Verify/>}/>
