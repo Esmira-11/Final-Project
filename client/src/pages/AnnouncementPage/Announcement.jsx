@@ -652,6 +652,7 @@ function Announcement() {
                 <div
                   className="comment-body"
                   style={{ display: "flex", gap: "10px" }}
+                  key={comment._id}
                 >
                   <div style={{ paddingTop: "5px" }}>
                     <Avatar

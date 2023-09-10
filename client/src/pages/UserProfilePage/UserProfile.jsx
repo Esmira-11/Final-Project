@@ -4,8 +4,8 @@ import Layout from "../../components/Layout";
 import Card from "../../components/Card/Card";
 import axios from "axios";
 import "./userprofile.scss";
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
+import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
 import { useAuth } from "../../context/auth";
 import FavoritesPage from "../FavoritesPage/FavoritesPage";
 import PropTypes from "prop-types";
@@ -119,7 +119,7 @@ function UserProfile() {
               <Tab label="Favorites" {...a11yProps(1)} />
               <Tab label="Posts" {...a11yProps(2)} />
               <Tab label="My Orders" {...a11yProps(3)} />
-        {/* <Tab label="Item Five" {...a11yProps(4)} />
+              {/* <Tab label="Item Five" {...a11yProps(4)} />
         <Tab label="Item Six" {...a11yProps(5)} />
         <Tab label="Item Seven" {...a11yProps(6)} /> */}
             </Tabs>
@@ -127,12 +127,17 @@ function UserProfile() {
               <div className="user-detail-container">
                 <div className="user-detail" width="100%" height="100%">
                   <div className="user-detail-img">
-                    <img src={`http://localhost:5000/api/user/user-avatar/${auth.user._id}`} alt="avatar" />
+                    <img
+                      src={`http://localhost:5000/api/user/user-avatar/${auth.user._id}`}
+                      alt="avatar"
+                    />
                   </div>
                   <div className="update-photo">
-                    <button onClick={() => {
+                    <button
+                      onClick={() => {
                         setOpen(true);
-                      }}>
+                      }}
+                    >
                       <i className="fa-solid fa-cloud-arrow-up"></i>
                     </button>
                   </div>
@@ -156,7 +161,7 @@ function UserProfile() {
               <Post />
             </TabPanel>
             <TabPanel value={value} index={3}>
-              <Orders/>
+              <Orders />
             </TabPanel>
             {/* <TabPanel value={value} index={4}>
               Item Five
@@ -176,74 +181,79 @@ function UserProfile() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style} >
-          <Typography id="modal-modal-title" variant="h6" component="h2" style={{
-                    textAlign: "center",
-                    paddingBottom: "10px",
-                    fontSize: "25px",
-                  }}>
+        <Box sx={style}>
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+            style={{
+              textAlign: "center",
+              paddingBottom: "10px",
+              fontSize: "25px",
+            }}
+          >
             Upload Avatar
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <form className="form" onSubmit={uploadAvatar}>
-              <div className="upload" >
-              <label>
-              {avatar ? avatar.name : "select file"}
-              <input
-                  type="file"
-                  name="avatar"
-                  accept="image/*"
-                  onChange={(e) => setAvatar(e.target.files[0])}
-                  hidden
-              />
-              </label>
+              <div className="upload">
+                <label>
+                  {avatar ? avatar.name : "select file"}
+                  <input
+                    type="file"
+                    name="avatar"
+                    accept="image/*"
+                    onChange={(e) => setAvatar(e.target.files[0])}
+                    hidden
+                  />
+                </label>
               </div>
               <div
-              className="btns"
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                paddingTop: "20px",
-              }}
-            >
-              <button type="submit" 
+                className="btns"
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  paddingTop: "20px",
+                }}
+              >
+                <button
+                  type="submit"
                   style={{
-                  padding: "13px",
-                  fontSize: "18px",
-                  border: "none",
-                  cursor: "pointer",
-                  fontWeight: "700",
-                  borderRadius: "8px",
-                  background: "#2f4f4f",
-                  color: "#fffaf5",
-                  transition: "background-color 0.3s ease",
-                }}>
+                    padding: "13px",
+                    fontSize: "18px",
+                    border: "none",
+                    cursor: "pointer",
+                    fontWeight: "700",
+                    borderRadius: "8px",
+                    background: "#2f4f4f",
+                    color: "#fffaf5",
+                    transition: "background-color 0.3s ease",
+                  }}
+                >
                   Upload
                 </button>
                 <button
-                onClick={handleClose}
-                style={{
-                  padding: "13px",
-                  fontSize: "18px",
-                  border: "none",
-                  cursor: "pointer",
-                  fontWeight: "700",
-                  borderRadius: "8px",
-                  background: "#2f4f4f",
-                  color: "#fffaf5",
-                  transition: "background-color 0.3s ease",
-                }}
-              >
-                Cancel
-              </button>
-            </div>
-              
+                  onClick={handleClose}
+                  style={{
+                    padding: "13px",
+                    fontSize: "18px",
+                    border: "none",
+                    cursor: "pointer",
+                    fontWeight: "700",
+                    borderRadius: "8px",
+                    background: "#2f4f4f",
+                    color: "#fffaf5",
+                    transition: "background-color 0.3s ease",
+                  }}
+                >
+                  Cancel
+                </button>
+              </div>
             </form>
           </Typography>
         </Box>
       </Modal>
       <Toaster position="bottom-right" />
-
     </Layout>
   );
 }

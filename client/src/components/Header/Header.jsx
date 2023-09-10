@@ -56,16 +56,16 @@ const Header = () => {
             <a href="/">Home</a>
           </div>
           <div className="nav-link">
-            <a href="about">About us</a>
+            <a href="/about">About us</a>
           </div>
           <div className="nav-link">
-            <a href="shop">Shop</a>
+            <a href="/shop">Shop</a>
           </div>
           <div className="nav-link">
-            <a href="announsements">Announcement</a>
+            <a href="/announsements">Announcement</a>
           </div>
           <div className="nav-link">
-            <a href="contact">Contact</a>
+            <a href="/contact">Contact</a>
           </div>
         </div>
       </div>
