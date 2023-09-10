@@ -27,19 +27,19 @@ function Footer() {
           <div className="links">
             <h2>Links</h2>
             <div className="link">
-              <a href="#">Home</a>
+              <a href="/">Home</a>
             </div>
             <div className="link">
-              <a href="#">About Us</a>
+              <a href="/about">About Us</a>
             </div>
             <div className="link">
-              <a href="#">Shop</a>
+              <a href="/shop">Shop</a>
             </div>
             <div className="link">
-              <a href="#">Announcement</a>
+              <a href="/announcements">Announcement</a>
             </div>
             <div className="link">
-              <a href="#">Contact</a>
+              <a href="/contact">Contact</a>
             </div>
           </div>
 

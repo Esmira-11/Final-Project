@@ -75,18 +75,26 @@
             display: flex;
             gap: 20px;
             .social-media-link {
+              cursor: pointer;
               width: 40px;
               height: 40px;
               display: flex;
               justify-content: center;
               align-items: center;
               background-color: #fff;
+              border: 2px solid #fff;
               border-radius: 50%;
               a {
                 i {
                   font-size: 20px;
                 }
               }
+            }
+            .social-media-link:hover {
+              background-color: #2f4f4f;
+            }
+            .social-media-link:hover a{
+              color: #fff;
             }
           }
         }
@@ -100,18 +108,26 @@
             display: flex;
             gap: 20px;
             .social-media-link {
+              cursor: pointer;
               width: 40px;
               height: 40px;
               display: flex;
               justify-content: center;
               align-items: center;
               background-color: #fff;
+              border: 2px solid #fff;
               border-radius: 50%;
               a {
                 i {
-                  font-size: 20px;
+                  font-size: 18px;
                 }
               }
+            }
+            .social-media-link:hover {
+              background-color: #2f4f4f;
+            }
+            .social-media-link:hover a{
+              color: #fff;
             }
           }
         }
@@ -157,6 +173,9 @@
           padding-top: 15px;
           a {
             color: #fff;
+          }
+          a:hover{
+            color: #d5e5e9;
           }
         }
       }
