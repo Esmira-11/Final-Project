@@ -8,12 +8,14 @@ import toast, { Toaster } from "react-hot-toast";
 import { useFavorites } from "../../context/FavoritesContext";
 import { useCart } from "../../context/CartContext";
 import StarRating from "../../components/StarRating";
+import { useAuth } from "../../context/auth";
 
 function Filter() {
   const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
   const { cart, addToCart, removeFromCart } = useCart();
 
   let navigate = useNavigate();
+  const [auth,setAuth] = useAuth();
   const [product, setProduct] = useState([]);
   const [categories, setCategories] = useState([]);
   const [sortingOption, setSortingOption] = useState("");
@@ -55,6 +57,10 @@ function Filter() {
   }, []);
 
   const handleFavoriteClick = (item) => {
+    if (!auth.user) {
+      toast.error("Please sign in to add to favorites");
+      return;
+    }
     if (favorites.includes(item._id)) {
       removeFromFavorites(item._id);
       toast.success("Removed From Favorites");
@@ -65,6 +71,10 @@ function Filter() {
   };
 
   const handleAddToCart = (item) => {
+    if (!auth.user) {
+      toast.error("Please sign in to add to cart");
+      return;
+    }
     if (cart.includes(item._id)) {
       removeFromCart(item._id);
       toast.success("Removed From Cart");

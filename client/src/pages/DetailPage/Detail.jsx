@@ -9,9 +9,11 @@ import Avatar from "@mui/material/Avatar";
 import StarRating from "../../components/StarRating";
 import { useFavorites } from "../../context/FavoritesContext";
 import { useCart } from "../../context/CartContext";
+import { useAuth } from "../../context/auth";
 
 function Detail() {
   const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
+  const [auth,setAuth] = useAuth();
   const { cart, addToCart, removeFromCart } = useCart();
   const params = useParams();
   const [product, setProduct] = useState({});
@@ -21,6 +23,10 @@ function Detail() {
   const [comments, setcomments] = useState([]);
 
   const handleFavoriteClick = (item) => {
+    if (!auth.user) {
+      toast.error("Please sign in to add to favorites");
+      return;
+    }
     if (favorites.includes(item?._id)) {
       removeFromFavorites(item?._id);
       toast.success("Removed From Favorites");
@@ -31,6 +37,10 @@ function Detail() {
   };
 
   const handleAddToCart = (item) => {
+    if (!auth.user) {
+      toast.error("Please sign in to add to cart");
+      return;
+    }
     if (cart.includes(item._id)) {
       removeFromCart(item._id);
       toast.success("Removed From Cart");
