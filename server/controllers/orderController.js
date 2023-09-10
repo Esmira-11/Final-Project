@@ -25,3 +25,14 @@ exports.addToOrder = async (req, res) => {
         });
     }
 }
+
+exports.getUserOrders = async (req, res) => {
+    try {
+      const userId = req.user.id;
+      const orders = await Order.find({ 'user.id': userId }).sort({ createdAt: -1 });
+      res.status(200).json({ success: true, orders });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ success: false, error, message: "Failed to fetch orders" });
+    }
+  };

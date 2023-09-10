@@ -14,6 +14,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Post from "../../components/UserAnnouncement/Post";
+import Orders from "../MyOrdersPage/Orders";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -117,8 +118,8 @@ function UserProfile() {
               <Tab label="Profile" {...a11yProps(0)} />
               <Tab label="Favorites" {...a11yProps(1)} />
               <Tab label="Posts" {...a11yProps(2)} />
-              {/* <Tab label="Item Four" {...a11yProps(3)} />
-        <Tab label="Item Five" {...a11yProps(4)} />
+              <Tab label="My Orders" {...a11yProps(3)} />
+        {/* <Tab label="Item Five" {...a11yProps(4)} />
         <Tab label="Item Six" {...a11yProps(5)} />
         <Tab label="Item Seven" {...a11yProps(6)} /> */}
             </Tabs>
@@ -154,10 +155,10 @@ function UserProfile() {
             <TabPanel className="tabpanel" value={value} index={2}>
               <Post />
             </TabPanel>
-                  {/* <TabPanel value={value} index={3}>
-              Item Four
+            <TabPanel value={value} index={3}>
+              <Orders/>
             </TabPanel>
-            <TabPanel value={value} index={4}>
+            {/* <TabPanel value={value} index={4}>
               Item Five
             </TabPanel>
             <TabPanel value={value} index={5}>

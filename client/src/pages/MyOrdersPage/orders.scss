@@ -1,0 +1,17 @@
+.orderbtn {
+    border-radius: 20px;
+    background-color: #2f4f4f;
+    color: #fffaf5;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    padding: 8px;
+    font-family: "Raleway", sans-serif;
+    border: 1px solid #2f4f4f;
+    transition: background-color 0.3s ease;
+  }
+  .orderbtn:hover {
+    background-color: transparent;
+    color: #2f4f4f;
+    border: 1px solid #2f4f4f;
+  }
