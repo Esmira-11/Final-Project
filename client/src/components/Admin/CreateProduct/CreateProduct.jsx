@@ -30,7 +30,6 @@ function CreateProduct() {
   const [category, setCategory] = useState("");
   const [petcategories, setPetCategories] = useState([]);
   const [petcategory, setPetCategory] = useState("");
-  const [size, setSize] = useState("");
   const [photo, setPhoto] = useState("");
 
   const [open, setOpen] = useState(false);
@@ -43,7 +42,6 @@ function CreateProduct() {
   const [updatedPrice, setUpdatedPrice] = useState("");
   const [updatedCategory, setUpdatedCategory] = useState("");
   const [updatedPetCategory, setUpdatedPetCategory] = useState("");
-  const [updatedSize, setUpdatedSize] = useState("");
   const [updatedPhoto, setUpdatedPhoto] = useState("");
 
   const handleClose = () => setOpen(false);
@@ -57,7 +55,6 @@ function CreateProduct() {
       productData.append("price", updatedPrice);
       productData.append("category", updatedCategory);
       productData.append("petcategory", updatedPetCategory);
-      productData.append("size", updatedSize);
       productData.append("photo", updatedPhoto);
 
       const { data } = await axios.put(
@@ -79,7 +76,6 @@ function CreateProduct() {
     setUpdatedPrice("");
     setUpdatedCategory("");
     setUpdatedPetCategory("");
-    setUpdatedSize("");
     setUpdatedPhoto("");
     handleCloseEdit();
     getAllProducts();
@@ -97,7 +93,6 @@ function CreateProduct() {
       setUpdatedPrice(data.product.price);
       setUpdatedCategory(data.product.category._id);
       setUpdatedPetCategory(data.product.petcategory._id);
-      setUpdatedSize(data.product.size);
       // setUpdatedPhoto()
     } catch (error) {
       console.log(error);
@@ -147,7 +142,6 @@ function CreateProduct() {
       productData.append("price", price);
       productData.append("category", category);
       productData.append("petcategory", petcategory);
-      productData.append("size", size);
       productData.append("photo", photo);
 
       const { data } = await axios.post(
@@ -168,21 +162,12 @@ function CreateProduct() {
     setPrice("");
     setCategory("");
     setPetCategory("");
-    setSize("");
     setPhoto("");
     getAllProducts();
   };
 
-  const handleChangeSize = (event) => {
-    setSize(event.target.value);
-  };
-
   const handleChange = (event) => {
     setCategory(event.target.value);
-  };
-
-  const handleChangeUpdatedSize = (event) => {
-    setUpdatedSize(event.target.value);
   };
 
   const handleChangeUpdatedPetCategory = (event) => {
@@ -342,29 +327,6 @@ function CreateProduct() {
             </FormControl>
           </Box>
 
-          <Box className="select-box" sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Size</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={size}
-                label="size"
-                onChange={handleChangeSize}
-              >
-                <MenuItem key={0} value={"Small"}>
-                  Small
-                </MenuItem>
-                <MenuItem key={1} value={"Medium"}>
-                  Medium
-                </MenuItem>
-                <MenuItem key={2} value={"Large"}>
-                  Large
-                </MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-
           <div className="form-btn">
             <button type="submit" onClick={handleCreate}>
               Create
@@ -383,7 +345,6 @@ function CreateProduct() {
                 <TableCell className="thcell">Price</TableCell>
                 <TableCell className="thcell">Category</TableCell>
                 <TableCell className="thcell">Pet</TableCell>
-                <TableCell className="thcell">Size</TableCell>
                 <TableCell className="thcell">Description</TableCell>
                 <TableCell className="thcell">Action</TableCell>
                 <TableCell className="thcell">Action</TableCell>
@@ -413,9 +374,6 @@ function CreateProduct() {
                   </TableCell>
                   <TableCell component="th" scope="row">
                     {row.petcategory?.name}
-                  </TableCell>
-                  <TableCell component="th" scope="row">
-                    {row.size}
                   </TableCell>
                   <TableCell component="th" scope="row">
                     {row.description}
@@ -678,39 +636,6 @@ function CreateProduct() {
                   </FormControl>
                 </Box>
 
-                <Box
-                  className="select-box"
-                  sx={{ minWidth: 120, marginTop: "10px", borderRadius: "8px" }}
-                >
-                  <FormControl
-                    fullWidth
-                    style={{
-                      background: "rgba(47, 79, 79, 0.2)",
-                      borderRadius: "8px",
-                      border: "none",
-                      outline: "none",
-                    }}
-                  >
-                    <InputLabel id="demo-simple-select-label">Size</InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      value={updatedSize}
-                      label="size"
-                      onChange={handleChangeUpdatedSize}
-                    >
-                      <MenuItem key={0} value={"Small"}>
-                        Small
-                      </MenuItem>
-                      <MenuItem key={1} value={"Medium"}>
-                        Medium
-                      </MenuItem>
-                      <MenuItem key={2} value={"Large"}>
-                        Large
-                      </MenuItem>
-                    </Select>
-                  </FormControl>
-                </Box>
               </div>
             </div>
             <div

@@ -5,7 +5,7 @@ const fs = require("fs");
 
 exports.createProduct = async (req, res) => {
   try {
-    const { name, slug, description, price, category, petcategory, size } =
+    const { name, slug, description, price, category, petcategory} =
       req.fields;
     const { photo } = req.files;
     switch (true) {
@@ -19,8 +19,6 @@ exports.createProduct = async (req, res) => {
         return res.status(500).send({ error: "Category is Required" });
       case !petcategory:
         return res.status(500).send({ error: "PetCategory is Required" });
-      case !size:
-        return res.status(500).send({ error: "Size is Required" });
       case photo && photo.size > 1000000:
         return res
           .status(500)
@@ -157,7 +155,7 @@ exports.deleteProductById = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
   try {
-    const { name, slug, description, price, category, petcategory, size } =
+    const { name, slug, description, price, category, petcategory} =
       req.fields;
     const { photo } = req.files;
     switch (true) {
@@ -171,8 +169,6 @@ exports.updateProduct = async (req, res) => {
         return res.status(500).send({ error: "Category is Required" });
       case !petcategory:
         return res.status(500).send({ error: "PetCategory is Required" });
-      case !size:
-        return res.status(500).send({ error: "Size is Required" });
       case photo && photo.size > 1000000:
         return res
           .status(500)

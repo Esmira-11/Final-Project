@@ -9,6 +9,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import axios from 'axios'
+import Services from '../../components/Services/Services'
 import "./card.scss";
 
 const Card = () => {
@@ -213,6 +214,7 @@ const Card = () => {
             </div>
           </div>
         </div>
+        <Services/>
       </Layout>
 
       <Modal

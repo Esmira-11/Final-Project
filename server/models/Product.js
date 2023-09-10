@@ -27,11 +27,6 @@ const ProductSchema = new mongoose.Schema({
         ref:'PetCategory',
         required:true
     },
-    size:{
-        type: String,
-        enum: ["Small", "Medium", "Large"],
-        required:true
-    },
     comments: [
         {
           user: {
