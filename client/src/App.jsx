@@ -24,6 +24,7 @@ import Contact from './pages/ContactPage/Contact'
 import Verify from './pages/VerifyPage/Verify'
 import UserProfile from './pages/UserProfilePage/UserProfile'
 import PrivateRoute from './routes/Private'
+import RequireRoute from './routes/RequireRoute'
 import AdminRoute from './routes/AdminRoute'
 import AdminProfile from './pages/AdminProfilePage/AdminProfile'
 import CreateCategory from './components/Admin/CreateCategory/CreateCategory'
@@ -46,13 +47,17 @@ function App() {
             <Route path='/register' element={<RegisterPage/>}/>
             <Route path='/forgotpassword' element={<ForgotPassword/>}/>
             <Route path='/resetpassword' element={<ChangePassword/>}/>
-            <Route path='/announsements' element={<Announcement/>}/>
+            {/* <Route path='/announsements' element={<Announcement/>}/> */}
             <Route path='/product/:slug' element={<Detail/>}/>
             {/* <Route path='/detail' element={<Detail/>}/> */}
             <Route path='/shop' element={<Shop/>}/>
             <Route path='/profile' element={<PrivateRoute/>}>
                 <Route path='user' element={<UserProfile/>}/>
             </Route>
+            <Route element={<RequireRoute/>}>
+                <Route path='/announsements' element={<Announcement/>}/>
+            </Route>
+
             <Route path='/profile' element={<AdminRoute/>}>
                 <Route path='admin' element={<AdminProfile/>}/>
                 {/* <Route path='admin/create-category' element={<CreateCategory/>}/> */}

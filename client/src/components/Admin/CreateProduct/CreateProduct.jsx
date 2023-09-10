@@ -376,7 +376,7 @@ function CreateProduct() {
                     {row.petcategory?.name}
                   </TableCell>
                   <TableCell component="th" scope="row">
-                    {row.description}
+                    {row.description?.substring(0,40)}...
                   </TableCell>
                   <TableCell component="th" scope="row">
                     <button

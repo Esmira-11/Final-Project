@@ -23,7 +23,7 @@
         background-color: rgba(45, 146, 186, 0.2);
         border-radius: 20px;
         width: 50%;
-        padding: 40px;
+        padding: 20px 40px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -51,11 +51,14 @@
           font-size: 20px;
           line-height: 22px;
           padding-bottom: 15px;
+          p{
+            padding: 5px 0;
+          }
         }
         .btns {
           display: flex;
-          // justify-content: space-between;
-          gap: 20px;
+          justify-content: space-between;
+          // gap: 20px;
           align-items: center;
           padding: 15px 0 20px;
           // width: 70%;
@@ -86,6 +89,7 @@
           //     }
           // }
           &-center {
+            width: 85%;
             button {
               border-radius: 20px;
               background-color: #2f4f4f;
@@ -93,7 +97,7 @@
               font-size: 18px;
               border: none;
               outline: none;
-              width: 250px;
+              width: 100%;
               padding: 10px;
               font-family: "Raleway", sans-serif;
               border: 1px solid #2f4f4f;
@@ -106,6 +110,7 @@
             }
           }
           &-right {
+            width: 15%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -212,6 +217,11 @@
         }
         .first {
           padding-top: 20px;
+          h2{
+            font-size: 18px;
+            line-height: 22px;
+            text-align: justify;
+          }
         }
         // .review{
         //     background-color: rgba(45, 146, 186, 0.2);

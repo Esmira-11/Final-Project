@@ -154,29 +154,11 @@ function Detail() {
                   <h2>$ {product.price}</h2>
                 </div>
                 <div className="shop-item-description">
-                  <p>{product.description}</p>
-                  {/* <p>{product?.category?.name}</p>
-                  <p>{product.petcategory.name}</p> */}
+                  <p> Description : {product?.description?.substring(0,40)}...</p>
+                  <p>Category : {product?.category?.name}</p>
+                  <p>Pet Category : {product?.petcategory?.name}</p>
                 </div>
                 <div className="btns">
-                  {/* <div className="btns-left">
-                    <button>
-                      <i className="fa-solid fa-minus"></i>
-                    </button>
-                    <input
-                      type="number"
-                      value="1"
-                      max
-                      min="1"
-                      step="1"
-                      placeholder
-                      inputmode="numeric"
-                      autocomplete="off"
-                    />
-                    <button>
-                      <i className="fa-solid fa-plus"></i>
-                    </button>
-                  </div> */}
                   <div className="btns-center left">
                     <button
                       onClick={() => {
@@ -203,9 +185,6 @@ function Detail() {
                       <i className="far fa-heart"></i>
                     </a> */}
                   </div>
-                </div>
-                <div className="submit">
-                  <button>Buy Now</button>
                 </div>
               </div>
             </div>

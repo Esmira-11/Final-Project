@@ -2,7 +2,8 @@ import { useState,useEffect } from "react";
 import {useAuth} from '../context/auth';
 import { Outlet } from "react-router-dom";
 import axios from "axios";
-import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
+import Require from "../components/Require/Require";
+// import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 // import Spinner from "../components/Spinner";
 
 export default function PrivateRoute() {
@@ -21,5 +22,5 @@ export default function PrivateRoute() {
       if (auth?.token) authCheck();
     }, [auth?.token]);
   
-    return ok ? <><Outlet /></>  : <><NotFoundPage/></>;
+    return ok ? <><Outlet /></>  : <><Require/></>;
   }

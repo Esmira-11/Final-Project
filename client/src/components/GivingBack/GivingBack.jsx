@@ -1,7 +1,10 @@
 import React from "react";
 import "./givingback.scss";
+import { useNavigate } from "react-router-dom";
 
 function GivingBack() {
+  let navigate = useNavigate();
+
   return (
     <div className="giving-back-section">
       <div className="giving-back-section-title">
@@ -12,7 +15,7 @@ function GivingBack() {
         <p>Possy Sunny helps provide food to dogs in need</p>
       </div>
       <div className="giving-back-section-btn">
-        <button>Take A Part</button>
+        <button onClick={() => navigate("/shop")}>Take A Part</button>
       </div>
     </div>
   );

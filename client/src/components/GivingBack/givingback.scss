@@ -38,6 +38,11 @@
       font-size: 18px;
       color: #2f4f4f;
       font-weight: 500;
+      cursor: pointer;
+    }
+    button:hover{
+      background-color: #2f4f4f;
+      color: #fffaf5;
     }
   }
 }
