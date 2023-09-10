@@ -18,6 +18,7 @@ import Post from "../../components/Admin/Posts/Post";
 import Avatar from "@mui/material/Avatar";
 import Modal from '@mui/material/Modal';
 import axios from "axios";
+import Orders from "../../components/Admin/Orders/Orders";
 
 
 
@@ -124,7 +125,7 @@ function AdminProfile() {
               <Tab label="Profile" {...a11yProps(0)} />
               <Tab label="Users" {...a11yProps(1)} />
               <Tab label="Category" {...a11yProps(2)} />
-              <Tab label="Pet Category" {...a11yProps(3)} />
+              <Tab label="Orders" {...a11yProps(3)} />
               <Tab label="Product" {...a11yProps(4)} />
               <Tab label="Announcement" {...a11yProps(5)} />
               <Tab label="Messages" {...a11yProps(6)} />
@@ -161,7 +162,7 @@ function AdminProfile() {
               <CreateCategory/>
             </TabPanel>
             <TabPanel className="tabpanel" value={value} index={3}>
-              
+              <Orders/>
             </TabPanel>
             <TabPanel className="tabpanel" value={value} index={4}>
               <CreateProduct/>

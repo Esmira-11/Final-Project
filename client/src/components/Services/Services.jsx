@@ -6,7 +6,7 @@ function Services() {
     <div className="services">
       <div className="services-card">
         <div className="services-card-top">
-          <i class="fa-solid fa-headset"></i>
+          <i className="fa-solid fa-headset"></i>
         </div>
         <div className="services-card-bottom">
           <h3>24/7 Friendly Support</h3>
@@ -14,7 +14,7 @@ function Services() {
       </div>
       <div className="services-card second">
         <div className="services-card-top">
-          <i class="fa-solid fa-shield-heart"></i>
+          <i className="fa-solid fa-shield-heart"></i>
         </div>
         <div className="services-card-bottom">
           <h3>Quality Guaranteed</h3>
@@ -22,7 +22,7 @@ function Services() {
       </div>
       <div className="services-card third">
         <div className="services-card-top">
-          <i class="fa-solid fa-rotate-left"></i>
+          <i className="fa-solid fa-rotate-left"></i>
         </div>
         <div className="services-card-bottom">
           <h3>7 Days Easy Return</h3>
@@ -30,7 +30,7 @@ function Services() {
       </div>
       <div className="services-card">
         <div className="services-card-top">
-          <i class="fa-solid fa-truck"></i>
+          <i className="fa-solid fa-truck"></i>
         </div>
         <div className="services-card-bottom">
           <h3>Free Shipping</h3>
