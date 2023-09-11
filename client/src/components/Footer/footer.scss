@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,700;1,500;1,700&display=swap");
-
+@import '../../assets/sass/abstracts/variables.scss';
 .footer {
   width: 100%;
   background-color: #2f4f4f;
@@ -12,7 +12,7 @@
   }
   &-container {
     padding: 40px 0;
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -189,3 +189,36 @@
     }
   }
 }
+
+@media(max-width: $tablet-breakpoint){
+  .footer{
+    .footer-container{
+      .footer-container-top{
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        .links{
+          padding-left: 0;
+        }
+        .contact,.find-payment,.footer-brand,.links{
+          display: flex;
+          flex-direction: column;
+          align-items: center;          
+          padding-top: 15px;
+          text-align: center;
+         .social-media-links{
+          display: flex;
+          justify-content: space-between;
+         }
+        }
+        .contact,.find-payment,.links{
+          border-bottom: 1px solid #fff;
+          padding-bottom: 10px;
+        }
+      }
+    }
+  }
+ 
+
+}
+

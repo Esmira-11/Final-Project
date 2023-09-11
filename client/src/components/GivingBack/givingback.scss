@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,700;1,500;1,700&family=Sofia&display=swap");
-
+@import '../../assets/sass/abstracts/variables.scss';
 .giving-back-section {
   background-color: #fffaf5;
   font-family: "Raleway", sans-serif;
@@ -43,6 +43,46 @@
     button:hover{
       background-color: #2f4f4f;
       color: #fffaf5;
+    }
+  }
+}
+
+@media(max-width: 1110px){
+  .giving-back-section {
+    
+    .giving-back-section-title {
+      h2 {
+        font-size: 36px;
+        font-weight: 700;
+      }
+    }
+    .giving-back-section-content {
+     
+      p {
+        font-size: 23px;
+        display: block;
+      }
+      
+    }
+  }
+}
+
+@media(max-width: 680px){
+  .giving-back-section {
+    
+    .giving-back-section-title {
+      h2 {
+        font-size: 30px;
+        font-weight: 700;
+      }
+    }
+    .giving-back-section-content {
+     
+      p {
+        font-size: 20px;
+        display: block;
+      }
+      
     }
   }
 }

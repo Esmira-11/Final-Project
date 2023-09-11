@@ -42,3 +42,21 @@
     }
   }
 }
+@media(max-width: 1300px){
+  .feature {
+    padding-left: 60px;
+  }
+}
+@media(max-width: 1110px){
+  .feature {
+    padding-left: 0;
+    &-box {
+    &-content {
+     
+      font-size: 20px;
+     
+      
+    }
+  }
+  }
+}

@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,700;1,500;1,700&family=Sofia&display=swap");
-
+@import '../../assets/sass/abstracts/variables.scss';
 .feedback {
   display: flex;
   width: 90%;
@@ -14,8 +14,8 @@
     // height: 100%;
     text-align: center;
     img {
-      width: 523px;
-      height: 518px;
+      width: 500px;
+      height: 500px;
     }
   }
   &-right {
@@ -49,6 +49,7 @@
       .slider-box {
         padding-bottom: 30px;
         &-top {
+          text-align: justify;
           font-size: 18px;
           line-height: 30px;
         }
@@ -76,5 +77,133 @@
         }
       }
     }
+  }
+}
+
+@media(max-width: $tablet-breakpoint){
+  .feedback {
+  
+    &-left {
+      img {
+        width: 450px;
+        height: 450px;
+      }
+    }
+    &-right {
+    
+      
+      &-center {
+        h2 {
+          font-size: 28px;
+          width: 300px;
+         
+        }
+       }
+      }
+  }
+}
+@media(max-width: 1110px){
+  .feedback {
+  
+    &-left {
+      img {
+        width: 400px;
+        height: 400px;
+      }
+    }
+    &-right {
+    
+     .slider-box{
+      &-top{
+        p{
+          font-size: 16px;
+          line-height: 25px;
+        }
+      }
+      
+     } 
+    }
+
+  }
+}
+@media(max-width: 1110px){
+  .feedback {
+  
+    &-left {
+      display: none;
+    }
+    &-right {
+      padding: 15px;
+      width: 100%;
+    
+     .slider-box{
+      &-top{
+        p{
+          font-size: 20px;
+          line-height: 26px;
+        }
+      }
+      
+     } 
+     &-center {
+      h2 {
+        padding: 15px 0;
+        font-size: 36px;
+        width: 100%;       
+      }
+     }
+    }
+    
+
+  }
+}
+@media(max-width: 670px){
+  .feedback {
+    &-right {
+      padding: 10px;
+    
+     .slider-box{
+      &-top{
+        p{
+          font-size: 17px;
+          line-height: 26px;
+        }
+      }
+      
+     } 
+     &-center {
+      h2 {
+        font-size: 30px;
+}
+     }
+    }
+    
+
+  }
+}
+@media(max-width: 575px){
+  .feedback {
+    &-right {
+    
+     .slider-box{
+      &-top{
+        p{
+          font-size: 17px;
+          line-height: 26px;
+        }
+      }
+      
+     } 
+     &-center {
+      h2 {
+        padding: 10px 0;
+
+        font-size: 25px;
+       
+}
+     }
+    }
+    
+
   }
 }

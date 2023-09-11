@@ -62,6 +62,7 @@
         padding: 15px;
         border-radius: 15px;
         border: 1px solid #2f4f4f;
+        width: 226px;
         &-title {
           padding-bottom: 10px;
           border-bottom: 1px solid #2f4f4f;
@@ -103,46 +104,48 @@
         }
       }
 
-      .size-bar {
-        padding: 15px;
-        border-radius: 15px;
-        border: 1px solid #2f4f4f;
-        &-title {
-          padding-bottom: 10px;
-          border-bottom: 1px solid #2f4f4f;
-          h2 {
-            font-size: 18px;
-            font-weight: 600;
-          }
-        }
-        &-content {
-          padding-top: 10px;
-          .size {
-            position: relative;
-            padding: 5px 0;
-            a {
-              text-decoration: none;
-              color: #2f4f4f;
-              font-size: 18px;
-            }
-          }
-          // .size::before{
-          //     content: '';
-          //     position: absolute;
-          //     bottom: -2px;
-          //     left: 0;
-          //     width: 0;
-          //     height: 2px;
-          //     background-color: #2f4f4f;
-          //     transition: width 0.6s ease;
-          // }
-          // .size:hover::before{
-          //     width: 100%;
-          // }
-        }
-      }
+      // .size-bar {
+      //   width: 226px;
+      //   padding: 15px;
+      //   border-radius: 15px;
+      //   border: 1px solid #2f4f4f;
+      //   &-title {
+      //     padding-bottom: 10px;
+      //     border-bottom: 1px solid #2f4f4f;
+      //     h2 {
+      //       font-size: 18px;
+      //       font-weight: 600;
+      //     }
+      //   }
+      //   &-content {
+      //     padding-top: 10px;
+      //     .size {
+      //       position: relative;
+      //       padding: 5px 0;
+      //       a {
+      //         text-decoration: none;
+      //         color: #2f4f4f;
+      //         font-size: 18px;
+      //       }
+      //     }
+      //     // .size::before{
+      //     //     content: '';
+      //     //     position: absolute;
+      //     //     bottom: -2px;
+      //     //     left: 0;
+      //     //     width: 0;
+      //     //     height: 2px;
+      //     //     background-color: #2f4f4f;
+      //     //     transition: width 0.6s ease;
+      //     // }
+      //     // .size:hover::before{
+      //     //     width: 100%;
+      //     // }
+      //   }
+      // }
 
       .price-bar {
+        width: 226px;
         padding: 15px;
         border-radius: 15px;
         border: 1px solid #2f4f4f;
@@ -217,7 +220,7 @@
       flex-direction: column;
       padding: 0 0 0 25px;
       &-top {
-        padding: 0 40px 10px 5px;
+        padding: 0 40px 15px 5px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -363,5 +366,216 @@
         }
       }
     }
+  }
+}
+
+
+@media(max-width: 1472px){
+  .filter-section {
+    &-container {
+      &-right {
+        &-bottom{
+          .cards {
+            // gap: 20px;
+            .shop-item {
+            
+              width: 260px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media(max-width: 1390px){
+  .filter-section {
+    &-container {
+      &-right {
+        &-bottom{
+          .cards {
+            width: 80%;
+            margin: 0 auto;
+            gap: 40px;
+            .shop-item {
+            
+              width: 280px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media(max-width: 1290px){
+  .filter-section {
+    &-container {
+      &-right {
+        &-bottom{
+          .cards {
+            width: 85%;
+            margin: 0 auto;
+            gap: 30px;
+            .shop-item {
+            
+              width: 280px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media(max-width: 1220px){
+  .filter-section {
+    &-container {
+      &-right {
+        &-bottom{
+          .cards {
+            width: 100%;
+            margin: 0 ;
+            gap: 30px;
+            .shop-item {
+            
+              width: 280px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media(max-width: 1090px){
+  .filter-section {
+    width: 90%;
+    margin: 0 auto;
+    &-petcategory-container {
+      .shop-by-pet {
+        
+        &-container {
+          .title {
+           
+            h1 {
+              font-size: 30px;
+              font-weight: 700;
+            }
+          }
+          .shop-categories {
+            
+            .shop-category-item {
+              &-top {
+                img {
+                  width: 90px;               
+                }
+              }
+            
+              &-bottom {
+                h3 {
+                  font-size: 18px;
+                  font-weight: 600;
+                }
+              }
+            }
+            
+          }
+        }
+      }
+    }
+    &-container {
+      &-right {
+        &-bottom{
+          .cards {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            .shop-item {
+              min-width: 280px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 1075px){
+  .filter-section {
+    
+    &-petcategory-container {
+      .shop-by-pet {
+        
+        &-container {
+          .title {
+           
+            h1 {
+              font-size: 28px;
+              font-weight: 700;
+            }
+          }
+          .shop-categories {
+            
+            .shop-category-item {
+              &-top {
+                img {
+                  width: 70px;               
+                }
+              }
+            
+              &-bottom {
+                h3 {
+                  font-size: 17px;
+                  font-weight: 600;
+                }
+              }
+            }
+            
+          }
+        }
+      }
+    }
+    
+  }
+}
+
+@media(max-width: 854px){
+  .filter-section {
+    &-container {
+      
+      &-right {
+        padding-left: 0;
+        &-top {
+          padding: 0 30px 15px 5px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+          
+      }
+    }
+  }
+  }
+}
+@media(max-width: 660px){
+  .filter-section {
+    &-container {
+      display: flex;
+      flex-direction: column;
+      &-left{
+        width: 100%;
+        padding-right: 0;
+        align-items: center;
+      }
+      &-right {
+        padding-left: 0;
+        &-top {
+          padding: 0 30px 15px 5px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+          
+      }
+    }
+  }
   }
 }
