@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import loadinggif from "../../assets/images/loading.gif";
 
 function Post() {
   const [myAnnouncements, setmyAnnouncements] = useState([]);
@@ -15,14 +16,19 @@ function Post() {
   const [auth, setAuth] = useAuth();
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
+  const [loading, setLoading] = useState(false);
+
 
   const getMyAnnouncement = async () => {
     try {
+      setLoading(true);
       const { data } = await axios.get(
         `http://localhost:5000/api/announcement/user/${auth?.user._id}`
       );
       setmyAnnouncements(data.announcements);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.log(error);
       toast.error("something went wrong");
     }
@@ -82,7 +88,22 @@ function Post() {
   };
 
   return (
-    <div className="posts">
+    <>
+    {loading ? (
+      <div
+        className="loading-container"
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        <img
+          src={loadinggif}
+          alt="Loading GIF"
+          className="loading-gif"
+          width={420}
+        />
+      </div>
+    ) : (
+      <>
+      <div className="posts">
       <>
         {myAnnouncements?.map(
           (item) =>
@@ -234,6 +255,9 @@ function Post() {
       </>
       <Toaster position="bottom-right" reverseOrder={false} />
     </div>
+      </>)}
+    
+    </>
   );
 }
 

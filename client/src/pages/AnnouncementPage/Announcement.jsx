@@ -9,6 +9,7 @@ import { useAuth } from "../../context/auth";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import loadinggif from '../../assets/images/loading.gif'
 
 function Announcement() {
   const [auth, setAuth] = useAuth();
@@ -316,7 +317,7 @@ function Announcement() {
                       style={{ display: "flex", justifyContent: "center" }}
                     >
                       <img
-                        src="https://cdn.dribbble.com/users/1491744/screenshots/11560338/media/c307b001214bc9f967c277be28bc446c.gif"
+                        src={loadinggif}
                         alt="Loading GIF"
                         className="loading-gif"
                         width={420}
@@ -678,7 +679,7 @@ function Announcement() {
                       style={{ display: "flex", justifyContent: "center" }}
                     >
                       <img
-                        src="https://cdn.dribbble.com/users/1491744/screenshots/11560338/media/c307b001214bc9f967c277be28bc446c.gif"
+                        src={loadinggif}
                         alt="Loading GIF"
                         className="loading-gif"
                         width={420}

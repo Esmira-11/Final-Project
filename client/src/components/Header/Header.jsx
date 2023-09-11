@@ -24,6 +24,7 @@ const Header = () => {
     });
     localStorage.removeItem("auth");
     localStorage.removeItem("authToken");
+    navigate("/")
   };
 
   const handleSubmit = async (e) => {

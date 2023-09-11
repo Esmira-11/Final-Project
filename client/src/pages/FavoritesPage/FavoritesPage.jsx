@@ -9,12 +9,23 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import axios from 'axios'
+import loadinggif from '../../assets/images/loading.gif';
 import './favorites.scss'
 
 function FavoritesPage() {
   const { favorites,setFavorites, removeFromFavorites } = useFavorites();
   const [auth] = useAuth();
   const [category, setcategory] = useState('')
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    const loadingTimeout = setTimeout(() => {
+      setIsLoading(false); 
+    }, 5000);
+
+    return () => {
+      clearTimeout(loadingTimeout);
+    };
+  }, []);
 
 //   useEffect(() => {
 //     if (auth.user) {
@@ -26,7 +37,19 @@ function FavoritesPage() {
 // }, [auth.user]);
 
   return (
-    <div className='favorite-table'>
+    <>
+    {isLoading ? (<><div
+          className="loading-container"
+          style={{ display: "flex", justifyContent: "center",paddingTop:'100px' }}
+        >
+          <img
+            src={loadinggif}
+            alt="Loading GIF"
+            className="loading-gif"
+            width={420}
+          />
+        </div></>) : (<>
+          <div className='favorite-table'>
       {favorites?.length
               ? <TableContainer className="table" component={Paper}>
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -46,7 +69,7 @@ function FavoritesPage() {
                           sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                         >
                           <TableCell component="th" scope="row">
-                            {row.product.name}
+                            {row.product.name.substring(0,20)}...
                           </TableCell>
                           <TableCell component="th" scope="row" width={110}>
                             <img
@@ -78,6 +101,10 @@ function FavoritesPage() {
             </TableContainer>
               : <h4>Your Favorites Box Empty</h4>}
     </div>
+        </>)}
+     
+    </>
+   
   );
 }
 

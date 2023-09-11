@@ -149,10 +149,12 @@ function CreateProduct() {
         productData
       );
       if (data?.success) {
-        toast.error(data?.message);
-      } else {
         toast.success("Product Created Successfully");
-      }
+        //toast.error(data?.message);
+      } 
+      // else {
+      //   toast.success("Product Created Successfully");
+      // }
     } catch (error) {
       console.log(error);
       toast.error("something went wrong");
@@ -408,7 +410,7 @@ function CreateProduct() {
         </TableContainer>
       </div>
 
-      <Toaster position="top-right" />
+      {/* <Toaster position="top-right" /> */}
 
       <Modal
         open={open}

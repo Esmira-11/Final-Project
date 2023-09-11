@@ -62,7 +62,7 @@ const ProductSchema = new mongoose.Schema({
       ],
     averageRating: {
         type: Number,
-        default: 0,
+        default: 3,
     },  
     photo:{
         data:Buffer,

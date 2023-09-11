@@ -12,23 +12,29 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Paper from "@mui/material/Paper";
 import "./orders.scss"
+import loadinggif from "../../assets/images/loading.gif";
 
 function Orders() {
   const [userOrders, setUserOrders] = useState([]);
   const [open, setOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState([]);
+  const [loading, setLoading] = useState(false);
+
 
   const handleOpen = () => setOpen(true);
 
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get("http://localhost:5000/api/order/get-user-orders")
       .then((response) => {
+        setLoading(false);
         setUserOrders(response.data.orders);
       })
       .catch((error) => {
+        setLoading(false);
         console.error("Failed to fetch user orders");
       });
   }, []);
@@ -97,7 +103,21 @@ function Orders() {
     //   </table>
     // </div>
     <>
-      <div className="favorite-table">
+     {loading ? (
+        <div
+          className="loading-container"
+          style={{ display: "flex", justifyContent: "center" }}
+        >
+          <img
+            src={loadinggif}
+            alt="Loading GIF"
+            className="loading-gif"
+            width={420}
+          />
+        </div>
+      ) : (
+        <>
+        <div className="favorite-table">
         {userOrders?.length ? (
           <TableContainer className="table" component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -210,6 +230,8 @@ function Orders() {
           </Box>
          )} 
       </Modal>
+        </>)}
+      
     </>
   );
 }

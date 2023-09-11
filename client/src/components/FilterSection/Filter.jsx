@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import "./filter.scss";
 import axios from "axios";
 import { Prices } from "../Prices";
-import { Radio, Checkbox, Layout } from "antd";
+import { Radio, Checkbox } from "antd";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { useFavorites } from "../../context/FavoritesContext";
 import { useCart } from "../../context/CartContext";
 import StarRating from "../../components/StarRating";
 import { useAuth } from "../../context/auth";
+import loadinggif from "../../assets/images/loading.gif";
 
 function Filter() {
   const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
@@ -24,9 +25,10 @@ function Filter() {
   const [selectedPetCategories, setSelectedPetCategories] = useState([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [filterloading, setfilterLoading] = useState(false);
   const [petCategories, setPetCategories] = useState([]);
+  const [filtersActive, setFiltersActive] = useState(false);
 
   const handlePetCategoryFilter = (category) => {
     const updatedCategories = selectedPetCategories.includes(category)
@@ -120,16 +122,13 @@ function Filter() {
       selectedPetCategories.length ||
       sortingOption
     ) {
+      setFiltersActive(true);
       filteredProduct();
     } else {
+      setFiltersActive(false);
       getAllProducts();
     }
-  }, [
-    checked.length,
-    radio,
-    selectedPetCategories.length,
-    sortingOption,
-  ]);
+  }, [checked.length, radio, selectedPetCategories.length, sortingOption]);
 
   const getAllCategories = async () => {
     try {
@@ -167,16 +166,16 @@ function Filter() {
   }, [page]);
 
   const loadMore = async () => {
+    console.log(page);
     try {
-      filterloading(true);
+      // setfilterLoading(true);
       const { data } = await axios.get(
         `http://localhost:5000/api/product/product-list/${page}`
       );
-      filterloading(false);
+      // setfilterLoading(false);
       setProduct([...product, ...data?.products]);
     } catch (error) {
       console.log(error);
-      setLoading(false);
     }
   };
 
@@ -192,7 +191,7 @@ function Filter() {
 
   const filteredProduct = async () => {
     try {
-      setfilterLoading(true)
+      setfilterLoading(true);
       const { data } = await axios.post(
         "http://localhost:5000/api/product/product-filters",
         {
@@ -205,7 +204,7 @@ function Filter() {
       setProduct(data?.products);
       // console.log(data.products);
       // console.log(product);
-      setfilterLoading(false)
+      setfilterLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -219,7 +218,7 @@ function Filter() {
           style={{ display: "flex", justifyContent: "center" }}
         >
           <img
-            src="https://cdn.dribbble.com/users/1491744/screenshots/11560338/media/c307b001214bc9f967c277be28bc446c.gif"
+            src={loadinggif}
             alt="Loading GIF"
             className="loading-gif"
             width={420}
@@ -243,7 +242,7 @@ function Filter() {
                             : ""
                         }`}
                         onClick={() => handlePetCategoryFilter(item._id)}
-                        key={item._id}
+                        // key={item._id}
                       >
                         <div className="shop-category-item-top">
                           <img
@@ -270,7 +269,7 @@ function Filter() {
                     {categories?.map((item) => (
                       <div className="category" key={item._id}>
                         <Checkbox
-                          key={item._id}
+                          // key={item._id}
                           onChange={(e) =>
                             handleFilter(e.target.checked, item._id)
                           }
@@ -328,80 +327,87 @@ function Filter() {
                   </div>
                 </div>
                 {filterloading ? (
-        <div
-          className="loading-container"
-          style={{ display: "flex", justifyContent: "center" }}
-        >
-          <img
-            src="https://cdn.dribbble.com/users/1491744/screenshots/11560338/media/c307b001214bc9f967c277be28bc446c.gif"
-            alt="Loading GIF"
-            className="loading-gif"
-            width={420}
-          />
-        </div>
-      ) : (
-        <>
-        <div className="filter-section-container-right-bottom">
-                  <div className="cards">
-                    {product?.map((item) => (
-                      <div className="shop-item" key={item._id}>
-                        <div className="shop-item-img">
-                          <img
-                            src={`http://localhost:5000/api/product/product-photo/${item._id}`}
-                            alt="shop-item"
-                          />
-                          <div className="shop-item-meta">
-                            <div className="links">
-                              <button
-                                className="heart"
-                                onClick={() => handleFavoriteClick(item)}
-                              >
-                                <i
-                                  className={`${
-                                    favorites.includes(item._id)
-                                      ? "fa-solid fa-heart"
-                                      : "fa-regular fa-heart"
-                                  }`}
-                                ></i>
-                              </button>
-                              <button
-                                onClick={() => {
-                                  handleAddToCart(item);
-                                }}
-                              >
-                                <i className="fa-solid fa-cart-shopping"></i>
-                              </button>
+                  <div
+                    className="loading-container"
+                    style={{ display: "flex", justifyContent: "center" }}
+                  >
+                    <img
+                      src={loadinggif}
+                      alt="Loading GIF"
+                      className="loading-gif"
+                      width={420}
+                    />
+                  </div>
+                ) : (
+                  <>
+                    <div className="filter-section-container-right-bottom">
+                      <div className="cards">
+                        {product?.map((item) => (
+                          <div className="shop-item" key={item._id}>
+                            <div className="shop-item-img">
+                              <img
+                                src={`http://localhost:5000/api/product/product-photo/${item._id}`}
+                                alt="shop-item"
+                              />
+                              <div className="shop-item-meta">
+                                <div className="links">
+                                  <button
+                                    className="heart"
+                                    onClick={() => handleFavoriteClick(item)}
+                                  >
+                                    <i
+                                      className={`${
+                                        favorites.includes(item._id)
+                                          ? "fa-solid fa-heart"
+                                          : "fa-regular fa-heart"
+                                      }`}
+                                    ></i>
+                                  </button>
+                                  <button
+                                    onClick={() => {
+                                      handleAddToCart(item);
+                                    }}
+                                  >
+                                    <i className="fa-solid fa-cart-shopping"></i>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                            <div
+                              className="shop-item-info"
+                              onClick={() => navigate(`/product/${item.slug}`)}
+                            >
+                              <div className="shop-item-rate">
+                                <StarRating rating={item.averageRating} />
+                              </div>
+                              <div>
+                                <h4 className="shop-item-title">
+                                  {item.name.substring(0, 18)}...
+                                </h4>
+                              </div>
+                              <div className="shop-item-price">
+                                {item.price} $
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        <div
-                          className="shop-item-info"
-                          onClick={() => navigate(`/product/${item.slug}`)}
-                        >
-                          <div className="shop-item-rate">
-                            <StarRating rating={item.averageRating} />
-                          </div>
-                          <a href="#">
-                            <h4 className="shop-item-title">{item.name}</h4>
-                          </a>
-                          <div className="shop-item-price">{item.price} $</div>
-                        </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
-                  {product && product.length < total && (
-                    <button
-                      className="load-button"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setPage(page + 1);
-                      }}
-                    >
-                      {loading ? "Loading ..." : "Loadmore"}
-                    </button>
-                  )}
-                </div></>)}
-                
+                      {console.log(page)}
+                      {console.log(total)}
+                      {!filtersActive && product && product.length < total && (
+                        <button
+                          className="load-button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setPage(page + 1);
+                          }}
+                        >
+                          {loading ? "Loading ..." : "Load More"}
+                        </button>
+                      )}
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>

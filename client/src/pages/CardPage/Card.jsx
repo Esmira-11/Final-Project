@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import { useAuth } from "../../context/auth";
 import { useCart } from "../../context/CartContext";
@@ -11,6 +11,7 @@ import Modal from "@mui/material/Modal";
 import axios from 'axios'
 import Services from '../../components/Services/Services'
 import "./card.scss";
+import loadinggif from '../../assets/images/loading.gif';
 
 const Card = () => {
   const [auth, setAuth] = useAuth();
@@ -18,10 +19,20 @@ const Card = () => {
   const [city, setCity] = useState("");
   const [street, setStreet] = useState("");
   const [zipcode, setZipCode] = useState("");
-
+  const [isLoading, setIsLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const { cart, setCart, addToCart, removeFromCart } = useCart();
   let navigate = useNavigate();
+
+  useEffect(() => {
+    const loadingTimeout = setTimeout(() => {
+      setIsLoading(false); 
+    }, 5000);
+
+    return () => {
+      clearTimeout(loadingTimeout);
+    };
+  }, []);
 
   const calculateTotalPrice = () => {
     let totalPrice = 0;
@@ -151,16 +162,27 @@ const Card = () => {
   return (
     <>
       <Layout>
+      {isLoading ? (<><div
+          className="loading-container"
+          style={{ display: "flex", justifyContent: "center",paddingTop:'100px' }}
+        >
+          <img
+            src={loadinggif}
+            alt="Loading GIF"
+            className="loading-gif"
+            width={420}
+          />
+        </div></>) : (<>
         <div className="card-page">
           <div className="card-page-container">
-            <div className="card-page-left">
+          <div className="card-page-left">
               <h4>
                 {cart?.length
                   ? `You Have ${cart.length} items in your cart `
                   : "Your Cart Is Empty"}
               </h4>
-              {cart?.map((item) => (
-                <div className="card-box" key={item._id}>
+              {cart && cart.map((item) => (
+                <div className="card-box" key={item?._id}>
                   <div className="card-box-left">
                     <img
                       src={`http://localhost:5000/api/product/product-photo/${item?.product?._id}`}
@@ -168,8 +190,8 @@ const Card = () => {
                     />
                   </div>
                   <div className="card-box-right">
-                    <p className="name">Name: {item?.product?.name}</p>
-                    <p className="description">Description: {item?.product.description.substring(0,40)}...</p>
+                    <p className="name">Name: {item?.product.name.substring(0,20)}...</p>
+                    <p className="description">Description: {item?.product?.description.substring(0,40)}...</p>
                     <p className="price">Price: $ {item?.product.price} </p>
                   </div>
                   <div className="btns-center">
@@ -212,8 +234,11 @@ const Card = () => {
               <h3>Total: {totalPrice()}</h3>
               <button onClick={() => setOpen(true)}>Buy now</button>
             </div>
+            
+            
           </div>
         </div>
+        </>)}
         <Services/>
       </Layout>
 
