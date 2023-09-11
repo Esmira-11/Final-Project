@@ -1,28 +1,28 @@
 export const Prices = [
     {
         _id:0,
-        name: '0$ - 49$',
-        array:[0,49]
+        name: '0$ - 20$',
+        array:[0,20]
     },
     {
         _id:1,
-        name: '50$ - 99$',
-        array:[50,99]
+        name: '21$ - 40$',
+        array:[21,40]
     },
     {
         _id:2,
-        name: '100$ - 149$',
-        array:[100,149]
+        name: '41$ - 60$',
+        array:[41,60]
     },
     {
         _id:3,
-        name: '151$ - 199$',
-        array:[151,199]
+        name: '61$ - 80$',
+        array:[61,80]
     },
     {
         _id:4,
-        name: '200$ - more',
-        array:[200,1000]
+        name: '81$ - more',
+        array:[81,1000]
     }
 
 ]

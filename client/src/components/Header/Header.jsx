@@ -41,7 +41,16 @@ const Header = () => {
   };
 
   return (
-    <div className="header">
+    <>
+   
+
+
+    <nav>
+      <input type="checkbox" id="check" />
+      <label htmlFor="check">
+        <i className="fa-solid fa-bars" id="btn"></i>
+        <i className="fa-solid fa-xmark" id="cancel"></i>
+      </label>
       <div className="logo">
         <div className="logo-icon">
           <i className="fa-solid fa-paw"></i>
@@ -50,73 +59,78 @@ const Header = () => {
           <h2>Possy Sunny</h2>
         </div>
       </div>
-
-      <div className="nav">
-        <div className="nav-links">
-          <div className="nav-link">
-            <a href="/">Home</a>
-          </div>
-          <div className="nav-link">
-            <a href="/about">About us</a>
-          </div>
-          <div className="nav-link">
-            <a href="/shop">Shop</a>
-          </div>
-          <div className="nav-link">
-            <a href="/announsements">Announcement</a>
-          </div>
-          <div className="nav-link">
-            <a href="/contact">Contact</a>
-          </div>
-        </div>
-      </div>
-
-      {!auth.user ? (
+      <ul>
+        <li className="special"><a href="/">Home</a></li>
+        <li className="special"><a href="/about">About us</a></li>
+        <li className="special"><a href="/shop">Shop</a></li>
+        <li className="special"><a href="/announsements">Announcement</a></li>
+        <li className="special"><a href="/contact">Contact</a></li>
+        {!auth.user ? (
         <>
-          <div className="icons">
-            <div className="profile-icon icon">
+           <li>
+              <form onSubmit={handleSubmit}>
+                <div className="search-bar">
+                  <input
+                    type="text"
+                    placeholder="Search for products..."
+                    value={values.keyword}
+                    onChange={(e) =>
+                      setValues({ ...values, keyword: e.target.value })
+                    }
+                  />
+                  <a href="#" onClick={handleSubmit}>
+                    <i className="fas fa-search "></i>
+                  </a>
+                </div>
+              </form> 
+            </li>
+            <li className="profile-icon icon special">
               <a href="/login">Login</a>
-            </div>
-            <div className="profile-icon icon">
+            </li>
+            <li className="profile-icon icon special">
               <a href="/register">Register</a>
-            </div>
-          </div>
+            </li>
         </>
-      ) : (
-        <>
-          <div className="icons">
+      ) : (<>
             {/* <h2>{JSON.stringify(auth,null,4)}</h2> */}
             {/* {console.log(JSON.stringify(auth, null, 4))} */}
-            <form onSubmit={handleSubmit}>
-              <div className="search-bar">
-                <input
-                  type="text"
-                  placeholder="Search for products..."
-                  value={values.keyword}
-                  onChange={(e) =>
-                    setValues({ ...values, keyword: e.target.value })
-                  }
-                />
-                <a href="#" onClick={handleSubmit}>
-                  <i className="fas fa-search "></i>
+            <li>
+              <form onSubmit={handleSubmit}>
+                <div className="search-bar">
+                  <input
+                    type="text"
+                    placeholder="Search for products..."
+                    value={values.keyword}
+                    onChange={(e) =>
+                      setValues({ ...values, keyword: e.target.value })
+                    }
+                  />
+                  <a href="#" onClick={handleSubmit}>
+                    <i className="fas fa-search "></i>
+                  </a>
+                </div>
+              </form> 
+            </li>
+
+            <li>
+              <div className="profile-icon icon">
+                <Link
+                  to={`/profile/${auth?.user?.role === 1 ? "admin" : "user"}`}
+                >
+                  <i className="fa-regular fa-user"></i>
+                </Link>
+              </div>
+            </li>
+
+            <li>
+              <div className="profile-icon icon">
+                <a onClick={handleLogout} href="#">
+                  <i className="fa-solid fa-right-from-bracket"></i>
                 </a>
               </div>
-            </form>
-
-            <div className="profile-icon icon">
-              <Link
-                to={`/profile/${auth?.user?.role === 1 ? "admin" : "user"}`}
-              >
-                <i className="fa-regular fa-user"></i>
-              </Link>
-            </div>
-
-            <div className="profile-icon icon">
-              <a onClick={handleLogout} href="#">
-                <i className="fa-solid fa-right-from-bracket"></i>
-              </a>
-            </div>
-
+            </li>
+            
+            <li>
             <div className="cart-icon icon">
               <NavLink to="/card" className="navlink">
                 <Badge badgeContent={cart?.length} color="primary">
@@ -126,10 +140,14 @@ const Header = () => {
                 {/* <span>{cart?.length}</span> */}
               </NavLink>
             </div>
-          </div>
-        </>
-      )}
-    </div>
+            </li>
+            
+
+      </>)}
+      </ul>
+    </nav>
+    </>
+   
   );
 };
 

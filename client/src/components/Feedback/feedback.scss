@@ -47,6 +47,7 @@
     }
     &-bottom {
       .slider-box {
+        z-index: -1;
         padding-bottom: 30px;
         &-top {
           text-align: justify;
@@ -58,10 +59,12 @@
           align-items: center;
           padding: 10px 0;
           .slider-box-avatar {
+            z-index: -1;
             width: 70px;
             height: 70px;
             border-radius: 50%;
             img {
+              z-index: -1;
               width: 100%;
               height: 100%;
               border-radius: 50%;

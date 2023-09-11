@@ -113,3 +113,229 @@
     }
   }
 }
+nav{
+  z-index: 999;
+  position: fixed;
+  width: 100%;
+  height: 80px;
+  background: #2f4f4f;
+  .logo{
+    position: absolute;
+    top: 10px;
+    left:6%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      &-icon {
+        i {
+          font-size: 28px;
+          color: #fff;
+        }
+      }
+  
+      &-name {
+        h2 {
+          font-family: "Raleway", sans-serif;
+          font-weight: 700;
+          font-size: 22px;
+          color: #fff;
+        }
+      
+    }
+  }
+  ul{
+    float: right;
+    margin-right: 25px;
+    li{
+      display: inline-block;
+      line-height: 80px;
+      margin-right: 20px;
+      .search-bar {
+        margin-left: 5px;
+        width: 300px;
+        background-color: #fff;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+  
+        input {
+          width: 85%;
+          outline: none;
+          border: none;
+          font-size: 15px;
+          font-family: "Raleway", sans-serif;
+          color: #2f4f4f;
+        }
+  
+        .fa-search {
+          // margin-left: 5px;
+          font-size: 16px;
+          color: #2f4f4f;
+          transition: all 0.2s ease-in-out;
+  
+          //   &:hover {
+          //     color: #ff9400;
+          //   }
+        }
+      }
+  
+      .icon {
+        a {
+          padding: 0 5px;
+          font-size: 20px;
+          color: #fff;
+          cursor: pointer;
+        }
+      }
+      .cart-icon {
+        // padding: 0 10px;
+        height: 100%;
+        cursor: pointer;
+        .navlink {
+          img {
+            width: 38px;
+            height: 38px;
+          }
+        }
+        .MuiBadge-badge{
+          background-color: #2f4f4f;
+          border: 2px solid #fff;
+          font-weight: 700;
+          color: #fff;
+          font-size: 14px;
+        }
+      }
+      a{
+        font-family: "Raleway", sans-serif;
+        position: relative;
+        color: #fff;
+        font-size: 20px;
+        text-decoration: none;
+        // padding: 5px 0;
+      }
+    }
+    .special{
+      a{
+        padding-bottom: 6px;
+      }
+      a:before{
+        position: absolute;
+        content: '';
+        left: 0;
+        bottom: 0;
+        height: 3px;
+        width: 100%;
+        background: #fff;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition:transform  .4s linear;
+      }
+      a:hover::before{
+        transform: (scaleX(1));
+        transform-origin: left;
+      }
+    }
+  }
+  label{
+    #btn,#cancel{
+      color: #fff;
+      font-size: 30px;
+      float: right;
+      line-height: 80px;
+      margin-right: 40px;
+      cursor: pointer;
+      display: none;
+    }
+  }
+  #check{
+    display: none;
+  }
+}
+@media(max-width:1400px){
+  nav{
+    .logo{
+      left: 3%;
+    }
+  }
+}
+// @media(max-width:944px){
+//   nav{
+//     .logo{
+//       left: 6%;
+//       // top: 20%;
+//     }
+//   }
+// }
+@media(max-width:1340px){
+  nav{
+    .logo{
+      left: 6%;
+    }
+    label{
+      #btn{
+        display: block;
+      }
+    }
+    ul{
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      background: #2f4f4f;
+      top: 80px;
+      left: -100%;
+      text-align:center;
+      transition: all .5s;
+      li{
+        .search-bar {
+          display: none;
+        }
+        display: block;
+        margin: 30px 0;
+        line-height: 30px;
+        a{
+          font-size: 25px;
+        }
+        .icon {
+          a {
+            font-size: 25px;
+         
+          }
+        }
+      }
+    }
+    #check {
+      &:checked {
+        ~ {
+          ul {
+            left: 0;
+          }
+        }
+      }
+    }
+    #check {
+      &:checked {
+        ~ {
+          label {
+            #btn {
+              display: none;            
+            }
+          }
+        }
+      }
+    }
+    #check {
+      &:checked {
+        ~ {
+          label {
+            #cancel {
+              display: block;            
+            }
+          }
+        }
+      }
+    }
+  }
+  
+}
