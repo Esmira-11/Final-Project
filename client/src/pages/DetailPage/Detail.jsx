@@ -124,8 +124,6 @@ function Detail() {
         });
         setProduct(updatedProduct);
         getComments(product._id);
-      } else {
-        toast.error(response.data?.message);
       }
       setComment("");
       setRating(0);
