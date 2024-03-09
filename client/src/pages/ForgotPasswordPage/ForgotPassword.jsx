@@ -4,7 +4,7 @@ import {Link, useNavigate } from 'react-router-dom'
 import axios from "axios";
 
 
-function forgotPassword() {
+function ForgotPassword() {
   let navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -80,4 +80,4 @@ function forgotPassword() {
   )
 }
 
-export default forgotPassword
+export default ForgotPassword
