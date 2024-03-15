@@ -91,7 +91,7 @@ function Filter() {
     try {
       setLoading(true);
       const response = await axios.get(
-        `http://localhost:5000/api/product/product-list/${page}`
+        `https://mern-project-server-oonq.onrender.com/api/product/product-list/${page}`
       );
       // setProduct(response.data.products);
       setLoading(false);
@@ -133,7 +133,7 @@ function Filter() {
   const getAllCategories = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/category/all-categories"
+        "https://mern-project-server-oonq.onrender.com/api/category/all-categories"
       );
 
       if (response.status == 200) {
@@ -152,7 +152,7 @@ function Filter() {
   const getTotal = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/api/product/product-count"
+        "https://mern-project-server-oonq.onrender.com/api/product/product-count"
       );
       setTotal(data?.total);
     } catch (error) {
@@ -170,7 +170,7 @@ function Filter() {
     try {
       // setfilterLoading(true);
       const { data } = await axios.get(
-        `http://localhost:5000/api/product/product-list/${page}`
+        `https://mern-project-server-oonq.onrender.com/api/product/product-list/${page}`
       );
       // setfilterLoading(false);
       setProduct([...product, ...data?.products]);
@@ -193,7 +193,7 @@ function Filter() {
     try {
       setfilterLoading(true);
       const { data } = await axios.post(
-        "http://localhost:5000/api/product/product-filters",
+        "https://mern-project-server-oonq.onrender.com/api/product/product-filters",
         {
           checked,
           radio,
@@ -246,7 +246,7 @@ function Filter() {
                       >
                         <div className="shop-category-item-top">
                           <img
-                            src={`http://localhost:5000/api/petcategory/petcategory-photo/${item._id}`}
+                            src={`https://mern-project-server-oonq.onrender.com/api/petcategory/petcategory-photo/${item._id}`}
                             alt="pet-category"
                           />
                         </div>
@@ -346,7 +346,7 @@ function Filter() {
                           <div className="shop-item" key={item._id}>
                             <div className="shop-item-img">
                               <img
-                                src={`http://localhost:5000/api/product/product-photo/${item._id}`}
+                                src={`https://mern-project-server-oonq.onrender.com/api/product/product-photo/${item._id}`}
                                 alt="shop-item"
                               />
                               <div className="shop-item-meta">

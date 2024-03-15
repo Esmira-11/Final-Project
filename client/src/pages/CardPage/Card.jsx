@@ -65,7 +65,7 @@ const Card = () => {
     };
 
     axios
-      .post("http://localhost:5000/api/order/add-to-order", orderData)
+      .post("https://mern-project-server-oonq.onrender.com/api/order/add-to-order", orderData)
       .then((response) => {
         console.log("Order placed successfully");
         toast.success("Order placed successfully");
@@ -185,7 +185,7 @@ const Card = () => {
                 <div className="card-box" key={item?._id}>
                   <div className="card-box-left">
                     <img
-                      src={`http://localhost:5000/api/product/product-photo/${item?.product?._id}`}
+                      src={`https://mern-project-server-oonq.onrender.com/api/product/product-photo/${item?.product?._id}`}
                       alt="shop-item"
                     />
                   </div>

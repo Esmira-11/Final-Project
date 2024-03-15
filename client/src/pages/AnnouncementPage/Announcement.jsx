@@ -38,7 +38,7 @@ function Announcement() {
     try {
       setcommentLoading(true);
       const { data } = await axios.get(
-        `http://localhost:5000/api/announcement/comments/${id}`
+        `https://mern-project-server-oonq.onrender.com/api/announcement/comments/${id}`
       );
       if (data?.success) {
         setcomments(data.comments);
@@ -56,7 +56,7 @@ function Announcement() {
     // e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/announcement/create-comment",
+        "https://mern-project-server-oonq.onrender.com/api/announcement/create-comment",
         {
           announcementId: item._id,
           text: commentTexts[item._id] || "",
@@ -94,7 +94,7 @@ function Announcement() {
     try {
       setLoading(true);
       const { data } = await axios.post(
-        "http://localhost:5000/api/announcement/announcement-filters",
+        "https://mern-project-server-oonq.onrender.com/api/announcement/announcement-filters",
         {
           type,
         }
@@ -112,7 +112,7 @@ function Announcement() {
     try {
       setLoading(true);
       const { data } = await axios.get(
-        "http://localhost:5000/api/announcement/all-announcement"
+        "https://mern-project-server-oonq.onrender.com/api/announcement/all-announcement"
       );
       setLoading(false);
       setAnnouncements(data.announcement);
@@ -152,7 +152,7 @@ function Announcement() {
       productData.append("photo", photo);
 
       const { data } = await axios.post(
-        "http://localhost:5000/api/announcement/create-announcement",
+        "https://mern-project-server-oonq.onrender.com/api/announcement/create-announcement",
         productData
       );
       if (data?.success) {
@@ -176,7 +176,7 @@ function Announcement() {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/announcement/create-question",
+        "https://mern-project-server-oonq.onrender.com/api/announcement/create-question",
         { description: question }
       );
       if (data?.success) {
@@ -441,7 +441,7 @@ function Announcement() {
                               </div>
                               <div className="announce-img">
                                 <img
-                                  src={`http://localhost:5000/api/announcement/announcement-photo/${item._id}`}
+                                  src={`https://mern-project-server-oonq.onrender.com/api/announcement/announcement-photo/${item._id}`}
                                   alt="announcement-img"
                                 />
                               </div>

@@ -67,7 +67,7 @@ function UserProfile() {
       userData.append("avatar", avatar);
 
       const { data } = await axios.post(
-        "http://localhost:5000/api/user/upload-avatar",
+        "https://mern-project-server-oonq.onrender.com/api/user/upload-avatar",
         userData
       );
       if (data?.success) {
@@ -128,7 +128,7 @@ function UserProfile() {
                 <div className="user-detail" width="100%" height="100%">
                   <div className="user-detail-img">
                     <img
-                      src={`http://localhost:5000/api/user/user-avatar/${auth.user._id}`}
+                      src={`https://mern-project-server-oonq.onrender.com/api/user/user-avatar/${auth.user._id}`}
                       alt="avatar"
                     />
                   </div>

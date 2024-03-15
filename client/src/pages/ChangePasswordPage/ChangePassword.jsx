@@ -66,7 +66,7 @@ function ChangePassword() {
 
     try {
       const { data } = await axios.put(
-        `http://localhost:5000/api/auth/resetpassword/${token}`,
+        `https://mern-project-server-oonq.onrender.com/api/auth/resetpassword/${token}`,
         {
           password,
         },

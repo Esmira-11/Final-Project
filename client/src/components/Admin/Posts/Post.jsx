@@ -17,7 +17,7 @@ function Post() {
   const getAllAnnouncement = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/api/announcement/all-announcement"
+        "https://mern-project-server-oonq.onrender.com/api/announcement/all-announcement"
       );
       setAnnouncements(data.announcement);
     } catch (error) {
@@ -29,7 +29,7 @@ function Post() {
   const handleDelete = async (id) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:5000/api/announcement/delete-announcement/${id}`
+        `https://mern-project-server-oonq.onrender.com/api/announcement/delete-announcement/${id}`
       );
       if (data.success) {
         toast.success(`Announcement deleted`);
@@ -169,7 +169,7 @@ function Post() {
                     </div>
                     <div className="announce-img">
                       <img
-                        src={`http://localhost:5000/api/announcement/announcement-photo/${item._id}`}
+                        src={`https://mern-project-server-oonq.onrender.com/api/announcement/announcement-photo/${item._id}`}
                         alt="announcement-img"
                       />
                     </div>

@@ -19,7 +19,7 @@ function Search() {
                   <div className="shop-item">
                     <div className="shop-item-img">
                       <img
-                        src={`http://localhost:5000/api/product/product-photo/${item._id}`}
+                        src={`https://mern-project-server-oonq.onrender.com/api/product/product-photo/${item._id}`}
                         alt="shop-item"
                       />
                       <div className="shop-item-meta">

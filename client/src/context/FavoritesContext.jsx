@@ -10,7 +10,7 @@ const FavoritesProvider = ({ children }) => {
 
   useEffect(() => {
     if (auth.user) {
-      axios.get('http://localhost:5000/api/favorites/getfavorites')
+      axios.get('https://mern-project-server-oonq.onrender.com/api/favorites/getfavorites')
       
         .then(response => setFavorites(response.data))
         .catch(error => console.error(error));
@@ -18,14 +18,14 @@ const FavoritesProvider = ({ children }) => {
   }, [auth.user]);
 
   const getFavorites = () => {
-    axios.get('http://localhost:5000/api/favorites/getfavorites')
+    axios.get('https://mern-project-server-oonq.onrender.com/api/favorites/getfavorites')
       
     .then(response => setFavorites(response.data))
     .catch(error => console.error(error));
   }
 
   const addToFavorites = (productId) => {
-    axios.post('http://localhost:5000/api/favorites/add-to-favorites', { productId })
+    axios.post('https://mern-project-server-oonq.onrender.com/api/favorites/add-to-favorites', { productId })
       .then(response => {
         setFavorites([...favorites, productId]);
       })
@@ -33,7 +33,7 @@ const FavoritesProvider = ({ children }) => {
   };
 
   const removeFromFavorites = (productId) => {
-    axios.delete(`http://localhost:5000/api/favorites/remove-from-favorites/${productId}`)
+    axios.delete(`https://mern-project-server-oonq.onrender.com/api/favorites/remove-from-favorites/${productId}`)
       .then(response => {
         setFavorites(favorites.filter(id => id !== productId));
         getFavorites();

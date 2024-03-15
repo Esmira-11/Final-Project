@@ -74,7 +74,7 @@ function FavoritesPage() {
                           <TableCell component="th" scope="row" width={110}>
                             <img
                               style={{ width: "100%", height: "100%" }}
-                              src={`http://localhost:5000/api/product/product-photo/${row.product._id}`}
+                              src={`https://mern-project-server-oonq.onrender.com/api/product/product-photo/${row.product._id}`}
                               alt="product-img"
                             />
                           </TableCell>

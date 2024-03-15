@@ -58,7 +58,7 @@ function CreateProduct() {
       productData.append("photo", updatedPhoto);
 
       const { data } = await axios.put(
-        `http://localhost:5000/api/product/update-product/${selectedId}`,
+        `https://mern-project-server-oonq.onrender.com/api/product/update-product/${selectedId}`,
         productData
       );
       console.log(data);
@@ -84,7 +84,7 @@ function CreateProduct() {
   const getSingleProduct = async (id) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:5000/api/product/get-product/${id}`
+        `https://mern-project-server-oonq.onrender.com/api/product/get-product/${id}`
       );
       console.log(data);
       setSelectedId(data.product._id);
@@ -102,7 +102,7 @@ function CreateProduct() {
   const handleDelete = async (id) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:5000/api/product/delete-product/${id}`
+        `https://mern-project-server-oonq.onrender.com/api/product/delete-product/${id}`
       );
       if (data.success) {
         toast.success(`Product deleted`);
@@ -120,7 +120,7 @@ function CreateProduct() {
   const getAllProducts = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/api/product/all-products"
+        "https://mern-project-server-oonq.onrender.com/api/product/all-products"
       );
       setProducts(data.products);
     } catch (error) {
@@ -145,7 +145,7 @@ function CreateProduct() {
       productData.append("photo", photo);
 
       const { data } = await axios.post(
-        "http://localhost:5000/api/product/create-product",
+        "https://mern-project-server-oonq.onrender.com/api/product/create-product",
         productData
       );
       if (data?.success) {
@@ -187,7 +187,7 @@ function CreateProduct() {
   const getAllCategory = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/api/category/all-categories"
+        "https://mern-project-server-oonq.onrender.com/api/category/all-categories"
       );
       if (data?.success) {
         setCategories(data?.category);
@@ -205,7 +205,7 @@ function CreateProduct() {
   const getAllPetCategory = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/api/petcategory/all-petcategories"
+        "https://mern-project-server-oonq.onrender.com/api/petcategory/all-petcategories"
       );
       if (data?.success) {
         setPetCategories(data?.petCategory);
@@ -364,7 +364,7 @@ function CreateProduct() {
                   <TableCell component="th" scope="row" width={110}>
                     <img
                       style={{ width: "100%", height: "100%" }}
-                      src={`http://localhost:5000/api/product/product-photo/${row._id}`}
+                      src={`https://mern-project-server-oonq.onrender.com/api/product/product-photo/${row._id}`}
                       alt="product-img"
                     />
                   </TableCell>

@@ -10,7 +10,7 @@ const CartProvider = ({ children }) => {
 
   useEffect(() => {
     if (auth.user) {
-      axios.get('http://localhost:5000/api/cart/getcart')
+      axios.get('https://mern-project-server-oonq.onrender.com/api/cart/getcart')
       
         .then(response => setCart(response.data))
         .catch(error => console.error(error));
@@ -18,14 +18,14 @@ const CartProvider = ({ children }) => {
   }, [auth.user]);
 
   const getCart = () => {
-    axios.get('http://localhost:5000/api/cart/getcart')
+    axios.get('https://mern-project-server-oonq.onrender.com/api/cart/getcart')
       
     .then(response => setCart(response.data))
     .catch(error => console.error(error));
   }
 
   const addToCart = (productId) => {
-    axios.post('http://localhost:5000/api/cart/add-to-cart', { productId })
+    axios.post('https://mern-project-server-oonq.onrender.com/api/cart/add-to-cart', { productId })
       .then(response => {
         setCart([...cart, productId]);
       })
@@ -33,7 +33,7 @@ const CartProvider = ({ children }) => {
   };
 
   const removeFromCart = (productId) => {
-    axios.delete(`http://localhost:5000/api/cart/remove-from-cart/${productId}`)
+    axios.delete(`https://mern-project-server-oonq.onrender.com/api/cart/remove-from-cart/${productId}`)
       .then(response => {
         setCart(cart.filter(id => id !== productId));
         getCart();

@@ -21,7 +21,7 @@ function Orders() {
 
     useEffect(() => {
         axios
-          .get("http://localhost:5000/api/order/get-all-orders")
+          .get("https://mern-project-server-oonq.onrender.com/api/order/get-all-orders")
           .then((response) => {
             setOrders(response.data.orders);
           })
@@ -151,7 +151,7 @@ function Orders() {
                       <li key={product.product._id}>
                         <img
                         style={{width:'50px', height:'50px'}}
-                        src={`http://localhost:5000/api/product/product-photo/${product.product}`}
+                        src={`https://mern-project-server-oonq.onrender.com/api/product/product-photo/${product.product}`}
                         alt="shop-item-img"
                         />
                         {product.product.name} x{product.quantity}

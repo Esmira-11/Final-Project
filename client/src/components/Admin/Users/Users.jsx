@@ -23,7 +23,7 @@ function Users() {
   const getAllUsers = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/api/user/all-users"
+        "https://mern-project-server-oonq.onrender.com/api/user/all-users"
       );
       if (data?.success) {
         setUsers(data?.users);
@@ -41,7 +41,7 @@ function Users() {
   const handleDelete = async (id) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:5000/api/user/delete-user/${id}`
+        `https://mern-project-server-oonq.onrender.com/api/user/delete-user/${id}`
       );
       if (data.success) {
         toast.success(`User deleted`);

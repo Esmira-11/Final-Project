@@ -53,7 +53,7 @@ function Detail() {
   const getComments = async (id) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:5000/api/product/comments/${id}`
+        `https://mern-project-server-oonq.onrender.com/api/product/comments/${id}`
       );
       if (data?.success) {
         setcomments(data.comments);
@@ -73,7 +73,7 @@ function Detail() {
   const getProduct = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:5000/api/product/get-product-by-slug/${params.slug}`
+        `https://mern-project-server-oonq.onrender.com/api/product/get-product-by-slug/${params.slug}`
       );
       // console.log(data);
       setProduct(data?.product);
@@ -87,7 +87,7 @@ function Detail() {
   const getSimilarProducts = async (pid, cid) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:5000/api/product/related-product/${pid}/${cid}`
+        `https://mern-project-server-oonq.onrender.com/api/product/related-product/${pid}/${cid}`
       );
       setRelatedProducts(data?.products);
     } catch (error) {
@@ -106,7 +106,7 @@ function Detail() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/product/add-comment-and-rating",
+        "https://mern-project-server-oonq.onrender.com/api/product/add-comment-and-rating",
         data
       );
 
@@ -146,7 +146,7 @@ function Detail() {
             <div className="detail-page-container-top">
               <div className="detail-left">
                 <img
-                  src={`http://localhost:5000/api/product/product-photo/${product._id}`}
+                  src={`https://mern-project-server-oonq.onrender.com/api/product/product-photo/${product._id}`}
                   alt="shop-item-img"
                 />
               </div>
@@ -300,7 +300,7 @@ function Detail() {
                   >
                     <div className="shop-item-img">
                       <img
-                        src={`http://localhost:5000/api/product/product-photo/${item?._id}`}
+                        src={`https://mern-project-server-oonq.onrender.com/api/product/product-photo/${item?._id}`}
                         alt="shop-item"
                       />
                       <div className="shop-item-meta">

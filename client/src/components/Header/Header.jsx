@@ -31,7 +31,7 @@ const Header = () => {
     e.preventDefault();
     try {
       const { data } = await axios.get(
-        `http://localhost:5000/api/product/search/${values.keyword}`
+        `https://mern-project-server-oonq.onrender.com/api/product/search/${values.keyword}`
       );
       setValues({ ...values, results: data });
       navigate("/search");

@@ -17,7 +17,7 @@ function Verify() {
     e.preventDefault();
     try {
       
-      const response = await axios.post(`http://localhost:5000/api/auth/verify`, {
+      const response = await axios.post(`https://mern-project-server-oonq.onrender.com/api/auth/verify`, {
         userID,
         otp,
       });

@@ -32,7 +32,7 @@ function CreateCategory() {
   const getAllCategory = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/api/category/all-categories"
+        "https://mern-project-server-oonq.onrender.com/api/category/all-categories"
       );
       if (data?.success) {
         setCategories(data?.category);
@@ -51,7 +51,7 @@ function CreateCategory() {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/category/create-category",
+        "https://mern-project-server-oonq.onrender.com/api/category/create-category",
         {
           name,
         }
@@ -75,7 +75,7 @@ function CreateCategory() {
     e.preventDefault();
     try {
       const { data } = await axios.put(
-        `http://localhost:5000/api/category/update-category/${selected._id}`,
+        `https://mern-project-server-oonq.onrender.com/api/category/update-category/${selected._id}`,
         { name: updatedName }
       );
       if (data.success) {
@@ -94,7 +94,7 @@ function CreateCategory() {
   const handleDelete = async (id) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:5000/api/category/delete-category/${id}`
+        `https://mern-project-server-oonq.onrender.com/api/category/delete-category/${id}`
       );
       if (data.success) {
         toast.success(`Category deleted`);

@@ -64,7 +64,7 @@ function RegisterPage() {
     }
 
     try {
-      const { data } = await axios.post("http://localhost:5000/api/auth/register",
+      const { data } = await axios.post("https://mern-project-server-oonq.onrender.com/api/auth/register",
       {
         username,
         email,
