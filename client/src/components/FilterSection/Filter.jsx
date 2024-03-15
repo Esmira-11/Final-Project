@@ -44,7 +44,7 @@ function Filter() {
   const getAllPetCategories = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/petcategory/all-petcategories"
+        "https://mern-project-server-oonq.onrender.com/api/petcategory/all-petcategories"
       );
 
       if (response.status == 200) {
